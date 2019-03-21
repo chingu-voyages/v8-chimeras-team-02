@@ -4,3 +4,4 @@ node_modules/
 .build/
 layout.md
 variables.env
+.DS_Store
