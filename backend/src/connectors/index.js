@@ -92,7 +92,17 @@ export async function updateQuestion(
     let updatedAt = new Date().toISOString();
 
     await Questions.update({ _id }, { title, question, createAt, updatedAt, user, tags, answers });
-    console.log(await Questions.findOne({ _id }))
 
     return await Questions.findOne({ _id });
+}
+
+
+export async function getQuestion(_id, mongo) {
+    const Questions = mongo.collection('Question');
+    const question = await Questions.findOne({ _id });
+
+    if (!question) {
+        throw new Error('Not found');
+    }
+    return question;
 }
