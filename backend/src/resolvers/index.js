@@ -4,11 +4,15 @@ import {
   LogOut,
   createQuestion,
   deleteQuestion,
-  updateQuestion
+  updateQuestion,
+  getQuestion
 } from '../connectors';
 
 const resolvers = {
   Query: {
+    question: async (root, { _id }, { mongo }, info) => {
+      return getQuestion(_id, mongo);
+    },
     logOut: async (root, args, { mongo, user }, info) => {
       return LogOut(mongo, user);
     },
