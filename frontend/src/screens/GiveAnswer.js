@@ -1,31 +1,33 @@
 import React, { Component } from "react";
 import Home from "./Home";
-import { SearchBar } from "../components";
+import ListItem from "../components/ListItem";
 
 export default class GiveAnswer extends Component {
   state = {
-    answer: "",
+    answers: [],
   };
 
   submitAnswer = e => {
     e.preventDefault();
-    this.setState({ answer: "" });
-  };
-
-  handleChange = e => {
-    this.setState({ answer: e.target.value });
+    const answer = e.target[0].value;
+    this.setState({ answers: [...this.state.answers, answer] });
+    e.currentTarget.reset();
   };
 
   render() {
     return (
       <div>
         <Home />
-        <form onSubmit={this.submitAnswer}>
-          <textarea
-            placeholder="Enter answer..."
-            value={this.state.value}
-            onChange={this.handleChange}
+        {this.state.answers.map(answer => (
+          <ListItem
+            title={answer}
+            user={"TheAnswerGiver"}
+            date={"Today"}
+            likes={"100"}
           />
+        ))}
+        <form onSubmit={this.submitAnswer}>
+          <textarea placeholder="Enter answer..." />
           <button type="submit">Answer</button>
         </form>
       </div>
