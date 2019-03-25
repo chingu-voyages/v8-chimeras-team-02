@@ -106,3 +106,102 @@ export async function getQuestion(_id, mongo) {
     }
     return question;
 }
+
+
+export async function createAnswer(
+    question_id,
+    newAnswer,
+    user,
+    mongo) {
+
+    // Find the question we're answering
+    const Questions = mongo.collection('Question');
+    const question = await Questions.findOne({ question_id });
+
+
+    if (!question) {
+        throw new Error(`Something Wrong! Trying to create answer for a question that doesn't exist. Id: ${question_id}`);
+    }
+
+    // Creatre MetaData
+    let _id = uuidv4()
+    let date = new Date().toISOString();
+
+    // Create and push Answer
+    const answer = { _id, answer: newAnswer, createDate: date, updateDate: date, user }
+    question.answers.push(answer);
+    
+    await Questions.update( {_id}, { answers: question.answers})
+    
+    return answer;
+}
+
+
+export async function getAnswer(question_id, _id, mongo) {
+    let answer = "";
+
+    // Get the Question
+    const Questions = mongo.collection('Question');
+    const question = await Questions.findOne({ question_id });
+
+
+    if (!question) {
+        throw new Error(`Something Wrong! Trying to get answer for a question that doesn't exist. Id: ${question_id}`);
+    }
+
+    // Loop trough array to check for the _id
+    for (let qstn in question.answers ) {
+        if (qstn._id === _id){
+            answer = qstn;
+        }
+    }
+
+    if (!question) {
+        throw new Error(`No Answer found for id: ${question_id}`);
+    }
+    
+    return answer;
+}
+
+
+export async function updateAnswer(
+    question_id,
+    _id,
+    newAnswer,
+    mongo) {
+
+    // Get Question
+    const Questions = mongo.collection('Question');
+    const question = await Questions.findOne({ question_id });
+
+    let answer;
+
+    // Create MetaData
+    let date = new Date().toISOString();
+
+
+    // Loop trough array to check for the _id and update answer
+    for (let qstn in question.answers ) {
+        if (qstn._id === _id){
+            qstn.answer = newAnswer;
+            answer = qstn;
+        }
+    }
+
+    await Questions.update( {_id}, { answers: question.answers})
+
+    return answer;
+}
+
+
+export async function deleteAnswer( question_id, _id, mongo ) {
+    // Get Question
+    const Questions = mongo.collection('Question');
+    const question = await Questions.findOne({ question_id });
+
+    filteredAnswers = question.answers.filter( x => { x._id !== _id })
+
+    await Questions.update( {_id}, { answers: filteredAnswers})
+    
+    return answer;
+}
