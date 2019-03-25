@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import Home from "./Home";
+import { SearchBar } from "../components";
 
 export default class GiveAnswer extends Component {
   state = {
-    value: "",
+    answer: "",
   };
 
   submitAnswer = e => {
     e.preventDefault();
-    console.log(this.state.value);
-    this.setState({ value: "" });
+    this.setState({ answer: "" });
   };
 
   handleChange = e => {
-    this.setState({ value: e.target.value });
+    this.setState({ answer: e.target.value });
   };
+
   render() {
     return (
       <div>
