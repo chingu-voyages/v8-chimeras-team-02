@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import { user } from "../resources/images";
 import { blue, green } from "../resources/colors";
-import { SearchBar, Section, ListItem, Logo, SideList } from "../components";
+import { SearchBar, Section, Logo } from "../components";
 
-export default class GiveAnswer extends Component {
+export default class NewQuestion extends Component {
   state = {
-    answers: [],
+    question: "",
   };
 
-  submitAnswer = e => {
+  askQuestion = e => {
     e.preventDefault();
-    const answer = e.target[0].value;
-    this.setState({ answers: [...this.state.answers, answer] });
-    e.currentTarget.reset();
+    this.setState({ question: "" });
+  };
+
+  handleChange = e => {
+    this.setState({ question: e.target.value });
   };
 
   render() {
@@ -29,21 +31,16 @@ export default class GiveAnswer extends Component {
         </div>
 
         <div style={gridView}>
-          <SideList />
-          <div style={listview}>
-            {this.state.answers.map(answer => (
-              <ListItem
-                title={answer}
-                user={"TheAnswerGiver"}
-                date={"Today"}
-                likes={"100"}
+          <div style={formView}>
+            <form onSubmit={this.askQuestion}>
+              <textarea
+                style={newQuestionForm}
+                placeholder="Enter question ..."
+                value={this.state.question}
+                onChange={this.handleChange}
               />
-            ))}
-            <form style={{ display: "flex" }} onSubmit={this.submitAnswer}>
-              <textarea style={textareaStyle} placeholder="Enter answer..." />
-              <button style={btn} type="submit">
-                Answer
-              </button>
+              <br />
+              <button type="submit" style={askBtn}>Ask</button>
             </form>
           </div>
         </div>
@@ -55,7 +52,6 @@ export default class GiveAnswer extends Component {
 const container = {
   backgroundColor: blue,
 };
-
 const header = {
   display: "flex",
   flexDirection: "row",
@@ -74,31 +70,29 @@ const avatar = {
   marginRight: 40,
   marginLeft: 20,
 };
-
-const listview = {
+const formView = {
   display: "flex",
   flex: 3,
-  flexDirection: "column",
+  justifyContent: "center",
 };
-
 const gridView = {
   display: "flex",
   flex: 1,
   flexDirection: "row",
   marginTop: 40,
 };
+const newQuestionForm = {
+  width: "80vw",
+  margin: "0 auto",
+}
 
-const textareaStyle = {
-  width: "50vw",
-};
-
-const btn = {
-  backgroundColor: green,
-  width: 100,
-  height: 36,
-  alignItems: "center",
-  fontSize: 14,
-  color: "white",
-  fontFamily: "Poppins",
-  border: "0px",
-};
+const askBtn = {
+    backgroundColor: green,
+    width: 100,
+    height: 36,
+    alignItems: 'center',
+    fontSize: 14,
+    color: 'white',
+    fontFamily: 'Poppins',
+    border: '0px'
+}

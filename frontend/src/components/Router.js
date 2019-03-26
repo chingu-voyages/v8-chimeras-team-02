@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import App from "../App";
 import GiveAnswer from "../screens/GiveAnswer";
+import NewQuestion from "../screens/NewQuestion";
 import NotFound from "../screens/NotFound";
 
 const Router = () => (
@@ -9,6 +10,7 @@ const Router = () => (
     <Switch>
       <Route path="/" exact component={App} />
       <Route path="/giveanswer" exact component={GiveAnswer} />
+      <Route path="/newquestion" exact component={NewQuestion} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
