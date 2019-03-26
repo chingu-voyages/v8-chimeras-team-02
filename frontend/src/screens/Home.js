@@ -2,8 +2,36 @@ import React, { Component } from "react";
 import { user } from "../resources/images";
 import { blue } from "../resources/colors";
 import { SearchBar, Section, ListItem, Logo, SideList } from "../components";
+import { graphql, compose } from "react-apollo";
+import gql from "graphql-tag";
+import { Mutation } from "react-apollo";
 
 class Home extends Component {
+    state = {
+        name: "hanen",
+        email: "hanen@gmail.com",
+        password: "111111",
+        error: ''
+    }
+
+    onSignup() {
+        const { name, email, password } = this.state;
+        this.props.mutate({
+            variables: { name, email, password }
+        })
+            .then((data) => console.log(JSON.stringify(data)))
+            .catch((err) => console.log(err, password, email, name))
+    }
+
+    onLogin() {
+        const { email, password } = this.state;
+        this.props.mutate({
+            variables: { email, password }
+        })
+            .then((data) => console.log(JSON.stringify(data)))
+            .catch((err) => console.log(err))
+    }
+
     render() {
         return (
             <div style={container}>
@@ -11,11 +39,11 @@ class Home extends Component {
                     <Logo />
                     <SearchBar />
                     <Section title="Ask" />
-                    <Section title="Login" />
-                    <Section title="Signup" />
-
+                    <Section title="Login" onClick={() => this.onLogin()} />
+                    <Section title="Signup" onClick={() => this.onSignup()} />
                     <img src={user} style={avatar} alt={user} />
                 </div>
+
 
                 <div style={gridView}>
                     <SideList />
@@ -34,7 +62,26 @@ class Home extends Component {
 }
 
 
-export default Home;
+const SIGNUP = gql`
+    mutation Signup($name: String!, $email:String!, $password: String!){
+        signup(name: $name, email: $email, password: $password){
+            _id
+        }
+    }
+`;
+
+const LOGIN = gql`
+    mutation Login($email:String!, $password: String!){
+        login(email: $email, password: $password){
+            _id
+            name
+            email
+        }
+    }
+`;
+
+export default graphql(LOGIN, SIGNUP)(Home);
+
 
 const container = {
     backgroundColor: blue,
