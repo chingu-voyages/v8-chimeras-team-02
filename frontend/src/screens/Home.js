@@ -9,8 +9,8 @@ import { Mutation } from "react-apollo";
 class Home extends Component {
     state = {
         name: "hanen",
-        email: "hanen4222@gmail.com",
-        password: "222222",
+        email: "hanen@gmail.com",
+        password: "111111",
         error: ''
     }
 
@@ -33,7 +33,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log("========+++>" + JSON.stringify(this.props))
         return (
             <div style={container}>
                 <div style={header}>
@@ -44,6 +43,7 @@ class Home extends Component {
                     <Section title="Signup" onClick={() => this.onSignup()} />
                     <img src={user} style={avatar} alt={user} />
                 </div>
+
 
                 <div style={gridView}>
                     <SideList />
@@ -80,7 +80,8 @@ const LOGIN = gql`
     }
 `;
 
-export default graphql(LOGIN)(Home);
+export default graphql(LOGIN, SIGNUP)(Home);
+
 
 const container = {
     backgroundColor: blue,
