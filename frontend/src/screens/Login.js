@@ -51,6 +51,7 @@ const button = {
     display: "flex",
     flexDirection: "row",
     background: "green",
+    color: "white";
     height: 85,
     alignItems: "center",
 };
