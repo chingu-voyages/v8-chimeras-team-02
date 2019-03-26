@@ -116,7 +116,7 @@ export async function createAnswer(
 
     // Find the question we're answering
     const Questions = mongo.collection('Question');
-    const question = await Questions.findOne({ question_id });
+    const question = await Questions.findOne({ _id: question_id });
 
 
     if (!question) {
@@ -142,7 +142,7 @@ export async function getAnswer(question_id, _id, mongo) {
 
     // Get the Question
     const Questions = mongo.collection('Question');
-    const question = await Questions.findOne({ question_id });
+    const question = await Questions.findOne({  _id: question_id });
 
 
     if (!question) {
@@ -172,7 +172,7 @@ export async function updateAnswer(
 
     // Get Question
     const Questions = mongo.collection('Question');
-    const question = await Questions.findOne({ question_id });
+    const question = await Questions.findOne({  _id: question_id });
 
     let answer;
 
@@ -197,7 +197,7 @@ export async function updateAnswer(
 export async function deleteAnswer( question_id, _id, mongo ) {
     // Get Question
     const Questions = mongo.collection('Question');
-    const question = await Questions.findOne({ question_id });
+    const question = await Questions.findOne({  _id: question_id });
 
     filteredAnswers = question.answers.filter( x => { x._id !== _id })
 
