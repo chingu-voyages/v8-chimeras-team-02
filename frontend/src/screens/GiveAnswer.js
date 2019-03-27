@@ -31,12 +31,25 @@ export default class GiveAnswer extends Component {
         <div style={gridView}>
           <SideList />
           <div style={listview}>
+            <ListItem
+              title={"Undefined is not an object React Native"}
+              user={"Hanen Wahabi"}
+              date={"16-03-2019"}
+              likes={"4"}
+            />
+            {this.state.answers.length === 0 ? (
+              <h1 style={{ color: "white" }}>Your answer</h1>
+            ) : (
+              <h1 style={{ color: "white" }}>
+                {this.state.answers.length} Answers
+              </h1>
+            )}
             {this.state.answers.map(answer => (
               <ListItem
                 title={answer}
                 user={"TheAnswerGiver"}
-                date={"Today"}
-                likes={"100"}
+                date={"Just now"}
+                likes={"0"}
               />
             ))}
             <form style={{ display: "flex" }} onSubmit={this.submitAnswer}>
@@ -79,6 +92,7 @@ const listview = {
   display: "flex",
   flex: 3,
   flexDirection: "column",
+  marginBottom: "100px",
 };
 
 const gridView = {
@@ -89,7 +103,7 @@ const gridView = {
 };
 
 const textareaStyle = {
-  width: "50vw",
+  width: "412px",
 };
 
 const btn = {
