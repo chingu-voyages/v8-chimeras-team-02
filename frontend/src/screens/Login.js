@@ -4,6 +4,18 @@ import { green } from "../resources/colors";
 export default class Login extends Component {
     constructor(props) {
         super(props);
+        state = {
+            useremail: "",
+            userpassword: ""
+        }
+    }
+
+    handleEmailChange = (event) => {
+        this.setState({ useremail: event.target.value });
+    }
+
+    handlePasswordChange = (event) => {
+        this.setState({ userpassword: event.target.value });
     }
 
     render() {
@@ -14,16 +26,16 @@ export default class Login extends Component {
                     placeholder="E-mail"
                     autoComplete="off"
                     autoFocus="on"
-                // onChange={this.handleChange}
-                // value={this.props.value}
+                    onChange={this.handleEmailChange}
+                    value={this.state.useremail}
                 ></input>
                 <input style={inputs}
                     type="password"
                     placeholder="Password"
                     autoComplete="off"
                     autoFocus="on"
-                // onChange={this.props.handleChange}
-                // value={this.props.value}
+                    onChange={this.handlePasswordChange}
+                    value={this.state.userpassword}
                 ></input>
                 <input style={button}
                     type="submit"
@@ -44,6 +56,7 @@ const inputs = {
     border: "1px solid green",
     background: "white",
     height: 85,
+    width: 250,
     alignItems: "left",
 };
 
