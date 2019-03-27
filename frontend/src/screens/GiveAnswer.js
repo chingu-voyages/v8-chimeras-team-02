@@ -92,6 +92,7 @@ const listview = {
   display: "flex",
   flex: 3,
   flexDirection: "column",
+  marginBottom: "100px",
 };
 
 const gridView = {
