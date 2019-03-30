@@ -1,20 +1,24 @@
 import React, { Component } from "react";
 import { user } from "../resources/images";
 import { blue, green } from "../resources/colors";
-import { SearchBar, Section, Logo } from "../components";
+import { SearchBar, Section, Logo, ListItem } from "../components";
 
 export default class NewQuestion extends Component {
   state = {
-    question: "",
+    questions: [],
+    newTitle: []
   };
 
   askQuestion = e => {
     e.preventDefault();
-    this.setState({ question: "" });
+    this.setState({
+      questions: [...this.state.questions, this.state.newTitle],
+      newTitle: []
+    });
   };
 
   handleChange = e => {
-    this.setState({ question: e.target.value });
+    this.setState({ newTitle: e.target.value });
   };
 
   render() {
@@ -31,16 +35,31 @@ export default class NewQuestion extends Component {
         </div>
 
         <div style={gridView}>
+          <div>
+            {this.state.questions.map(question => (
+              <ListItem
+                title={question}
+                user={"User001"}
+                date={"Just now"}
+                likes={"0"}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div style={gridView}>
           <div style={formView}>
             <form onSubmit={this.askQuestion}>
               <textarea
                 style={newQuestionForm}
-                placeholder="Enter question ..."
-                value={this.state.question}
+                placeholder="Add new question"
+                value={this.state.newTitle}
                 onChange={this.handleChange}
               />
               <br />
-              <button type="submit" style={askBtn}>Ask</button>
+              <button type="submit" style={askBtn}>
+                Ask
+              </button>
             </form>
           </div>
         </div>
@@ -50,14 +69,14 @@ export default class NewQuestion extends Component {
 }
 
 const container = {
-  backgroundColor: blue,
+  backgroundColor: blue
 };
 const header = {
   display: "flex",
   flexDirection: "row",
   background: "linear-gradient(to top, #00AB90 0%, #080A38 15%, #080A38 100%)",
   height: 85,
-  alignItems: "center",
+  alignItems: "center"
 };
 
 const avatar = {
@@ -68,31 +87,33 @@ const avatar = {
   borderWidth: 2,
   resizeMode: "cover",
   marginRight: 40,
-  marginLeft: 20,
+  marginLeft: 20
 };
 const formView = {
   display: "flex",
   flex: 3,
-  justifyContent: "center",
+  justifyContent: "center"
 };
 const gridView = {
   display: "flex",
   flex: 1,
   flexDirection: "row",
   marginTop: 40,
+  color: "white",
+  justifyContent: "center"
 };
 const newQuestionForm = {
   width: "80vw",
-  margin: "0 auto",
-}
+  margin: "0 auto"
+};
 
 const askBtn = {
-    backgroundColor: green,
-    width: 100,
-    height: 36,
-    alignItems: 'center',
-    fontSize: 14,
-    color: 'white',
-    fontFamily: 'Poppins',
-    border: '0px'
-}
+  backgroundColor: green,
+  width: 100,
+  height: 36,
+  alignItems: "center",
+  fontSize: 14,
+  color: "white",
+  fontFamily: "Poppins",
+  border: "0px"
+};
