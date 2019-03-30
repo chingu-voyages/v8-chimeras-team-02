@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { user } from '../resources/images';
-import { blue } from '../resources/colors';
+import { blue, green } from '../resources/colors';
 import { SearchBar, Section, ListItem, Logo, SideList } from '../components';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -28,17 +28,23 @@ class Home extends Component {
 
 	onLogin() {
 		const { email, password } = this.state;
-		if (email.length === 0 || password.length === 0) this.setState({ error: 'Empty fields' });
-		else this.setState({ error: '' });
-		this.props
-			.mutate({
-				variables: { email, password },
-			})
-			.then(data => {
-				this.setState({ openModal: false });
-				console.log(JSON.stringify(data));
-			})
-			.catch(error => console.log(error));
+		if (email.length === 0 || password.length === 0) {
+			this.setState({ error: 'Empty fields' });
+		} else {
+			this.setState({ error: '' });
+			this.props
+				.mutate({
+					variables: { email, password },
+				})
+				.then(data => {
+					console.log(JSON.stringify(data));
+					this.setState({ openModal: false });
+				})
+				.catch(error => {
+					console.log(error);
+					this.setState({ error: 'Wrong email/password ' });
+				});
+		}
 	}
 
 	render() {
@@ -64,6 +70,7 @@ class Home extends Component {
 						/>
 					</div>
 				</div>
+
 				<Modal
 					style={{
 						overlay: {
@@ -72,7 +79,7 @@ class Home extends Component {
 							justifyContent: 'center',
 						},
 						content: {
-							backgroundColor: 'red',
+							backgroundColor: 'transparent',
 							borderWidth: 0,
 							padding: 50,
 						},
@@ -107,6 +114,7 @@ const LOGIN = gql`
 			_id
 			name
 			email
+			rememberToken
 		}
 	}
 `;
@@ -144,4 +152,43 @@ const gridView = {
 	flex: 1,
 	flexDirection: 'row',
 	marginTop: 40,
+};
+
+const form = {
+	display: 'flex',
+	flexDirection: 'column',
+	backgroundColor: 'white',
+	alignItems: 'center',
+	justifyContent: 'center',
+	width: '30%',
+	height: 400,
+	borderRadius: 10,
+};
+
+const inputs = {
+	border: '1px solid #ccc',
+	background: 'white',
+	height: 45,
+	width: '40%',
+	alignItems: 'left',
+	marginTop: 25,
+	fontSize: 16,
+	outlineColor: green,
+};
+
+const button = {
+	background: green,
+	color: 'white',
+	height: 60,
+	width: '40%',
+	alignItems: 'center',
+	marginTop: 25,
+	fontSize: 20,
+};
+
+const error = {
+	color: 'red',
+	fontSize: 14,
+	marginTop: 25,
+	textAlign: 'center',
 };

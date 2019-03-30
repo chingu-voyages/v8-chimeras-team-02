@@ -5,7 +5,7 @@ export default class Login extends Component {
 	render() {
 		return (
 			<div style={container}>
-				<form style={form}>
+				<div style={form}>
 					<input
 						style={inputs}
 						type="email"
@@ -26,7 +26,7 @@ export default class Login extends Component {
 					/>
 					<h3 style={error}>{this.props.error}</h3>
 					<input style={button} type="submit" value="Log In" onClick={this.props.onClick} />
-				</form>
+				</div>
 			</div>
 		);
 	}
