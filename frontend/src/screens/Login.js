@@ -1,57 +1,78 @@
-import React, { Component } from "react";
-import { green } from "../resources/colors";
+import React, { Component } from 'react';
+import { green } from '../resources/colors';
 
 export default class Login extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <form style={container}>
-                <input style={inputs}
-                    type="email"
-                    placeholder="E-mail"
-                    autoComplete="off"
-                    autoFocus="on"
-                // onChange={this.handleChange}
-                // value={this.props.value}
-                ></input>
-                <input style={inputs}
-                    type="password"
-                    placeholder="Password"
-                    autoComplete="off"
-                    autoFocus="on"
-                // onChange={this.props.handleChange}
-                // value={this.props.value}
-                ></input>
-                <input style={button}
-                    type="submit"
-                    value="Log In"
-                ></input>
-            </form>
-        );
-    }
+	render() {
+		return (
+			<div style={container}>
+				<div style={form}>
+					<input
+						style={inputs}
+						type="email"
+						placeholder="E-mail"
+						autoComplete="off"
+						autoFocus="on"
+						onChange={this.props.handleEmail}
+						value={this.props.email}
+					/>
+					<input
+						style={inputs}
+						type="password"
+						placeholder="Password"
+						autoComplete="off"
+						autoFocus="on"
+						onChange={this.props.handlePassword}
+						value={this.props.password}
+					/>
+					<h3 style={error}>{this.props.error}</h3>
+					<input style={button} type="submit" value="Log In" onClick={this.props.onClick} />
+				</div>
+			</div>
+		);
+	}
 }
-
 const container = {
-    backgroundColor: "white"
+	display: 'flex',
+	flex: 1,
+	backgroundColor: 'transparent',
+	alignItems: 'center',
+	justifyContent: 'center',
+};
+const form = {
+	display: 'flex',
+	flexDirection: 'column',
+	backgroundColor: 'white',
+	alignItems: 'center',
+	justifyContent: 'center',
+	width: '30%',
+	height: 400,
+	borderRadius: 10,
 };
 
 const inputs = {
-    display: "flex",
-    flexDirection: "row",
-    border: "1px solid green",
-    background: "white",
-    height: 85,
-    alignItems: "left",
+	border: '1px solid #ccc',
+	background: 'white',
+	height: 45,
+	width: '40%',
+	alignItems: 'left',
+	marginTop: 25,
+	fontSize: 16,
+	outlineColor: green,
 };
 
 const button = {
-    display: "flex",
-    flexDirection: "row",
-    background: "green",
-    color: "white";
-    height: 85,
-    alignItems: "center",
+	background: green,
+	color: 'white',
+	height: 60,
+	width: '40%',
+	alignItems: 'center',
+	marginTop: 25,
+	fontSize: 20,
+};
+
+const error = {
+	color: 'red',
+	fontSize: 14,
+	marginTop: 25,
+	textAlign: 'center',
 };
