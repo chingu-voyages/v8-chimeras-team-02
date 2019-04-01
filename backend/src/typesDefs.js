@@ -43,6 +43,7 @@ const typeDefs = [`
     
     type Query {
       question(_id: ID!): Question
+      answer(question_id: ID!, _id: ID!): Answer
       logOut:User
       currentUser:User
     }
@@ -67,6 +68,20 @@ const typeDefs = [`
         answers_ids: [ID]!): Question
 
       deleteQuestion(_id: ID!): Question
+
+      createAnswer( 
+        question_id: ID!,
+        answer: String!, 
+        user_id: ID!): Answer
+
+      updateAnswer(
+        question_id: ID!, 
+        _id: ID!, 
+        newAnswer: String!): Answer
+
+      deleteAnswer( 
+        question_id: ID!,
+         _id: ID!): Answer
     }
 
     schema {
