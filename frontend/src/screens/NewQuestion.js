@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { user } from "../resources/images";
 import { blue, green } from "../resources/colors";
-import { SearchBar, Section, Logo, ListItem, Footer } from "../components";
+import { Header, ListItem, Footer } from "../components";
 
 export default class NewQuestion extends Component {
   state = {
@@ -24,15 +24,7 @@ export default class NewQuestion extends Component {
   render() {
     return (
       <div style={container}>
-        <div style={header}>
-          <Logo />
-          <SearchBar />
-          <Section title="Ask" />
-          <Section title="Login" />
-          <Section title="Signup" />
-
-          <img src={user} style={avatar} alt={user} />
-        </div>
+        <Header />
 
         <div style={gridView}>
           <div>
