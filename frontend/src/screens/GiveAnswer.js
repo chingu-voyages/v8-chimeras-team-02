@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { user } from "../resources/images";
 import { blue, green } from "../resources/colors";
-import { SearchBar, Section, ListItem, Logo, SideList } from "../components";
+import { SearchBar, Section, ListItem, Logo, SideList, Footer } from "../components";
 
 export default class GiveAnswer extends Component {
   state = {
@@ -60,6 +60,8 @@ export default class GiveAnswer extends Component {
             </form>
           </div>
         </div>
+
+        <Footer />
       </div>
     );
   }
