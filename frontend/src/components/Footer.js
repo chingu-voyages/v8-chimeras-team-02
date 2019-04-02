@@ -19,6 +19,7 @@ const footer = {
   textAlign: 'center',
   margin: '0 auto',
   color: 'white',
-  padding: '15px',
+  paddingTop: '15px',
+  paddingBottom: '15px',
   borderTop: '1px solid white'
 };
