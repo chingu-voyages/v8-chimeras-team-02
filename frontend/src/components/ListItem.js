@@ -1,27 +1,30 @@
 import React, { Component } from 'react';
 import { green, blue, purple } from "../resources/colors";
 import { user, heart } from "../resources/images";
-const WIDTH = window.innerWidth;
 
 export default class ListItem extends Component {
 
     render() {
         return (
-            <div style={{ display: 'flex', flexDirection: 'column', width: WIDTH / 2 - 100 }}>
+            <div style={listContainer}>
                 <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
 
                 <p style={h1}>{this.props.title}</p>
+
                 <div style={item}>
                     <img src={user} style={avatar} alt={user} />
+
                     <div style={{ marginLeft: 15 }}>
                         <p style={username}>{this.props.user}</p>
-                        <div style={{ display: 'flex', flexDirection: 'row', width: WIDTH / 2 - 170, justifyContent: 'space-between' }}>
-                            <div style={{ display: 'flex', flexDirection: 'row', marginTop: -15 }}>
-                                <img src={heart} style={like} alt={heart} />
-                                <p style={likes}>{this.props.likes + ' likes'}</p>
-                            </div>
-                            <p style={date}>{"published in " + this.props.date}</p>
-                        </div>
+                        <p style={date}>{"published on " + this.props.date}</p>
+                    </div>
+
+                    <div style={{ marginLeft: '15%' }}>
+                      <div>
+                        <img src={heart} style={like} alt={heart} />
+                        <p style={{width: '100%', height: '20px'}}></p>
+                      </div>
+                      <p style={likes}>{this.props.likes + ' likes '}</p>
                     </div>
                 </div>
             </div>
@@ -30,20 +33,27 @@ export default class ListItem extends Component {
     }
 }
 
+const listContainer = {
+   display: 'flex',
+   flexDirection: 'column',
+   width: '100%'
+}
 
 const item = {
     display: 'flex',
     flexDirection: 'row',
     height: 80,
-    background: 'linear-gradient(to top, #566EFC 0%, #080A38 1%, #080A38 100%)',
-    marginTop: -15
+    maxWidth: '100%',
+    marginTop: -15,
+    alignItems: 'center'
 }
 const like = {
     height: 20,
     width: 20,
     resizeMode: "contain",
     marginTop: 12,
-    marginRight: 8
+    marginRight: 8,
+    float: 'right'
 }
 const likes = {
     fontSize: 14,
@@ -62,7 +72,8 @@ const date = {
     fontSize: 12,
     color: purple,
     fontFamily: 'Poppins',
-    marginTop: 0
+    marginTop: 0,
+    paddingRight: 5
 }
 const username = {
     fontSize: 14,
@@ -77,8 +88,5 @@ const avatar = {
     border: '30px solid #566EFC',
     borderWidth: 6,
     resizeMode: "cover",
-    backgroundColor: purple,
-    marginTop: 10
+    backgroundColor: purple
 }
-
-

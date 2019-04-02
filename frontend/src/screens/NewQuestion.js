@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { user } from "../resources/images";
 import { blue, green } from "../resources/colors";
-import { SearchBar, Section, Logo, ListItem, Footer } from "../components";
+import { Header, ListItem, Footer } from "../components";
 
 export default class NewQuestion extends Component {
   state = {
-    questions: [],
+    questions: ['This is just a random question(?)'],
     newTitle: []
   };
 
@@ -24,15 +24,7 @@ export default class NewQuestion extends Component {
   render() {
     return (
       <div style={container}>
-        <div style={header}>
-          <Logo />
-          <SearchBar />
-          <Section title="Ask" />
-          <Section title="Login" />
-          <Section title="Signup" />
-
-          <img src={user} style={avatar} alt={user} />
-        </div>
+        <Header />
 
         <div style={gridView}>
           <div>
@@ -72,24 +64,6 @@ export default class NewQuestion extends Component {
 
 const container = {
   backgroundColor: blue
-};
-const header = {
-  display: "flex",
-  flexDirection: "row",
-  background: "linear-gradient(to top, #00AB90 0%, #080A38 15%, #080A38 100%)",
-  height: 85,
-  alignItems: "center"
-};
-
-const avatar = {
-  height: 35,
-  width: 35,
-  borderRadius: 40,
-  border: "30px solid #2FE090",
-  borderWidth: 2,
-  resizeMode: "cover",
-  marginRight: 40,
-  marginLeft: 20
 };
 const formView = {
   display: "flex",
