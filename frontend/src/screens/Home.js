@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { user } from '../resources/images';
 import { blue, green } from '../resources/colors';
-import { SearchBar, Section, ListItem, Logo, SideList } from '../components';
+import { SearchBar, Section, ListItem, Logo, SideList, Footer } from '../components';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import Modal from 'react-modal';
@@ -95,6 +95,10 @@ class Home extends Component {
 						error={this.state.error}
 					/>
 				</Modal>
+
+				<div>
+					<Footer />
+				</div>
 			</div>
 		);
 	}
