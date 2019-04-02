@@ -5,7 +5,7 @@ import { Header, ListItem, Footer } from "../components";
 
 export default class NewQuestion extends Component {
   state = {
-    questions: [],
+    questions: ['This is just a random question(?)'],
     newTitle: []
   };
 
