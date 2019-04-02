@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { user } from '../resources/images';
 import { blue, green } from '../resources/colors';
-import { SearchBar, Section, ListItem, Logo, SideList, Footer } from '../components';
+import { SearchBar, Section, ListItem, Logo, SideList, Header, Footer } from '../components';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import Modal from 'react-modal';
@@ -50,18 +50,20 @@ class Home extends Component {
 	render() {
 		return (
 			<div style={container}>
-				<div style={header}>
+				<Header />
+				{/*<div style={header}>
 					<Logo />
 					<SearchBar />
 					<Section title="Ask" />
 					<Section title="Login" onClick={() => this.setState({ openModal: true })} />
 					<Section title="Signup" onClick={() => this.onSignup()} />
 					<img src={user} style={avatar} alt={user} />
-				</div>
+				</div>*/}
 
 				<div style={gridView}>
 					<SideList />
 					<div style={listview}>
+						<h2 style={{textAlign:'left'}}>New Questions</h2>
 						<ListItem
 							title={'Undefined is not an object React Native'}
 							user={'Hanen Wahabi'}
@@ -126,7 +128,7 @@ const LOGIN = gql`
 export default graphql(LOGIN, SIGNUP)(Home);
 
 const container = {
-	backgroundColor: blue,
+
 };
 const header = {
 	display: 'flex',
@@ -150,12 +152,13 @@ const listview = {
 	display: 'flex',
 	flex: 3,
 	flexDirection: 'column',
+	maxWidth:'50%'
 };
 const gridView = {
 	display: 'flex',
 	flex: 1,
 	flexDirection: 'row',
-	marginTop: 40,
+	marginTop: 40
 };
 
 const form = {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { blue } from "../resources/colors";
 
 export default class Footer extends Component {
     render() {
@@ -14,12 +14,12 @@ export default class Footer extends Component {
 
 const footer = {
 	position: 'absolute',
+  backgroundColor: blue,
   bottom: 0,
   width: '100%',
   textAlign: 'center',
   margin: '0 auto',
-  color: 'white',
+  color: '#fff',
   paddingTop: '15px',
   paddingBottom: '15px',
-  borderTop: '1px solid white'
 };
