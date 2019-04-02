@@ -30,7 +30,7 @@ const header = {
 const logo = {
   color: '#fff',
   padding: '15px',
-  fontSize: '28px'
+  fontSize: '4vw'
 }
 
 const avatar = {
