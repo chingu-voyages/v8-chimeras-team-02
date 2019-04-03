@@ -6,6 +6,7 @@ import {
   deleteQuestion,
   updateQuestion,
   getQuestion,
+  getQuestions,
   createAnswer,
   deleteAnswer,
   updateAnswer,
@@ -16,6 +17,9 @@ const resolvers = {
   Query: {
     question: async (root, { _id }, { mongo }, info) => {
       return getQuestion(_id, mongo);
+    },
+    questions: async(root, { number }, {mongo}, info) => {
+      return getQuestions(number, mongo);
     },
     answer: async (root, { question_id, _id }, { mongo }, info) => {
       return getAnswer(question_id, _id, mongo);

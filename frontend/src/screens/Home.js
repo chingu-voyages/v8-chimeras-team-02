@@ -6,6 +6,8 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import Modal from 'react-modal';
 import Login from './Login';
+import { setToken } from '../utils';
+
 
 class Home extends Component {
 	state = {
@@ -36,8 +38,8 @@ class Home extends Component {
 				.mutate({
 					variables: { email, password },
 				})
-				.then(data => {
-					console.log(JSON.stringify(data));
+				.then(res => {
+					setToken(res.data.login.rememberToken);
 					this.setState({ openModal: false });
 				})
 				.catch(error => {

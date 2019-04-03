@@ -43,6 +43,7 @@ const typeDefs = [`
     
     type Query {
       question(_id: ID!): Question
+      questions(number: String!): Question
       answer(question_id: ID!, _id: ID!): Answer
       logOut:User
       currentUser:User

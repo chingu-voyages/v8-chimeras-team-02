@@ -5,15 +5,18 @@ import { createServer } from 'http';
 import { schema } from './src/schema';
 import { MongoClient } from 'mongodb'
 import dotenv from 'dotenv';
+const cookieParser = require('cookie-parser');
 const jsonwebtoken = require('jsonwebtoken')
+
+
 
 var account = require('./src/routes/account');
 const app = express()
 app.use('/account', account);
 app.use(cors())
+app.use(cookieParser())
 dotenv.config({ silent: true });
 
-const MONGO_URL = process.env.MONGO_URL
 const MONGO_USER = process.env.MONGO_USER
 const MONGO_SECRET = process.env.MONGO_SECRET
 const homePath = process.env.HOME_PATH;

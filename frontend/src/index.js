@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-// import { getToken } from './utils';
+import { getToken } from './utils';
 
 const cache = new InMemoryCache({
     dataIdFromObject: o => o.id
@@ -15,8 +15,7 @@ const cache = new InMemoryCache({
 const client = new ApolloClient({
     uri: 'http://localhost:3003/graphql',
     headers: {
-        // authorization: getToken() ? `Bearer ${getToken()}` : '',
-        authorization: ''
+        authorization: getToken() ? `Bearer ${getToken()}` : '',
     },
     cache
 });
