@@ -14,6 +14,8 @@ app.use(cors())
 dotenv.config({ silent: true });
 
 const MONGO_URL = process.env.MONGO_URL
+const MONGO_USER = process.env.MONGO_USER
+const MONGO_SECRET = process.env.MONGO_SECRET
 const homePath = process.env.HOME_PATH;
 const URL = process.env.URL
 const PORT = process.env.PORT
@@ -24,8 +26,8 @@ const server = new ApolloServer({
         const token = req.headers.authorization || '';
         let mongo, user;
         if (!mongo) {
-            const client = await MongoClient.connect(MONGO_URL, { useNewUrlParser: true })
-            mongo = client.db('chingu');
+            const client = await MongoClient.connect(`mongodb://${MONGO_USER}:${MONGO_SECRET}@ds131296.mlab.com:31296/chinguflow`, { useNewUrlParser: true })
+            mongo = client.db('chinguflow');
             if (token) {
                 user = await getUser(token, mongo);
             }
