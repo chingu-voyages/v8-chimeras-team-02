@@ -35,7 +35,7 @@ const server = new ApolloServer({
                 user = await getUser(token, mongo);
             }
         }
-        return { mongo, user };
+        return { ...req, mongo, user };
     },
 });
 

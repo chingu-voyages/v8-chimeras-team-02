@@ -18,8 +18,9 @@ const resolvers = {
     question: async (root, { _id }, { mongo }, info) => {
       return getQuestion(_id, mongo);
     },
-    questions: async(root, { number }, {mongo}, info) => {
-      return getQuestions(number, mongo);
+    questions: async(root, { number }, ctx, info) => {
+      console.log(ctx.req)
+      return getQuestions(number, ctx.mongo);
     },
     answer: async (root, { question_id, _id }, { mongo }, info) => {
       return getAnswer(question_id, _id, mongo);
