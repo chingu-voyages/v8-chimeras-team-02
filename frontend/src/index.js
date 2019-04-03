@@ -13,7 +13,7 @@ const cache = new InMemoryCache({
 });
 
 const client = new ApolloClient({
-    uri: 'http://localhost:3002/graphql',
+    uri: 'http://localhost:3003/graphql',
     headers: {
         // authorization: getToken() ? `Bearer ${getToken()}` : '',
         authorization: ''
