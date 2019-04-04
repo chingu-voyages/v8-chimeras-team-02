@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { user } from '../resources/images';
 import { blue, green } from '../resources/colors';
 import { SearchBar, Section, ListItem, Logo, SideList, Footer } from '../components';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import Modal from 'react-modal';
-import Login from './Login';
+import LogIn from './LogIn';
+import Avatar from './Avatar';
 
 class Home extends Component {
 	state = {
@@ -47,6 +47,10 @@ class Home extends Component {
 		}
 	}
 
+	onLogout() {
+		//Hannen code here
+	}
+
 	render() {
 		return (
 			<div style={container}>
@@ -56,7 +60,7 @@ class Home extends Component {
 					<Section title="Ask" />
 					<Section title="Login" onClick={() => this.setState({ openModal: true })} />
 					<Section title="Signup" onClick={() => this.onSignup()} />
-					<img src={user} style={avatar} alt={user} />
+					<Avatar />
 				</div>
 
 				<div style={gridView}>
@@ -88,7 +92,7 @@ class Home extends Component {
 					onRequestClose={() => this.setState({ openModal: false })}
 					contentLabel="Modal with image"
 				>
-					<Login
+					<LogIn
 						handleEmail={event => this.setState({ email: event.target.value })}
 						handlePassword={event => this.setState({ password: event.target.value })}
 						onClick={() => this.onLogin()}
@@ -136,16 +140,6 @@ const header = {
 	alignItems: 'center',
 };
 
-const avatar = {
-	height: 35,
-	width: 35,
-	borderRadius: 40,
-	border: '30px solid #2FE090',
-	borderWidth: 2,
-	resizeMode: 'cover',
-	marginRight: 40,
-	marginLeft: 20,
-};
 const listview = {
 	display: 'flex',
 	flex: 3,
