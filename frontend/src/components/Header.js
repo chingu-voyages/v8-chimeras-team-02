@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// add library
+import styled from 'styled-components'
 import { SearchBar, Section, ListItem, Logo, SideList, Footer } from '../components';
 import { user } from '../resources/images';
 import { blue } from '../resources/colors';
@@ -6,26 +8,27 @@ import { blue } from '../resources/colors';
 export default class Header extends Component {
     render() {
         return (
-          <div style={header}>
+          <HeaderContainer>
             <h1 style={logo}>ChinguFlow</h1>
             <SearchBar />
             <Section title="Ask" />
             <Section title="Login" onClick={() => this.setState({ openModal: true })} />
             <Section title="Signup" onClick={() => this.onSignup()} />
             <img src={user} style={avatar} alt={user} />
-          </div>
+          </HeaderContainer>
 
         )
     }
 }
 
-const header = {
-	display: 'flex',
-	flexDirection: 'row',
-	background: blue,
-	height: 85,
-	alignItems: 'center',
-};
+// styled component
+const HeaderContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	background: #070a37;
+	height: 85px;
+	align-items: center;
+`
 
 const logo = {
   color: '#fff',
