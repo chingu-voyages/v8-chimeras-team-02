@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { green } from '../resources/colors';
 
-export default class LogIn extends Component {
+export default class SignUp extends Component {
 	render() {
 		return (
 			<div style={container}>
@@ -25,7 +25,7 @@ export default class LogIn extends Component {
 						value={this.props.password}
 					/>
 					<h3 style={error}>{this.props.error}</h3>
-					<input style={button} type="submit" value="Log In" onClick={this.props.onClick} />
+					<input style={button} type="submit" value="Sign Up" onClick={this.props.onClick} />
 				</div>
 			</div>
 		);
