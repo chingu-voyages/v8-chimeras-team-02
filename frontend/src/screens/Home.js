@@ -87,12 +87,15 @@ class Home extends Component {
 					isOpen={this.state.openModal}
 					onRequestClose={() => this.setState({ openModal: false })}
 					contentLabel="Modal with image"
+					shouldCloseOnEsc={true}
+					shouldCloseOnOverlayClick={true}
 				>
 					<Login
 						handleEmail={event => this.setState({ email: event.target.value })}
 						handlePassword={event => this.setState({ password: event.target.value })}
 						onClick={() => this.onLogin()}
 						error={this.state.error}
+						onColse={() => this.setState({ openModal: false })}
 					/>
 				</Modal>
 

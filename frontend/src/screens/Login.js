@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { green } from '../resources/colors';
+import { unsolved2 } from '../resources/images';
 
 export default class Login extends Component {
 	render() {
 		return (
 			<div style={container}>
+				<img onClick={this.props.onColse} src={unsolved2} style={close} />
 				<div style={form}>
 					<input
 						style={inputs}
@@ -35,7 +37,7 @@ const container = {
 	display: 'flex',
 	flex: 1,
 	backgroundColor: 'transparent',
-	alignItems: 'center',
+	// alignItems: 'center',
 	justifyContent: 'center',
 };
 const form = {
@@ -75,4 +77,10 @@ const error = {
 	fontSize: 14,
 	marginTop: 25,
 	textAlign: 'center',
+};
+
+const close = {
+	width: 25,
+	height: 25,
+	resizeMode: 'contain',
 };
