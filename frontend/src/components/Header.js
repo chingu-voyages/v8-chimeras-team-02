@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 // add library
 import styled from 'styled-components'
 import { SearchBar, Section, ListItem, Logo, SideList } from '../components';
@@ -52,9 +53,13 @@ class Header extends Component {
     render() {
         return (
           <HeaderContainer>
-            <h1 style={logo}>ChinguFlow</h1>
+            <Link exact to={"/"} style={linkColor}>
+              <h1 style={logo}>ChinguFlow</h1>
+            </Link>
             <SearchBar />
-            <Section title="Ask" />
+            <Link to={"/newquestion"}>
+              <Section title="Ask" />
+            </Link>
             <Section title="Login" onClick={() => this.setState({ openModal: true })} />
             <Section title="Signup" onClick={() => this.onSignup()} />
             <img src={user} style={avatar} alt={user} />
@@ -122,6 +127,10 @@ const logo = {
   color: '#fff',
   padding: '15px',
   fontSize: '4vw'
+}
+
+const linkColor = {
+  textDecoration: 'none'
 }
 
 const avatar = {
