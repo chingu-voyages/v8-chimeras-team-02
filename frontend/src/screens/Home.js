@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { user } from '../resources/images';
 import { blue, green } from '../resources/colors';
 import { SearchBar, Section, ListItem, Logo, SideList, Header, Footer } from '../components';
 

@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 // add library
 import styled from 'styled-components'
 import { SearchBar, Section, ListItem, Logo, SideList } from '../components';
-import { user } from '../resources/images';
 import { blue } from '../resources/colors';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import Modal from 'react-modal';
 import Login from '../screens/Login';
+import Avatar from './Avatar';
 
 class Header extends Component {
     state = {
@@ -50,6 +50,10 @@ class Header extends Component {
   		}
   	}
 
+    onLogout() {
+  		//Hannen code here
+  	}
+
     render() {
         return (
           <HeaderContainer>
@@ -62,7 +66,7 @@ class Header extends Component {
             </Link>
             <Section title="Login" onClick={() => this.setState({ openModal: true })} />
             <Section title="Signup" onClick={() => this.onSignup()} />
-            <img src={user} style={avatar} alt={user} />
+            <Avatar />
 
             <Modal
     					style={{
@@ -132,14 +136,3 @@ const logo = {
 const linkColor = {
   textDecoration: 'none'
 }
-
-const avatar = {
-	height: 35,
-	width: 35,
-	borderRadius: 40,
-	border: '30px solid #2FE090',
-	borderWidth: 2,
-	resizeMode: 'cover',
-	marginRight: 40,
-	marginLeft: 20,
-};
