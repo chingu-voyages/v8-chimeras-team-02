@@ -2,12 +2,21 @@ import React, { Component } from 'react';
 import { green, blue } from '../resources/colors';
 import { unsolved2 } from '../resources/images';
 
-export default class LogIn extends Component {
+export default class SignUp extends Component {
 	render() {
 		return (
 			<div style={container}>
 				<img onClick={this.props.onColse} src={unsolved2} style={close} />
 				<div style={form}>
+					<input
+						style={inputs}
+						type="text"
+						placeholder="Name"
+						autoComplete="off"
+						autoFocus="on"
+						onChange={this.props.handleName}
+						value={this.props.name}
+					/>
 					<input
 						style={inputs}
 						type="email"
@@ -27,7 +36,7 @@ export default class LogIn extends Component {
 						value={this.props.password}
 					/>
 					<h3 style={error}>{this.props.error}</h3>
-					<input style={button} type="submit" value="Log In" onClick={this.props.onClick} />
+					<input style={button} type="submit" value="Sign Up" onClick={this.props.onClick} />
 				</div>
 			</div>
 		);
@@ -37,7 +46,6 @@ const container = {
 	display: 'flex',
 	flex: 1,
 	backgroundColor: 'transparent',
-	// alignItems: 'center',
 	justifyContent: 'center',
 };
 const form = {
@@ -78,7 +86,6 @@ const error = {
 	marginTop: 25,
 	textAlign: 'center',
 };
-
 const close = {
 	width: 25,
 	height: 25,

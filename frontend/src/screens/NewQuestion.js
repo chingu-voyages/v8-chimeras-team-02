@@ -5,7 +5,7 @@ import { Header, ListItem, Footer } from "../components";
 
 export default class NewQuestion extends Component {
   state = {
-    questions: ['This is just a random question(?)'],
+    questions: ['This is just a random question(?)', 'And this is another one! :-o'],
     newTitle: []
   };
 
@@ -63,12 +63,12 @@ export default class NewQuestion extends Component {
 }
 
 const container = {
-  backgroundColor: blue
+
 };
 const formView = {
   display: "flex",
   flex: 3,
-  justifyContent: "center"
+  justifyContent: "center",
 };
 const gridView = {
   display: "flex",
@@ -80,7 +80,13 @@ const gridView = {
 };
 const newQuestionForm = {
   width: "80vw",
-  margin: "0 auto"
+  height: 100,
+  margin: "0 auto",
+  boxShadow: '0px 0px 8px 4px gainsboro',
+  border: '2px solid gainsboro',
+  borderRadius: '4px',
+  resize: 'none',
+  padding: 5,
 };
 
 const askBtn = {

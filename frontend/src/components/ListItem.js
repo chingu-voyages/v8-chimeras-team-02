@@ -36,7 +36,10 @@ export default class ListItem extends Component {
 const listContainer = {
    display: 'flex',
    flexDirection: 'column',
-   width: '100%'
+   width: '100%',
+   boxShadow: '0px 0px 8px 4px gainsboro',
+   padding: '0 15px 15px 15%',
+   marginBottom: '20px'
 }
 
 const item = {
@@ -63,21 +66,21 @@ const likes = {
 const h1 = {
     display: 'flex',
     fontSize: 20,
-    color: 'white',
+    color: '#7f7f7f',
     fontFamily: 'Poppins',
     justifyContent: 'flex-start',
     paddingTop: 15
 }
 const date = {
     fontSize: 12,
-    color: purple,
+    color: '#7f7f7f',
     fontFamily: 'Poppins',
     marginTop: 0,
     paddingRight: 5
 }
 const username = {
     fontSize: 14,
-    color: 'white',
+    color: '#7f7f7f',
     fontFamily: 'Poppins',
     textAlign: 'left'
 }
@@ -85,8 +88,9 @@ const avatar = {
     height: 35,
     width: 35,
     borderRadius: 40,
-    border: '30px solid #566EFC',
+    border: '30px solid',
+    borderColor: green,
     borderWidth: 6,
     resizeMode: "cover",
-    backgroundColor: purple
+    backgroundColor: green
 }
