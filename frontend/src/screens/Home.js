@@ -11,7 +11,7 @@ class Home extends Component {
 				<div style={gridView}>
 					<SideList />
 					<div style={listview}>
-						<h2 style={{textAlign:'left'}}>Top Questions</h2>
+						<h2 style={{ textAlign: 'left' }}>Top Questions</h2>
 						<ListItem
 							title={'Undefined is not an object React Native'}
 							user={'Hanen Wahabi'}
@@ -35,13 +35,13 @@ const listview = {
 	display: 'flex',
 	flex: 3,
 	flexDirection: 'column',
-	maxWidth:'50%'
+	maxWidth: '50%',
 };
 const gridView = {
 	display: 'flex',
 	flex: 1,
 	flexDirection: 'row',
-	marginTop: 40
+	marginTop: 40,
 };
 
 const form = {

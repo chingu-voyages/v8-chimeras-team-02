@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-import { green } from '../resources/colors';
+import { green, blue } from '../resources/colors';
+import { unsolved2 } from '../resources/images';
 
 export default class SignUp extends Component {
 	render() {
 		return (
 			<div style={container}>
+				<img onClick={this.props.onColse} src={unsolved2} style={close} />
 				<div style={form}>
+					<input
+						style={inputs}
+						type="text"
+						placeholder="Name"
+						autoComplete="off"
+						autoFocus="on"
+						onChange={this.props.handleName}
+						value={this.props.name}
+					/>
 					<input
 						style={inputs}
 						type="email"
@@ -35,13 +46,12 @@ const container = {
 	display: 'flex',
 	flex: 1,
 	backgroundColor: 'transparent',
-	alignItems: 'center',
 	justifyContent: 'center',
 };
 const form = {
 	display: 'flex',
 	flexDirection: 'column',
-	backgroundColor: 'white',
+	backgroundColor: blue,
 	alignItems: 'center',
 	justifyContent: 'center',
 	width: '30%',
@@ -75,4 +85,9 @@ const error = {
 	fontSize: 14,
 	marginTop: 25,
 	textAlign: 'center',
+};
+const close = {
+	width: 25,
+	height: 25,
+	resizeMode: 'contain',
 };
