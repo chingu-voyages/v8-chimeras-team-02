@@ -38,7 +38,7 @@ export default class SideList extends Component {
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
-              color: selected === "Unsolved" ? green : "white",
+              color: selected === "Unsolved" ? green : "black",
               backgroundColor:
                 selected === "Unsolved"
                   ? "rgba(47, 224, 144, .2)"
@@ -66,7 +66,7 @@ export default class SideList extends Component {
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
-              color: selected === "Solved" ? green : "white",
+              color: selected === "Solved" ? green : "black",
               backgroundColor:
                 selected === "Solved"
                   ? "rgba(47, 224, 144, .2)"
@@ -94,7 +94,7 @@ export default class SideList extends Component {
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
-              color: selected === "My Questions" ? green : "white",
+              color: selected === "My Questions" ? green : "black",
               backgroundColor:
                 selected === "My Questions"
                   ? "rgba(47, 224, 144, .2)"
@@ -115,6 +115,7 @@ const sideList = {
   marginTop: 40,
   marginLeft: 25,
   alignSelf: "flex-start",
+  maxWidth: '30%'
 };
 const sideItem = {
   display: "flex",
@@ -132,5 +133,5 @@ const icon = {
   height: 20,
   resizeMode: "contain",
   marginRight: 10,
-  backgroundColor: blue,
+  backgroundColor: 'black',
 };
