@@ -61,9 +61,6 @@ class GiveAnswer extends Component {
   }
 
   render() {
-    // if (this.props.data.loading) {
-    //   return <div>Loading...</div>;
-    // }
     return (
       <div style={container}>
         <div style={header}>
@@ -79,13 +76,6 @@ class GiveAnswer extends Component {
         <div style={gridView}>
           <SideList />
           <div style={listview}>
-            {/* {this.renderQuestions()} */}
-            {/* <ListItem
-              title={'Undefined is not an object React Native'}
-              user={'Hanen Wahabi'}
-              date={'16-03-2019'}
-              likes={'4'}
-						/> */}
             {this.renderQuestion()}
             {this.state.answers.length === 0 ? (
               <h1 style={{ color: 'white' }}>Your answer</h1>
