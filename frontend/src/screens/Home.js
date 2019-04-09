@@ -13,6 +13,20 @@ import {
 } from '../components';
 
 class Home extends Component {
+  renderQuestions() {
+    if (!this.props.data.loading) {
+      return this.props.data.questions.map((question, i) => {
+        return (
+          <ListItem
+            title={question.title}
+            user={'Hanen Wahabi'}
+            date={question.createAt}
+            likes={'4'}
+          />
+        );
+      });
+    }
+  }
   render() {
     return (
       <div>
@@ -22,12 +36,7 @@ class Home extends Component {
           <SideList />
           <div style={listview}>
             <h2 style={{ textAlign: 'left' }}>Top Questions</h2>
-            <ListItem
-              title={'Undefined is not an object React Native'}
-              user={'Hanen Wahabi'}
-              date={'16-03-2019'}
-              likes={'4'}
-            />
+            {this.renderQuestions()}
           </div>
         </div>
 
