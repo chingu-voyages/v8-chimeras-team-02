@@ -15,9 +15,10 @@ import {
 class Home extends Component {
   renderQuestions() {
     if (!this.props.data.loading) {
-      return this.props.data.questions.map((question, i) => {
+      return this.props.data.questions.map(question => {
         return (
           <ListItem
+            key={question._id}
             title={question.title}
             user={'Hanen Wahabi'}
             date={question.createAt}
