@@ -93,6 +93,15 @@ export async function getQuestion(_id, mongo) {
 	return question;
 }
 
+export async function getQuestions(number = "0", mongo) {
+	const Questions = mongo.collection('Question');
+	const questions = await Questions.find().limit(Number(number)).toArray()
+	if (!questions) {
+			throw new Error('Not found');
+	}
+	return questions;
+}
+
 export async function createAnswer(question_id, newAnswer, user, mongo) {
 	// Find the question we're answering
 	const Questions = mongo.collection('Question');
