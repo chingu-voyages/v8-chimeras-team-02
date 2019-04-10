@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import { user } from "../resources/images";
-import { blue, green } from "../resources/colors";
-import { Header, ListItem, Footer } from "../components";
+import React, { Component } from 'react';
+import { user } from '../resources/images';
+import { blue, green } from '../resources/colors';
+import { Header, ListItem, Footer } from '../components';
 
 export default class NewQuestion extends Component {
   state = {
-    questions: ['This is just a random question(?)', 'And this is another one! :-o'],
-    newTitle: []
+    questions: [],
+    newTitle: [],
   };
 
   askQuestion = e => {
     e.preventDefault();
     this.setState({
       questions: [...this.state.questions, this.state.newTitle],
-      newTitle: []
+      newTitle: [],
     });
   };
 
@@ -31,9 +31,9 @@ export default class NewQuestion extends Component {
             {this.state.questions.map(question => (
               <ListItem
                 title={question}
-                user={"User001"}
-                date={"Just now"}
-                likes={"0"}
+                user={'User001'}
+                date={'Just now'}
+                likes={'0'}
               />
             ))}
           </div>
@@ -62,26 +62,24 @@ export default class NewQuestion extends Component {
   }
 }
 
-const container = {
-
-};
+const container = {};
 const formView = {
-  display: "flex",
+  display: 'flex',
   flex: 3,
-  justifyContent: "center",
+  justifyContent: 'center',
 };
 const gridView = {
-  display: "flex",
+  display: 'flex',
   flex: 1,
-  flexDirection: "row",
+  flexDirection: 'row',
   marginTop: 40,
-  color: "white",
-  justifyContent: "center"
+  color: 'white',
+  justifyContent: 'center',
 };
 const newQuestionForm = {
-  width: "80vw",
+  width: '80vw',
   height: 100,
-  margin: "0 auto",
+  margin: '0 auto',
   boxShadow: '0px 0px 8px 4px gainsboro',
   border: '2px solid gainsboro',
   borderRadius: '4px',
@@ -93,9 +91,9 @@ const askBtn = {
   backgroundColor: green,
   width: 100,
   height: 36,
-  alignItems: "center",
+  alignItems: 'center',
   fontSize: 14,
-  color: "white",
-  fontFamily: "Poppins",
-  border: "0px"
+  color: 'white',
+  fontFamily: 'Poppins',
+  border: '0px',
 };
