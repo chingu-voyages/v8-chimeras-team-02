@@ -128,8 +128,8 @@ export async function createAnswer(question_id, newAnswer, user, mongo) {
 }
 
 export async function getAnswer(question_id, _id, mongo) {
-	let answer = '';
-
+	let answer;
+	
 	// Get the Question
 	const Questions = mongo.collection('Question');
 	const question = await Questions.findOne({ _id: question_id });
@@ -137,15 +137,16 @@ export async function getAnswer(question_id, _id, mongo) {
 	if (!question) {
 		throw new Error(`Something Wrong! Trying to get answer for a question that doesn't exist. Id: ${question_id}`);
 	}
-
+	console.log(question.answers)
 	// Loop trough array to check for the _id
-	for (let qstn in question.answers) {
-		if (qstn._id === _id) {
-			answer = qstn;
+	for (let i in question.answers) {
+		
+		if (question.answers[i]._id === _id) {
+			answer = question.answers[i];
 		}
 	}
 
-	if (!question) {
+	if (!answer) {
 		throw new Error(`No Answer found for id: ${question_id}`);
 	}
 
@@ -163,10 +164,10 @@ export async function updateAnswer(question_id, _id, newAnswer, mongo) {
 	let date = new Date().toISOString();
 
 	// Loop trough array to check for the _id and update answer
-	for (let qstn in question.answers) {
-		if (qstn._id === _id) {
-			qstn.answer = newAnswer;
-			answer = qstn;
+	for (let i in question.answers) {
+		if (question.answers[i]._id === _id) {
+			question.answers[i].answer = newAnswer;
+			answer = question.answers[i];
 		}
 	}
 
