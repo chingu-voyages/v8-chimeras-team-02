@@ -177,11 +177,27 @@ export async function updateAnswer(question_id, _id, newAnswer, mongo) {
 
 export async function deleteAnswer(question_id, _id, mongo) {
 	// Get Question
+	let answer
 	const Questions = mongo.collection('Question');
 	const question = await Questions.findOne({ _id: question_id });
 
-	filteredAnswers = question.answers.filter(x => {
-		x._id !== _id;
+	if (!question) {
+		throw new Error(`Something Wrong! Trying to get answer for a question that doesn't exist. Id: ${question_id}`);
+	}
+
+	for (let i in question.answers) {
+		
+		if (question.answers[i]._id === _id) {
+			answer = question.answers[i];
+		}
+	}
+
+	if (!answer) {
+		throw new Error(`No Answer found for id: ${question_id}`);
+	}
+
+	const filteredAnswers = question.answers.filter(x => {
+		return x._id !== _id;
 	});
 
 	await Questions.updateOne({ _id: question_id } , { $set:{ answers: filteredAnswers } } );
