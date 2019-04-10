@@ -122,8 +122,7 @@ export async function createAnswer(question_id, newAnswer, user, mongo) {
 	if (!question.answers) { question.answers = [] }
 	question.answers.push(answer);
 
-	const result = await Questions.updateOne({ _id: question_id } , { $set:{ answers: question.answers } } );
-	console.log(question.answers)
+	await Questions.updateOne({ _id: question_id } , { $set:{ answers: question.answers } } );
 
 	return answer;
 }
@@ -171,7 +170,7 @@ export async function updateAnswer(question_id, _id, newAnswer, mongo) {
 		}
 	}
 
-	await Questions.update({ _id }, { answers: question.answers });
+	await Questions.updateOne({ _id: question_id } , { $set:{ answers: question.answers } } );
 
 	return answer;
 }
@@ -185,7 +184,7 @@ export async function deleteAnswer(question_id, _id, mongo) {
 		x._id !== _id;
 	});
 
-	await Questions.update({ _id }, { answers: filteredAnswers });
+	await Questions.updateOne({ _id: question_id } , { $set:{ answers: filteredAnswers } } );
 
 	return answer;
 }
