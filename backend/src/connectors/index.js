@@ -119,9 +119,11 @@ export async function createAnswer(question_id, newAnswer, user, mongo) {
 
 	// Create and push Answer
 	const answer = { _id, answer: newAnswer, createDate: date, updateDate: date, user };
+	if (!question.answers) { question.answers = [] }
 	question.answers.push(answer);
 
-	await Questions.update({ _id }, { answers: question.answers });
+	const result = await Questions.updateOne({ _id: question_id } , { $set:{ answers: question.answers } } );
+	console.log(question.answers)
 
 	return answer;
 }
