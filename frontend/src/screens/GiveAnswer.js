@@ -118,9 +118,9 @@ const GET_QUESTION = gql`
 `;
 
 // const CREATE_ANSWER = gql`
-//   mutation createAnswer($question_id: ID!, $answer: String!, $user: String!) {
+//   mutation CreateAnswer($question_id: ID!, $answer: String!, $user: ID!) {
 //     createAnswer(question_id: $question_id, answer: $answer, user: $user) {
-//       question_id
+//       _id
 //       answer
 //       user
 //     }
