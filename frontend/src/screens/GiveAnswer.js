@@ -117,14 +117,6 @@ const GET_QUESTION = gql`
   }
 `;
 
-// const GET_QUESTION = gql`
-//   query getQuestion($question_id: ID!) {
-//     getQuestion(question_id: $question_id) {
-//       question_id
-//     }
-//   }
-// `;
-
 // const CREATE_ANSWER = gql`
 //   mutation createAnswer($question_id: ID!, $answer: String!, $user: String!) {
 //     createAnswer(question_id: $question_id, answer: $answer, user: $user) {
