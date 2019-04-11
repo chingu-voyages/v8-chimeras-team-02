@@ -9,6 +9,7 @@ import {
   ListItem,
   Logo,
   SideList,
+  Header,
   Footer,
 } from '../components';
 
@@ -44,7 +45,7 @@ class GiveAnswer extends Component {
   renderQuestion() {
     if (!this.props.data.loading) {
       const question = this.props.data.questions.filter(
-        question => question._id === 'cdea5b19-a640-4db6-8456-955bad32c755'
+        question => question._id === 'a8259359-b78d-48b0-989e-d523aa749776'
       );
       const questionTitle = question[0].title;
       const questionCreateAt = question[0].createAt;
@@ -63,24 +64,16 @@ class GiveAnswer extends Component {
   render() {
     return (
       <div style={container}>
-        <div style={header}>
-          <Logo />
-          <SearchBar />
-          <Section title="Ask" />
-          <Section title="LogIn" />
-          <Section title="Signup" />
 
-          <img src={user} style={avatar} alt={user} />
-        </div>
-
+        <Header />
         <div style={gridView}>
           <SideList />
           <div style={listview}>
             {this.renderQuestion()}
             {this.state.answers.length === 0 ? (
-              <h1 style={{ color: 'white' }}>Your answer</h1>
+              <h1 style={{ color: '#7f7f7f', }}>Your answer</h1>
             ) : (
-              <h1 style={{ color: 'white' }}>
+              <h1 style={{ color: '#7f7f7f', }}>
                 {this.state.answers.length} Answers
               </h1>
             )}
@@ -146,7 +139,7 @@ const GET_QUESTION = gql`
 export default graphql(GET_QUESTION)(GiveAnswer);
 
 const container = {
-  backgroundColor: blue,
+  color: '#7f7f7f',
 };
 
 const header = {
@@ -172,9 +165,8 @@ const listview = {
   display: 'flex',
   flex: 3,
   flexDirection: 'column',
-  marginBottom: '100px',
+  maxWidth: '50%',
 };
-
 const gridView = {
   display: 'flex',
   flex: 1,
