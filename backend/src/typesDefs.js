@@ -1,5 +1,5 @@
-
-const typeDefs = [`
+const typeDefs = [
+  `
 
     scalar Date
 
@@ -55,7 +55,7 @@ const typeDefs = [`
       createQuestion( 
         title: String!, 
         question: String!, 
-        user_id: ID!, 
+        user_id: ID, 
         tags: [String],
         answers_ids: [ID]): Question
 
@@ -73,7 +73,7 @@ const typeDefs = [`
       createAnswer( 
         question_id: ID!,
         answer: String!, 
-        user_id: ID!): Answer
+        user_id: ID): Answer
 
       updateAnswer(
         question_id: ID!, 
@@ -89,5 +89,6 @@ const typeDefs = [`
       query: Query
       mutation: Mutation
     }
-  `];
+  `,
+];
 export default typeDefs;

@@ -1,51 +1,47 @@
 import React, { Component } from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import { Link } from 'react-router-dom';
 import { user } from '../resources/images';
 import { blue, green } from '../resources/colors';
-import { Header, ListItem, Footer } from '../components';
+import { Header, Footer } from '../components';
 
-export default class NewQuestion extends Component {
+class NewQuestion extends Component {
   state = {
-    questions: [],
-    newTitle: [],
+    title: '',
+    question: 'question from state',
   };
 
-  askQuestion = e => {
+  createQuestion = e => {
     e.preventDefault();
-    this.setState({
-      questions: [...this.state.questions, this.state.newTitle],
-      newTitle: [],
-    });
+    this.props
+      .mutate({
+        variables: {
+          title: this.state.title,
+          question: this.state.question,
+        },
+      })
+      .then(data =>
+        this.props.history.push(`/giveanswer/${data.data.createQuestion._id}`)
+      )
+      .catch(err => console.log(err));
   };
 
   handleChange = e => {
-    this.setState({ newTitle: e.target.value });
+    this.setState({ title: e.target.value });
   };
 
   render() {
     return (
       <div style={container}>
         <Header />
-
-        <div style={gridView}>
-          <div>
-            {this.state.questions.map(question => (
-              <ListItem
-                title={question}
-                user={'User001'}
-                date={'Just now'}
-                likes={'0'}
-              />
-            ))}
-          </div>
-        </div>
-
         <div style={gridView}>
           <div style={formView}>
-            <form onSubmit={this.askQuestion}>
+            <form onSubmit={this.createQuestion}>
               <textarea
                 style={newQuestionForm}
-                placeholder="Add new question"
-                value={this.state.newTitle}
+                placeholder="Add question title"
+                value={this.state.title}
                 onChange={this.handleChange}
               />
               <br />
@@ -61,6 +57,18 @@ export default class NewQuestion extends Component {
     );
   }
 }
+
+const CREATE_QUESTION = gql`
+  mutation createQuestion($title: String!, $question: String!) {
+    createQuestion(title: $title, question: $question) {
+      _id
+      title
+      question
+    }
+  }
+`;
+
+export default graphql(CREATE_QUESTION)(NewQuestion);
 
 const container = {};
 const formView = {
