@@ -9,6 +9,7 @@ import {
   ListItem,
   Logo,
   SideList,
+  Header,
   Footer,
 } from '../components';
 
@@ -63,24 +64,16 @@ class GiveAnswer extends Component {
   render() {
     return (
       <div style={container}>
-        <div style={header}>
-          <Logo />
-          <SearchBar />
-          <Section title="Ask" />
-          <Section title="Login" />
-          <Section title="Signup" />
-
-          <img src={user} style={avatar} alt={user} />
-        </div>
+        <Header />
 
         <div style={gridView}>
           <SideList />
           <div style={listview}>
             {this.renderQuestion()}
             {this.state.answers.length === 0 ? (
-              <h1 style={{ color: 'white' }}>Your answer</h1>
+              <h1 style={{ color: '#7f7f7f', }}>Your answer</h1>
             ) : (
-              <h1 style={{ color: 'white' }}>
+              <h1 style={{ color: '#7f7f7f', }}>
                 {this.state.answers.length} Answers
               </h1>
             )}
@@ -146,7 +139,7 @@ const GET_QUESTION = gql`
 export default graphql(GET_QUESTION)(GiveAnswer);
 
 const container = {
-  backgroundColor: blue,
+  color: '#7f7f7f',
 };
 
 const header = {
@@ -172,9 +165,8 @@ const listview = {
   display: 'flex',
   flex: 3,
   flexDirection: 'column',
-  marginBottom: '100px',
+  maxWidth: '50%',
 };
-
 const gridView = {
   display: 'flex',
   flex: 1,
