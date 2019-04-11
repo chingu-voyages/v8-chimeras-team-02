@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { user } from "../resources/images";
-import { blue, green } from "../resources/colors";
+import { green } from "../resources/colors";
 import { Header, ListItem, Footer } from "../components";
 import styled from 'styled-components';
 
@@ -24,7 +23,7 @@ export default class NewQuestion extends Component {
 
   render() {
     return (
-      <GridView>
+      <div>
         <Header />
         <GridView>
           <div>
@@ -88,7 +87,7 @@ const NewQuestionForm = styled.textarea`
 `;
 
 const AskBtn = styled.button`
-  background-color: green;
+  background-color: ${green};
   width: 100px;
   height: 36px;
   align-items: center;

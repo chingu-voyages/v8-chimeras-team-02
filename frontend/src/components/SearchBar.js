@@ -6,8 +6,6 @@ export default class SearchBar extends Component {
     render() {
         return (
             <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center' }}>
-                <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-
                 <Input type='text' placeholder='Search anything...' />
                 <SearchBtn>Search</SearchBtn>
             </div>

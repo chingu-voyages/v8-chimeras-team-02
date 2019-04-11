@@ -17,10 +17,6 @@ export default class SideList extends Component {
     const { selected } = this.state;
     return (
       <SideListDiv>
-        <link
-          href="https://fonts.googleapis.com/css?family=Poppins"
-          rel="stylesheet"
-        />
         <SideItem
           onClick={() => this.setState({ selected: "Unsolved" })}
         >

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { SearchBar, Section, ListItem, Logo, SideList } from '../components';
+import { SearchBar, Section, Logo } from '../components';
 import { blue } from '../resources/colors';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';

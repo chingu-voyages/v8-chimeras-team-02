@@ -8,8 +8,6 @@ export default class ListItem extends Component {
     render() {
         return (
             <ListContainer>
-                <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-
                 <Title>{this.props.title}</Title>
 
                 <Item>

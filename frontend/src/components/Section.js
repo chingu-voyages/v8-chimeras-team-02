@@ -9,7 +9,6 @@ export default class Section extends Component {
     render() {
         return (
             <div>
-                <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
                 <button style={this.state.btnStyle}
                     onClick={this.props.onClick}
                     onMouseEnter={() => this.setState({ btnStyle: <BtnHover /> })}

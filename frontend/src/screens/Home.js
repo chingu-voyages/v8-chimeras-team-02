@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { blue, green } from '../resources/colors';
-import { SearchBar, Section, ListItem, Logo, SideList, Header, Footer } from '../components';
-
+import { ListItem, SideList, Header, Footer } from '../components';
+import styled from 'styled-components';
 class Home extends Component {
 	render() {
 		return (
