@@ -1,34 +1,65 @@
 import React, { Component } from 'react';
 import { ListItem, SideList, Header, Footer } from '../components';
 import styled from 'styled-components';
-class Home extends Component {
-	render() {
-		return (
-			<div>
-				<Header />
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
+import { blue, green } from '../resources/colors';
+import {
+  SearchBar,
+  Section,
+  ListItem,
+  Logo,
+  SideList,
+  Header,
+  Footer,
+} from '../components';
 
+class Home extends Component {
+  renderQuestions() {
+    if (!this.props.data.loading) {
+      return this.props.data.questions.map(question => {
+        return (
+          <ListItem
+            key={question._id}
+            title={question.title}
+            user={'Hanen Wahabi'}
+            date={question.createAt}
+            likes={'4'}
+          />
+        );
+      });
+    }
+  }
+  render() {
+    return (
+      <div>
+        <Header />
 				<GridView>
 					<SideList />
 					<ListView>
 						<h2 style={{ textAlign: 'left' }}>Top Questions</h2>
-						<ListItem
-							title={'Undefined is not an object React Native'}
-							user={'Hanen Wahabi'}
-							date={'16-03-2019'}
-							likes={'4'}
-						/>
+						{this.renderQuestions()}
 					</ListView>
 				</GridView>
-
-				<div>
-					<Footer />
-				</div>
-			</div>
-		);
-	}
+        <div>
+          <Footer />
+        </div>
+      </div>
+    );
+  }
 }
 
-export default Home;
+const GET_QUESTION = gql`
+  {
+    questions {
+      _id
+      title
+      createAt
+    }
+  }
+`;
+
+export default graphql(GET_QUESTION)(Home);
 
 const ListView = styled.div`
 	display: flex;

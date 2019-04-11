@@ -1,19 +1,20 @@
-import React, { Component } from "react";
-import { green } from "../resources/colors";
-import { Header, ListItem, Footer } from "../components";
+import React, { Component } from 'react';
+import { user } from '../resources/images';
+import { blue, green } from '../resources/colors';
+import { Header, ListItem, Footer } from '../components';
 import styled from 'styled-components';
 
 export default class NewQuestion extends Component {
   state = {
-    questions: ['This is just a random question(?)', 'And this is another one! :-o'],
-    newTitle: []
+    questions: [],
+    newTitle: [],
   };
 
   askQuestion = e => {
     e.preventDefault();
     this.setState({
       questions: [...this.state.questions, this.state.newTitle],
-      newTitle: []
+      newTitle: [],
     });
   };
 
@@ -30,9 +31,9 @@ export default class NewQuestion extends Component {
             {this.state.questions.map(question => (
               <ListItem
                 title={question}
-                user={"User001"}
-                date={"Just now"}
-                likes={"0"}
+                user={'User001'}
+                date={'Just now'}
+                likes={'0'}
               />
             ))}
           </div>
