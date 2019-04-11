@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// add library
 import styled from 'styled-components';
 import { SearchBar, Section, ListItem, Logo, SideList } from '../components';
 import { blue } from '../resources/colors';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import Modal from 'react-modal';
-import Login from '../screens/Login';
 import Avatar from './Avatar';
+import LogIn from '../screens/LogIn';
 import SignUp from '../screens/SignUp';
 
 class Header extends Component {
@@ -17,7 +16,7 @@ class Header extends Component {
 		email: '',
 		password: '',
 		error: '',
-		openLogin: false,
+		openLogIn: false,
 		openSignup: false,
 	};
 
@@ -36,7 +35,7 @@ class Header extends Component {
 			});
 	}
 
-	onLogin() {
+	onLogIn() {
 		const { email, password } = this.state;
 
 		if (email.length === 0 || password.length === 0) {
@@ -49,7 +48,7 @@ class Header extends Component {
 				})
 				.then(data => {
 					console.log(JSON.stringify(data));
-					this.setState({ openLogin: false });
+					this.setState({ openLogIn: false });
 				})
 				.catch(error => {
 					console.log(error);
@@ -65,17 +64,17 @@ class Header extends Component {
 	render() {
 		return (
 			<HeaderContainer>
-				<Link exact to={'/'} style={linkColor}>
-					<h1 style={logo}>ChinguFlow</h1>
-				</Link>
+				<StyledLink exact to={'/'}>
+					<Logo />
+				</StyledLink>
 				<SearchBar />
-				<Link to={'/newquestion'}>
+				<StyledLink to={'/newquestion'}>
 					<Section title="Ask" />
-				</Link>
-				<Section title="Login" onClick={() => this.setState({ openLogin: true })} />
+				</StyledLink>
+				<Section title="LogIn" onClick={() => this.setState({ openLogIn: true })} />
 				<Section title="Signup" onClick={() => this.setState({ openSignup: true })} />
 				<Avatar />
-				{/* For Login */}
+				{/* For LogIn */}
 				<Modal
 					style={{
 						overlay: {
@@ -89,16 +88,16 @@ class Header extends Component {
 							padding: 50,
 						},
 					}}
-					isOpen={this.state.openLogin}
-					onRequestClose={() => this.setState({ openLogin: false })}
+					isOpen={this.state.openLogIn}
+					onRequestClose={() => this.setState({ openLogIn: false })}
 					contentLabel="Modal with image"
 				>
-					<Login
+					<LogIn
 						handleEmail={event => this.setState({ email: event.target.value })}
 						handlePassword={event => this.setState({ password: event.target.value })}
-						onClick={() => this.onLogin()}
+						onClick={() => this.onLogIn()}
 						error={this.state.error}
-						onColse={() => this.setState({ openLogin: false })}
+						onColse={() => this.setState({ openLogIn: false })}
 					/>
 				</Modal>
 
@@ -147,7 +146,7 @@ const SIGNUP = gql`
 `;
 
 const LOGIN = gql`
-	mutation Login($email: String!, $password: String!) {
+	mutation LogIn($email: String!, $password: String!) {
 		login(email: $email, password: $password) {
 			_id
 			name
@@ -162,7 +161,6 @@ export default compose(
 	graphql(LOGIN, { name: 'login' })
 )(Header);
 
-// styled component
 const HeaderContainer = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -171,12 +169,6 @@ const HeaderContainer = styled.div`
 	align-items: center;
 `;
 
-const logo = {
-	color: '#fff',
-	padding: '15px',
-	fontSize: '4vw',
-};
-
-const linkColor = {
-	textDecoration: 'none',
-};
+const StyledLink = styled(Link)`
+	text-decoration: none;
+`;

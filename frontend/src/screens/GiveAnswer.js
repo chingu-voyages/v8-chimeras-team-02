@@ -22,7 +22,7 @@ export default class GiveAnswer extends Component {
           <Logo />
           <SearchBar />
           <Section title="Ask" />
-          <Section title="Login" />
+          <Section title="LogIn" />
           <Section title="Signup" />
 
           <img src={user} style={avatar} alt={user} />

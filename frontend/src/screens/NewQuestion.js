@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { user } from "../resources/images";
 import { blue, green } from "../resources/colors";
 import { Header, ListItem, Footer } from "../components";
+import styled from 'styled-components';
 
 export default class NewQuestion extends Component {
   state = {
@@ -23,10 +24,9 @@ export default class NewQuestion extends Component {
 
   render() {
     return (
-      <div style={container}>
+      <GridView>
         <Header />
-
-        <div style={gridView}>
+        <GridView>
           <div>
             {this.state.questions.map(question => (
               <ListItem
@@ -37,24 +37,23 @@ export default class NewQuestion extends Component {
               />
             ))}
           </div>
-        </div>
+        </GridView>
 
-        <div style={gridView}>
-          <div style={formView}>
+        <GridView>
+          <FormView>
             <form onSubmit={this.askQuestion}>
-              <textarea
-                style={newQuestionForm}
+              <NewQuestionForm
                 placeholder="Add new question"
                 value={this.state.newTitle}
                 onChange={this.handleChange}
               />
               <br />
-              <button type="submit" style={askBtn}>
+              <AskBtn type="submit">
                 Ask
-              </button>
+              </AskBtn>
             </form>
-          </div>
-        </div>
+          </FormView>
+        </GridView>
 
         <Footer />
       </div>
@@ -62,40 +61,39 @@ export default class NewQuestion extends Component {
   }
 }
 
-const container = {
+const FormView = styled.div`
+  display: flex;
+  flex: 3;
+  justifyContent: center;
+`;
 
-};
-const formView = {
-  display: "flex",
-  flex: 3,
-  justifyContent: "center",
-};
-const gridView = {
-  display: "flex",
-  flex: 1,
-  flexDirection: "row",
-  marginTop: 40,
-  color: "white",
-  justifyContent: "center"
-};
-const newQuestionForm = {
-  width: "80vw",
-  height: 100,
-  margin: "0 auto",
-  boxShadow: '0px 0px 8px 4px gainsboro',
-  border: '2px solid gainsboro',
-  borderRadius: '4px',
-  resize: 'none',
-  padding: 5,
-};
+const GridView = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  margin-top: 40;
+  color: white;
+  justify-content: center;
+`;
 
-const askBtn = {
-  backgroundColor: green,
-  width: 100,
-  height: 36,
-  alignItems: "center",
-  fontSize: 14,
-  color: "white",
-  fontFamily: "Poppins",
-  border: "0px"
-};
+const NewQuestionForm = styled.textarea`
+  width: 80vw;
+  height: 100px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 8px 4px gainsboro;
+  border: 2px solid gainsboro;
+  border-radius: 4px;
+  resize: none;
+  padding: 5px;
+`;
+
+const AskBtn = styled.button`
+  background-color: green;
+  width: 100px;
+  height: 36px;
+  align-items: center;
+  font-size: 14px;
+  color: white;
+  font-family: Poppins;
+  border: 0px;
+`;
