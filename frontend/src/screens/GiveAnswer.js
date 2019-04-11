@@ -44,7 +44,7 @@ class GiveAnswer extends Component {
   renderQuestion() {
     if (!this.props.data.loading) {
       const question = this.props.data.questions.filter(
-        question => question._id === 'cdea5b19-a640-4db6-8456-955bad32c755'
+        question => question._id === 'a8259359-b78d-48b0-989e-d523aa749776'
       );
       const questionTitle = question[0].title;
       const questionCreateAt = question[0].createAt;
