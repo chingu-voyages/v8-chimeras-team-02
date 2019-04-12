@@ -4,19 +4,19 @@ import styled from 'styled-components';
 
 export default class Section extends Component {
   state = {
-    btnStyle: <Btn />,
+    // btnStyle: <Btn />,
   };
   render() {
     return (
       <div>
-        <button
-          style={this.state.btnStyle}
+        <Btn
+          // style={this.state.btnStyle}
           onClick={this.props.onClick}
-          onMouseEnter={() => this.setState({ btnStyle: <BtnHover /> })}
-          onMouseLeave={() => this.setState({ btnStyle: <Btn /> })}
+          // onMouseEnter={() => this.setState({ btnStyle: <BtnHover /> })}
+          // onMouseLeave={() => this.setState({ btnStyle: <Btn /> })}
         >
           {this.props.title}
-        </button>
+        </Btn>
       </div>
     );
   }
