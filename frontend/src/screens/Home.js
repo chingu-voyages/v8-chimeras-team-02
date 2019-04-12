@@ -4,15 +4,7 @@ import styled from 'styled-components';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { blue, green } from '../resources/colors';
-import {
-  SearchBar,
-  Section,
-  ListItem,
-  Logo,
-  SideList,
-  Header,
-  Footer,
-} from '../components';
+import { SearchBar, Section, Logo } from '../components';
 
 class Home extends Component {
   renderQuestions() {
@@ -34,13 +26,13 @@ class Home extends Component {
     return (
       <div>
         <Header />
-				<GridView>
-					<SideList />
-					<ListView>
-						<h2 style={{ textAlign: 'left' }}>Top Questions</h2>
-						{this.renderQuestions()}
-					</ListView>
-				</GridView>
+        <GridView>
+          <SideList />
+          <ListView>
+            <h2 style={{ textAlign: 'left' }}>Top Questions</h2>
+            {this.renderQuestions()}
+          </ListView>
+        </GridView>
         <div>
           <Footer />
         </div>
@@ -62,16 +54,16 @@ const GET_QUESTION = gql`
 export default graphql(GET_QUESTION)(Home);
 
 const ListView = styled.div`
-	display: flex;
-	flex: 3;
-	flex-direction: column;
-	max-width: 50%;
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  max-width: 50%;
 `;
 const GridView = styled.div`
-	display: flex;
-	flex: 1;
-	flex-direction: row;
-	margin-top: 40;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  margin-top: 40;
 `;
 
 /* const form = styled.`
