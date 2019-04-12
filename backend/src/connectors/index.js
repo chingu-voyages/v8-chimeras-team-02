@@ -147,7 +147,7 @@ export async function getAnswer(question_id, _id, mongo) {
 	}
 
 	if (!answer) {
-		throw new Error(`No Answer found for id: ${question_id}`);
+		throw new Error(`No Answer found for id: ${_id}`);
 	}
 
 	return answer;
@@ -157,6 +157,10 @@ export async function updateAnswer(question_id, _id, newAnswer, mongo) {
 	// Get Question
 	const Questions = mongo.collection('Question');
 	const question = await Questions.findOne({ _id: question_id });
+
+	if (!question) {
+		throw new Error(`No question found for id: ${question_id}`);
+	}
 
 	let answer;
 
@@ -171,6 +175,10 @@ export async function updateAnswer(question_id, _id, newAnswer, mongo) {
 		}
 	}
 
+	if (!answer) {
+		throw new Error(`No Answer found for id: ${_id}`);
+	}
+
 	await Questions.updateOne({ _id: question_id } , { $set:{ answers: question.answers } } );
 
 	return answer;
@@ -183,7 +191,7 @@ export async function deleteAnswer(question_id, _id, mongo) {
 	const question = await Questions.findOne({ _id: question_id });
 
 	if (!question) {
-		throw new Error(`Something Wrong! Trying to get answer for a question that doesn't exist. Id: ${question_id}`);
+		throw new Error(`Something Wrong! Trying to delete an answer for a question that doesn't exist. Id: ${question_id}`);
 	}
 
 	for (let i in question.answers) {
@@ -193,8 +201,8 @@ export async function deleteAnswer(question_id, _id, mongo) {
 		}
 	}
 
-	if (!answer) {
-		throw new Error(`No Answer found for id: ${question_id}`);
+		if (!answer) {
+		throw new Error(`No Answer found for id: ${_id}`);
 	}
 
 	const filteredAnswers = question.answers.filter(x => {
