@@ -71,75 +71,76 @@ class Header extends Component {
         <StyledLink to={'/newquestion'}>
           <Section title="Ask" />
         </StyledLink>
-      </HeaderContainer>
-      // <HeaderContainer>
-      // 	<StyledLink exact to={'/'}>
-      // 		<Logo />
-      // 	</StyledLink>
-      // 	<SearchBar />
-      // 	<StyledLink to={'/newquestion'}>
-      // 		<Section title="Ask" />
-      // 	</StyledLink>
-      // 	<Section title="LogIn" onClick={() => this.setState({ openLogIn: true })} />
-      // 	<Section title="Signup" onClick={() => this.setState({ openSignup: true })} />
-      // 	<Avatar />
-      // 	{/* For LogIn */}
-      // 	<Modal
-      // 		style={{
-      // 			overlay: {
-      // 				backgroundColor: 'rgba(255,255,255,.2)',
-      // 				alignItems: 'center',
-      // 				justifyContent: 'center',
-      // 			},
-      // 			content: {
-      // 				backgroundColor: 'transparent',
-      // 				borderWidth: 0,
-      // 				padding: 50,
-      // 			},
-      // 		}}
-      // 		isOpen={this.state.openLogIn}
-      // 		onRequestClose={() => this.setState({ openLogIn: false })}
-      // 		contentLabel="Modal with image"
-      // 	>
-      // 		<LogIn
-      // 			handleEmail={event => this.setState({ email: event.target.value })}
-      // 			handlePassword={event => this.setState({ password: event.target.value })}
-      // 			onClick={() => this.onLogIn()}
-      // 			error={this.state.error}
-      // 			onColse={() => this.setState({ openLogIn: false })}
-      // 		/>
-      // 	</Modal>
+        <Section
+          title="LogIn"
+          onClick={() => this.setState({ openLogIn: true })}
+        />
+        <Section
+          title="Signup"
+          onClick={() => this.setState({ openSignup: true })}
+        />
+        <Avatar />
+        {/* For LogIn */}
+        <Modal
+          style={{
+            overlay: {
+              backgroundColor: 'rgba(255,255,255,.2)',
+              alignItems: 'center',
+              justifyContent: 'center',
+            },
+            content: {
+              backgroundColor: 'transparent',
+              borderWidth: 0,
+              padding: 50,
+            },
+          }}
+          isOpen={this.state.openLogIn}
+          onRequestClose={() => this.setState({ openLogIn: false })}
+          contentLabel="Modal with image"
+        >
+          <LogIn
+            handleEmail={event => this.setState({ email: event.target.value })}
+            handlePassword={event =>
+              this.setState({ password: event.target.value })
+            }
+            onClick={() => this.onLogIn()}
+            error={this.state.error}
+            onColse={() => this.setState({ openLogIn: false })}
+          />
+        </Modal>
 
-      // 	{/* For Signup */}
-      // 	<Modal
-      // 		style={{
-      // 			overlay: {
-      // 				backgroundColor: 'rgba(255,255,255,.2)',
-      // 				alignItems: 'center',
-      // 				justifyContent: 'center',
-      // 			},
-      // 			content: {
-      // 				backgroundColor: 'transparent',
-      // 				borderWidth: 0,
-      // 				padding: 50,
-      // 			},
-      // 		}}
-      // 		isOpen={this.state.openSignup}
-      // 		onRequestClose={() => this.setState({ openSignup: false })}
-      // 		contentLabel="Modal with image"
-      // 	>
-      // 		<SignUp
-      // 			handleName={event => this.setState({ name: event.target.value })}
-      // 			handleEmail={event => this.setState({ email: event.target.value })}
-      // 			handlePassword={event => this.setState({ password: event.target.value })}
-      // 			onClick={() => {
-      // 				this.onSignup();
-      // 			}}
-      // 			error={this.state.error}
-      // 			onColse={() => this.setState({ openSignup: false })}
-      // 		/>
-      // 	</Modal>
-      // </HeaderContainer>
+        {/* For Signup */}
+        <Modal
+          style={{
+            overlay: {
+              backgroundColor: 'rgba(255,255,255,.2)',
+              alignItems: 'center',
+              justifyContent: 'center',
+            },
+            content: {
+              backgroundColor: 'transparent',
+              borderWidth: 0,
+              padding: 50,
+            },
+          }}
+          isOpen={this.state.openSignup}
+          onRequestClose={() => this.setState({ openSignup: false })}
+          contentLabel="Modal with image"
+        >
+          <SignUp
+            handleName={event => this.setState({ name: event.target.value })}
+            handleEmail={event => this.setState({ email: event.target.value })}
+            handlePassword={event =>
+              this.setState({ password: event.target.value })
+            }
+            onClick={() => {
+              this.onSignup();
+            }}
+            error={this.state.error}
+            onColse={() => this.setState({ openSignup: false })}
+          />
+        </Modal>
+      </HeaderContainer>
     );
   }
 }
