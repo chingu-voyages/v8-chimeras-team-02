@@ -43,22 +43,31 @@ class GiveAnswer extends Component {
   };
 
   renderQuestion() {
-    if (!this.props.data.loading) {
-      const question = this.props.data.questions.filter(
-        question => question._id === 'a8259359-b78d-48b0-989e-d523aa749776'
-      );
-      const questionTitle = question[0].title;
-      const questionCreateAt = question[0].createAt;
-
-      return (
-        <ListItem
-          title={questionTitle}
-          user={'Hanen Wahabi'}
-          date={questionCreateAt}
-          likes={'4'}
-        />
-      );
-    }
+		if (!this.props.data.loading) {
+			const questionId = this.props.history.location.pathname.split(​/\bgiveanswer.\b/)[1];
+			console.log((this.props.data.variables = { questionId }));
+		// this.props
+		//   .data({
+		//     variables: {
+		//       _id: questionId,
+		//     },
+		//   })
+		//   .then(data => console.log(data))
+		//   .catch(err => console.log(err));
+		// const question = this.props.data.questions.filter(
+		//   question => question._id === questionId
+		// );
+		// const questionTitle = question[0].title;
+		// const questionCreateAt = question[0].createAt;
+		// return (
+		//   <ListItem
+		//     title={'title'}
+		//     user={'Hanen Wahabi'}
+		//     date={'date'}
+		//     likes={'4'}
+		//   />
+		// );
+​    }
   }
 
   render() {
