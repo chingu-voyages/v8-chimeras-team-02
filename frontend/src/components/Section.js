@@ -1,41 +1,39 @@
 import React, { Component } from 'react';
 import { green, blue } from "../resources/colors";
+import styled from 'styled-components';
 
 export default class Section extends Component {
     state = {
-        btnStyle: btn
+        btnStyle: <Btn />
     }
     render() {
         return (
             <div>
-                <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
                 <button style={this.state.btnStyle}
                     onClick={this.props.onClick}
-                    onMouseEnter={() => this.setState({ btnStyle: btnHover })}
-                    onMouseLeave={() => this.setState({ btnStyle: btn })}>
+                    onMouseEnter={() => this.setState({ btnStyle: <BtnHover /> })}
+                    onMouseLeave={() => this.setState({ btnStyle: <Btn /> })}>
                     {this.props.title}
                 </button>
             </div>
-
         )
     }
 }
 
-const btn = {
-    fontSize: 16,
-    color: 'white',
-    backgroundColor: blue,
-    border: '0px',
-    fontFamily: 'Poppins',
-    padding: 15,
-}
+const Btn = styled.button`
+    fontSize: 16px;
+    color: white;
+    background-color: ${blue};
+    border: 0px;
+    font-family: Poppins;
+    padding: 15px;
+`;
 
-const btnHover = {
-    fontSize: 20,
-    color: green,
-    backgroundColor: blue,
-    border: '0px',
-    fontFamily: 'Poppins',
-    padding: 15,
-}
-
+const BtnHover = styled.button`
+    font-size: 20px;
+    color: ${green};
+    background-color: ${blue};
+    border: 0px;
+    font-family: Poppins;
+    padding: 15px;
+`;

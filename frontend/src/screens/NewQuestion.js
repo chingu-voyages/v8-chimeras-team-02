@@ -4,7 +4,8 @@ import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 import { user } from '../resources/images';
 import { blue, green } from '../resources/colors';
-import { Header, Footer } from '../components';
+import { Header, ListItem, Footer } from '../components';
+import styled from 'styled-components';
 
 class NewQuestion extends Component {
   state = {
@@ -33,24 +34,37 @@ class NewQuestion extends Component {
 
   render() {
     return (
-      <div style={container}>
+      <div>
         <Header />
-        <div style={gridView}>
-          <div style={formView}>
+        <GridView>
+          <div>
+            {this.state.questions.map(question => (
+              <ListItem
+                title={question}
+                user={'User001'}
+                date={'Just now'}
+                likes={'0'}
+              />
+            ))}
+          </div>
+        </GridView>
+
+        <GridView>
+          <FormView>
             <form onSubmit={this.createQuestion}>
-              <textarea
-                style={newQuestionForm}
-                placeholder="Add question title"
+              <NewQuestionForm
+                placeholder="Add new question"
                 value={this.state.title}
+
                 onChange={this.handleChange}
               />
               <br />
-              <button type="submit" style={askBtn}>
+              <AskBtn type="submit">
                 Ask
-              </button>
+              </AskBtn>
             </form>
-          </div>
-        </div>
+          </FormView>
+        </GridView>
 
         <Footer />
       </div>
@@ -70,38 +84,39 @@ const CREATE_QUESTION = gql`
 
 export default graphql(CREATE_QUESTION)(NewQuestion);
 
-const container = {};
-const formView = {
-  display: 'flex',
-  flex: 3,
-  justifyContent: 'center',
-};
-const gridView = {
-  display: 'flex',
-  flex: 1,
-  flexDirection: 'row',
-  marginTop: 40,
-  color: 'white',
-  justifyContent: 'center',
-};
-const newQuestionForm = {
-  width: '80vw',
-  height: 100,
-  margin: '0 auto',
-  boxShadow: '0px 0px 8px 4px gainsboro',
-  border: '2px solid gainsboro',
-  borderRadius: '4px',
-  resize: 'none',
-  padding: 5,
-};
+const FormView = styled.div`
+  display: flex;
+  flex: 3;
+  justifyContent: center;
+`;
 
-const askBtn = {
-  backgroundColor: green,
-  width: 100,
-  height: 36,
-  alignItems: 'center',
-  fontSize: 14,
-  color: 'white',
-  fontFamily: 'Poppins',
-  border: '0px',
-};
+const GridView = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  margin-top: 40;
+  color: white;
+  justify-content: center;
+`;
+
+const NewQuestionForm = styled.textarea`
+  width: 80vw;
+  height: 100px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 8px 4px gainsboro;
+  border: 2px solid gainsboro;
+  border-radius: 4px;
+  resize: none;
+  padding: 5px;
+`;
+
+const AskBtn = styled.button`
+  background-color: ${green};
+  width: 100px;
+  height: 36px;
+  align-items: center;
+  font-size: 14px;
+  color: white;
+  font-family: Poppins;
+  border: 0px;
+`;

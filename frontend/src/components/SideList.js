@@ -8,7 +8,7 @@ import {
   solved,
   myq2,
 } from "../resources/images";
-
+import styled from 'styled-components';
 export default class SideList extends Component {
   state = {
     selected: "",
@@ -16,18 +16,12 @@ export default class SideList extends Component {
   render() {
     const { selected } = this.state;
     return (
-      <div style={sideList}>
-        <link
-          href="https://fonts.googleapis.com/css?family=Poppins"
-          rel="stylesheet"
-        />
-        <button
-          style={sideItem}
+      <SideListDiv>
+        <SideItem
           onClick={() => this.setState({ selected: "Unsolved" })}
         >
-          <img
+          <Icon
             src={selected === "Unsolved" ? unsolved2 : unsolved}
-            style={icon}
             alt={unsolved}
           />
           <p
@@ -47,15 +41,13 @@ export default class SideList extends Component {
           >
             {"Unsolved"}
           </p>
-        </button>
+        </SideItem>
 
-        <button
-          style={sideItem}
+        <SideItem
           onClick={() => this.setState({ selected: "Solved" })}
         >
-          <img
+          <Icon
             src={selected === "Solved" ? solved2 : solved}
-            style={icon}
             alt={solved}
           />
           <p
@@ -75,15 +67,13 @@ export default class SideList extends Component {
           >
             {"Solved"}
           </p>
-        </button>
+        </SideItem>
 
-        <button
-          style={sideItem}
+        <SideItem
           onClick={() => this.setState({ selected: "My Questions" })}
         >
-          <img
+          <Icon
             src={selected === "My Questions" ? myq2 : myq}
-            style={icon}
             alt={myq}
           />
           <p
@@ -103,35 +93,37 @@ export default class SideList extends Component {
           >
             {"My Questions"}
           </p>
-        </button>
-      </div>
+        </SideItem>
+      </SideListDiv>
     );
   }
 }
-const sideList = {
-  display: "flex",
-  flex: 1,
-  flexDirection: "column",
-  marginTop: 40,
-  marginLeft: 25,
-  alignSelf: "flex-start",
-  maxWidth: '30%'
-};
-const sideItem = {
-  display: "flex",
-  flex: 1,
-  flexDirection: "row",
-  marginLeft: 30,
-  paddingBottom: 20,
-  backgroundColor: "transparent",
-  border: "0px",
-  outline: 0,
-};
 
-const icon = {
-  width: 20,
-  height: 20,
-  resizeMode: "contain",
-  marginRight: 10,
-  backgroundColor: 'black',
-};
+const SideListDiv = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-top: 40px;
+  margin-left: 25px;
+  align-self: flex-start;
+  max-width: 30%;
+`;
+
+const SideItem = styled.button`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  margin-left: 30px;
+  padding-bottom: 20px;
+  background-color: transparent;
+  border: 0px;
+  outline: 0px;
+`;
+
+const Icon = styled.img`
+  width: 20px;
+  height: 20px;
+  resize-mode: contain;
+  margin-right: 10px;
+  background-color: black;
+`;
