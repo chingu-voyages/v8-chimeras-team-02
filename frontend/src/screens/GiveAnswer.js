@@ -71,9 +71,9 @@ class GiveAnswer extends Component {
           <div style={listview}>
             {this.renderQuestion()}
             {this.state.answers.length === 0 ? (
-              <h1 style={{ color: '#7f7f7f', }}>Your answer</h1>
+              <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
             ) : (
-              <h1 style={{ color: '#7f7f7f', }}>
+              <h1 style={{ color: '#7f7f7f' }}>
                 {this.state.answers.length} Answers
               </h1>
             )}
@@ -101,12 +101,10 @@ class GiveAnswer extends Component {
 }
 
 const GET_QUESTION = gql`
-  {
-    questions {
-      _id
-      title
-      createAt
-    }
+  query getQuestion($_id: ID!) {
+​    question(_id: $_id) {
+​      title
+​    }
   }
 `;
 
