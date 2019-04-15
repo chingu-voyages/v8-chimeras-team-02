@@ -48,7 +48,6 @@ class GiveAnswer extends Component {
         /\bgiveanswer.\b/
       )[1];
       console.log(questionId);
-      console.log(this.props);
 
       // this.props
       //   .data({
@@ -64,7 +63,6 @@ class GiveAnswer extends Component {
   render() {
     return (
       <div style={container}>
-
         <Header />
         <div style={gridView}>
           <SideList />
