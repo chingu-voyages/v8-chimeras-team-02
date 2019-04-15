@@ -44,32 +44,26 @@ class GiveAnswer extends Component {
 
   renderQuestion() {
     if (!this.props.data.loading) {
-      const questionId = this.props.history.location.pathname.split(
-        /\bgiveanswer.\b/
-      )[1];
-      console.log(questionId);
-      console.log(this.props);
-
-      // this.props
-      //   .data({
-      //     variables: {
-      //       _id: questionId,
-      //     },
-      //   })
-      //   .then(data => console.log(data))
-      //   .catch(err => console.log(err));
+      return (
+        <ListItem
+          title={this.props.data.question.title}
+          user={'TheAnswerGiver'}
+          date={'Just now'}
+          likes={'0'}
+        />
+      );
     }
   }
 
   render() {
     return (
       <div style={container}>
-
         <Header />
         <div style={gridView}>
           <SideList />
           <div style={listview}>
             {this.renderQuestion()}
+            {console.log(this.props)}
             {this.state.answers.length === 0 ? (
               <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
             ) : (
@@ -77,14 +71,6 @@ class GiveAnswer extends Component {
                 {this.state.answers.length} Answers
               </h1>
             )}
-            {this.state.answers.map(answer => (
-              <ListItem
-                title={answer}
-                user={'TheAnswerGiver'}
-                date={'Just now'}
-                likes={'0'}
-              />
-            ))}
             <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
               <textarea style={textareaStyle} placeholder="Enter answer..." />
               <button style={btn} type="submit">
@@ -104,6 +90,7 @@ const GET_QUESTION = gql`
   query getQuestion($_id: ID!) {
     question(_id: $_id) {
       title
+      question
     }
   }
 `;
@@ -142,7 +129,11 @@ const GET_QUESTION = gql`
 //   }
 // `;
 
-export default graphql(GET_QUESTION)(GiveAnswer);
+export default graphql(GET_QUESTION, {
+  options: props => {
+    return { variables: { _id: props.match.params.questionId } };
+  },
+})(GiveAnswer);
 
 const container = {
   color: '#7f7f7f',
