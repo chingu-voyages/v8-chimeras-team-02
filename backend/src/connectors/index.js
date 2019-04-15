@@ -52,7 +52,12 @@ export async function LogOut(mongo, user) {
 export async function createQuestion(title, question, user_id, tags, answers, mongo) {
 	const Questions = mongo.collection('Question');
 	const Users = mongo.collection('User');
+	console.log(user_id);
+
 	const user = await Users.findOne({ _id: user_id });
+	if (!user) {
+		throw new Error('User is not found');
+	}
 	let _id = uuidv4();
 	let date = new Date().toISOString();
 
@@ -93,11 +98,13 @@ export async function getQuestion(_id, mongo) {
 	return question;
 }
 
-export async function getQuestions(number = "0", mongo) {
+export async function getQuestions(number = '0', mongo) {
 	const Questions = mongo.collection('Question');
-	const questions = await Questions.find().limit(Number(number)).toArray()
+	const questions = await Questions.find()
+		.limit(Number(number))
+		.toArray();
 	if (!questions) {
-			throw new Error('Not found');
+		throw new Error('Not found');
 	}
 	return questions;
 }
@@ -119,17 +126,19 @@ export async function createAnswer(question_id, newAnswer, user, mongo) {
 
 	// Create and push Answer
 	const answer = { _id, answer: newAnswer, createDate: date, updateDate: date, user };
-	if (!question.answers) { question.answers = [] }
+	if (!question.answers) {
+		question.answers = [];
+	}
 	question.answers.push(answer);
 
-	await Questions.updateOne({ _id: question_id } , { $set:{ answers: question.answers } } );
+	await Questions.updateOne({ _id: question_id }, { $set: { answers: question.answers } });
 
 	return answer;
 }
 
 export async function getAnswer(question_id, _id, mongo) {
 	let answer;
-	
+
 	// Get the Question
 	const Questions = mongo.collection('Question');
 	const question = await Questions.findOne({ _id: question_id });
@@ -137,10 +146,9 @@ export async function getAnswer(question_id, _id, mongo) {
 	if (!question) {
 		throw new Error(`Something Wrong! Trying to get answer for a question that doesn't exist. Id: ${question_id}`);
 	}
-	console.log(question.answers)
+	console.log(question.answers);
 	// Loop trough array to check for the _id
 	for (let i in question.answers) {
-		
 		if (question.answers[i]._id === _id) {
 			answer = question.answers[i];
 		}
@@ -179,29 +187,30 @@ export async function updateAnswer(question_id, _id, newAnswer, mongo) {
 		throw new Error(`No Answer found for id: ${_id}`);
 	}
 
-	await Questions.updateOne({ _id: question_id } , { $set:{ answers: question.answers } } );
+	await Questions.updateOne({ _id: question_id }, { $set: { answers: question.answers } });
 
 	return answer;
 }
 
 export async function deleteAnswer(question_id, _id, mongo) {
 	// Get Question
-	let answer
+	let answer;
 	const Questions = mongo.collection('Question');
 	const question = await Questions.findOne({ _id: question_id });
 
 	if (!question) {
-		throw new Error(`Something Wrong! Trying to delete an answer for a question that doesn't exist. Id: ${question_id}`);
+		throw new Error(
+			`Something Wrong! Trying to delete an answer for a question that doesn't exist. Id: ${question_id}`
+		);
 	}
 
 	for (let i in question.answers) {
-		
 		if (question.answers[i]._id === _id) {
 			answer = question.answers[i];
 		}
 	}
 
-		if (!answer) {
+	if (!answer) {
 		throw new Error(`No Answer found for id: ${_id}`);
 	}
 
@@ -209,7 +218,7 @@ export async function deleteAnswer(question_id, _id, mongo) {
 		return x._id !== _id;
 	});
 
-	await Questions.updateOne({ _id: question_id } , { $set:{ answers: filteredAnswers } } );
+	await Questions.updateOne({ _id: question_id }, { $set: { answers: filteredAnswers } });
 
 	return answer;
 }
