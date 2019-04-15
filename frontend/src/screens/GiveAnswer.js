@@ -44,20 +44,20 @@ class GiveAnswer extends Component {
 
   renderQuestion() {
     if (!this.props.data.loading) {
-      const question = this.props.data.questions.filter(
-        question => question._id === 'a8259359-b78d-48b0-989e-d523aa749776'
-      );
-      const questionTitle = question[0].title;
-      const questionCreateAt = question[0].createAt;
+      const questionId = this.props.history.location.pathname.split(
+        /\bgiveanswer.\b/
+      )[1];
+      console.log(questionId);
+      console.log(this.props);
 
-      return (
-        <ListItem
-          title={questionTitle}
-          user={'Hanen Wahabi'}
-          date={questionCreateAt}
-          likes={'4'}
-        />
-      );
+      // this.props
+      //   .data({
+      //     variables: {
+      //       _id: questionId,
+      //     },
+      //   })
+      //   .then(data => console.log(data))
+      //   .catch(err => console.log(err));
     }
   }
 
@@ -71,9 +71,9 @@ class GiveAnswer extends Component {
           <div style={listview}>
             {this.renderQuestion()}
             {this.state.answers.length === 0 ? (
-              <h1 style={{ color: '#7f7f7f', }}>Your answer</h1>
+              <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
             ) : (
-              <h1 style={{ color: '#7f7f7f', }}>
+              <h1 style={{ color: '#7f7f7f' }}>
                 {this.state.answers.length} Answers
               </h1>
             )}
@@ -101,14 +101,20 @@ class GiveAnswer extends Component {
 }
 
 const GET_QUESTION = gql`
-  {
-    questions {
-      _id
+  query getQuestion($_id: ID!) {
+    question(_id: $_id) {
       title
-      createAt
     }
   }
 `;
+
+// const GET_QUESTION = gql`
+//   query getQuestion($_id: ID!) {
+// ​    question(_id: $_id) {
+// ​      title
+// ​    }
+//   }
+// `;
 
 // const CREATE_ANSWER = gql`
 //   mutation CreateAnswer($question_id: ID!, $answer: String!, $user: ID!) {
