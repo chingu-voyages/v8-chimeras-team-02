@@ -44,19 +44,14 @@ class GiveAnswer extends Component {
 
   renderQuestion() {
     if (!this.props.data.loading) {
-      const questionId = this.props.history.location.pathname.split(
-        /\bgiveanswer.\b/
-      )[1];
+      const questionId = this.props.match.params.questionId;
       console.log(questionId);
+      console.log(this.props);
 
-      // this.props
-      //   .data({
-      //     variables: {
-      //       _id: questionId,
-      //     },
-      //   })
-      //   .then(data => console.log(data))
-      //   .catch(err => console.log(err));
+      this.props.data
+        .refetch({ _id: questionId })
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
     }
   }
 
