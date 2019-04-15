@@ -37,31 +37,15 @@ class NewQuestion extends Component {
       <div>
         <Header />
         <GridView>
-          <div>
-            {this.state.questions.map(question => (
-              <ListItem
-                title={question}
-                user={'User001'}
-                date={'Just now'}
-                likes={'0'}
-              />
-            ))}
-          </div>
-        </GridView>
-
-        <GridView>
           <FormView>
             <form onSubmit={this.createQuestion}>
               <NewQuestionForm
                 placeholder="Add new question"
                 value={this.state.title}
-
                 onChange={this.handleChange}
               />
               <br />
-              <AskBtn type="submit">
-                Ask
-              </AskBtn>
+              <AskBtn type="submit">Ask</AskBtn>
             </form>
           </FormView>
         </GridView>
@@ -87,7 +71,7 @@ export default graphql(CREATE_QUESTION)(NewQuestion);
 const FormView = styled.div`
   display: flex;
   flex: 3;
-  justifyContent: center;
+  justify-content: center;
 `;
 
 const GridView = styled.div`
