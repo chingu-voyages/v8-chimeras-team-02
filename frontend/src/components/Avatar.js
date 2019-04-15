@@ -1,64 +1,64 @@
 import React, { Component } from 'react';
 import { user } from '../resources/images';
-import { green } from "../resources/colors";
+import styled from 'styled-components';
 
 export default class Avatar extends Component {
     render() {
         return (
-            <div style={dropdown}>
-                <img src={user} style={avatar} alt={user} />
-                <div style={dropdownContent}>
-                    <h3 style={text}>See you soon?</h3>
-                    <input style={button} type="button" value="Log Out" onClick={this.props.onClick} />
-                </div>
-            </div>
+            <AvatarContainer>
+                <AvatarImg src={user} alt={user} />
+                <DropdownContent>
+                    <Text>See you soon?</Text>
+                    <Button type="button" value="Log Out" onClick={this.props.onClick} />
+                </DropdownContent>
+            </AvatarContainer>
         )
     }
 }
 
-const dropdown = {
-    position: 'relative',
-    display: 'inline-block'
-};
+const AvatarContainer = styled.div`
+position: relative;
+display: inline-block;
+`;
 
-const avatar = {
-    height: 35,
-    width: 35,
-    borderRadius: 40,
-    border: '30px solid #2FE090',
-    borderWidth: 2,
-    resizeMode: 'cover',
-    marginRight: 40,
-    marginLeft: 20
-};
+const AvatarImg = styled.img`
+    height: 25%;
+    width: 25%;
+    border-radius: 40px;
+    border: 30px solid #2FE090;
+    border-width: 2px;
+    resize-mode: cover;
+    margin-right: 40px;
+    margin-left: 20px;
+`;
 
-const dropdownContent = {
-    display: 'none',
-    position: 'absolute',
-    backgroundColor: '#fff',
-    minWidth: '160px',
-    boxShadow: '0px 8px 16px 0px rgba(0, 0, 0, 0.2)',
-    alignItems: 'right',
-    justifyContent: 'right',
-    zIndex: 1
-};
+const DropdownContent = styled.div`
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    align-items: right;
+    justify-content: right;
+    z-index: 1;
+`;
 
-const text = {
-    color: 'black',
-    padding: '12px 16px',
-    display: 'block'
-}
+const Text = styled.h3`
+    color: black;
+    padding: 12px 16px;
+    display: block;
+`;
 
-const button = {
-    backgroundColor: green,
-    width: 100,
-    height: 36,
-    alignItems: 'center',
-    fontSize: 14,
-    color: 'white',
-    fontFamily: 'Poppins',
-    border: '0px'
-}
+const Button = styled.input`
+    background-color: #2FE090;
+    width: 100;
+    height: 36;
+    align-items: center;
+    font-size: 14;
+    color: white;
+    font-family: Poppins;
+    border: 0px;
+`;
 
 // MISSING:
 // .dropdown:hover .dropdownContent {display: block;}

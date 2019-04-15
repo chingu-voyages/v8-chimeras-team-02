@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { blue } from "../resources/colors";
+import styled from 'styled-components';
 
 export default class Footer extends Component {
-    render() {
-        return (
-            <div style={footer}>
-              Made with ♥
-            </div>
-
-        )
-    }
+  render() {
+    return (
+      <FooterDiv>
+        Made with ♥
+      </FooterDiv>
+    )
+  }
 }
 
-const footer = {
-  backgroundColor: blue,
-  bottom: 0,
-  width: '100%',
-  textAlign: 'center',
-  margin: '20px 0 0 0',
-  color: '#fff',
-  paddingTop: '15px',
-  paddingBottom: '15px',
-};
+const FooterDiv = styled.div`
+  background-color: ${blue};
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+  margin: 20px 0px 0px 0px;
+  color: #fff;
+  padding-top: 15px;
+  padding-bottom: 15px;
+`;

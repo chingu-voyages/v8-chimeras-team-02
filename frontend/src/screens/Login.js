@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { green, blue } from '../resources/colors';
 import { unsolved2 } from '../resources/images';
+import styled from 'styled-components';
 
 export default class LogIn extends Component {
 	render() {
 		return (
-			<div style={container}>
-				<img onClick={this.props.onColse} src={unsolved2} style={close} />
-				<div style={form}>
-					<input
-						style={inputs}
+			<Container>
+				<Close onClick={this.props.onColse} src={unsolved2} />
+				<Form>
+					<Inputs
 						type="email"
 						placeholder="E-mail"
 						autoComplete="off"
@@ -17,8 +17,7 @@ export default class LogIn extends Component {
 						onChange={this.props.handleEmail}
 						value={this.props.email}
 					/>
-					<input
-						style={inputs}
+					<Inputs
 						type="password"
 						placeholder="Password"
 						autoComplete="off"
@@ -26,61 +25,60 @@ export default class LogIn extends Component {
 						onChange={this.props.handlePassword}
 						value={this.props.password}
 					/>
-					<h3 style={error}>{this.props.error}</h3>
-					<input style={button} type="submit" value="Log In" onClick={this.props.onClick} />
-				</div>
-			</div>
+					<Error>{this.props.error}</Error>
+					<Button type="submit" value="Log In" onClick={this.props.onClick} />
+				</Form>
+			</Container>
 		);
 	}
 }
-const container = {
-	display: 'flex',
-	flex: 1,
-	backgroundColor: 'transparent',
-	// alignItems: 'center',
-	justifyContent: 'center',
-};
-const form = {
-	display: 'flex',
-	flexDirection: 'column',
-	backgroundColor: blue,
-	alignItems: 'center',
-	justifyContent: 'center',
-	width: '30%',
-	height: 400,
-	borderRadius: 10,
-};
+const Container = styled.div`
+	display: flex;
+	flex: 1;
+	backgroundColor: transparent;
+	justifyContent: center;
+`;
 
-const inputs = {
-	border: '1px solid #ccc',
-	background: 'white',
-	height: 45,
-	width: '40%',
-	alignItems: 'left',
-	marginTop: 25,
-	fontSize: 16,
-	outlineColor: green,
-};
+const Form = styled.div`
+	display: flex;
+	flex-direction: column;
+	background-color: ${blue};
+	align-items: center;
+	justify-content: center;
+	width: 30%;
+	height: 400px;
+	border-radius: 10px;
+`;
 
-const button = {
-	background: green,
-	color: 'white',
-	height: 60,
-	width: '40%',
-	alignItems: 'center',
-	marginTop: 25,
-	fontSize: 20,
-};
+const Inputs = styled.input`
+	border: 1px solid #ccc;
+	background: white;
+	height: 45px;
+	width: 40%;
+	align-items: left;
+	margin-top: 25px;
+	font-size: 16px;
+	outline-color: ${green};
+`;
 
-const error = {
-	color: 'red',
-	fontSize: 14,
-	marginTop: 25,
-	textAlign: 'center',
-};
+const Button = styled.input`
+	background: ${green};
+	color: white;
+	height: 60px;
+	width: 40%;
+	alignItems: center;
+	marginTop: 25px;
+	fontSize: 20px;
+`;
 
-const close = {
-	width: 25,
-	height: 25,
-	resizeMode: 'contain',
-};
+const Error = styled.h3`
+	color: red;
+	fontSize: 14px;
+	marginTop: 25px;
+	textAlign: center;
+`;
+const Close = styled.img`
+	width: 25px;
+	height: 25px;
+	resizeMode: contain;
+`;

@@ -64,8 +64,8 @@ class GiveAnswer extends Component {
   render() {
     return (
       <div style={container}>
-        <Header />
 
+        <Header />
         <div style={gridView}>
           <SideList />
           <div style={listview}>

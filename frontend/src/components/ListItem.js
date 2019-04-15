@@ -1,96 +1,100 @@
 import React, { Component } from 'react';
 import { green, blue, purple } from "../resources/colors";
 import { user, heart } from "../resources/images";
+import styled from 'styled-components';
 
 export default class ListItem extends Component {
 
     render() {
         return (
-            <div style={listContainer}>
-                <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+            <ListContainer>
+                <Title>{this.props.title}</Title>
 
-                <p style={h1}>{this.props.title}</p>
-
-                <div style={item}>
-                    <img src={user} style={avatar} alt={user} />
+                <Item>
+                    <Avatar src={user} alt={user} />
 
                     <div style={{ marginLeft: 15 }}>
-                        <p style={username}>{this.props.user}</p>
-                        <p style={date}>{"published on " + this.props.date}</p>
+                        <Username>{this.props.user}</Username>
+                        <Date>{"published on " + this.props.date}</Date>
                     </div>
 
                     <div style={{ marginLeft: '15%' }}>
-                      <div>
-                        <img src={heart} style={like} alt={heart} />
-                        <p style={{width: '100%', height: '20px'}}></p>
-                      </div>
-                      <p style={likes}>{this.props.likes + ' likes '}</p>
+                        <div>
+                            <Like src={heart} alt={heart} />
+                            <p style={{ width: '100%', height: '20px' }}></p>
+                        </div>
+                        <Likes>{this.props.likes + ' likes '}</Likes>
                     </div>
-                </div>
-            </div>
-
+                </Item>
+            </ListContainer>
         )
     }
 }
 
-const listContainer = {
-   display: 'flex',
-   flexDirection: 'column',
-   width: '100%',
-   boxShadow: '0px 0px 8px 4px gainsboro',
-   padding: '0 15px 15px 15%',
-   marginBottom: '20px'
-}
+const ListContainer = styled.div`
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   box-shadow: 0px 0px 8px 4px gainsboro;
+   padding: 0 15px 15px 15%;
+   margin-bottom: 20px;
+`;
 
-const item = {
-    display: 'flex',
-    flexDirection: 'row',
-    height: 80,
-    maxWidth: '100%',
-    marginTop: -15,
-    alignItems: 'center'
-}
-const like = {
-    height: 20,
-    width: 20,
-    resizeMode: "contain",
-    marginTop: 12,
-    marginRight: 8,
-    float: 'right'
-}
-const likes = {
-    fontSize: 14,
-    color: purple,
-    fontFamily: 'Poppins'
-}
-const h1 = {
-    display: 'flex',
-    fontSize: 20,
-    color: '#7f7f7f',
-    fontFamily: 'Poppins',
-    justifyContent: 'flex-start',
-    paddingTop: 15
-}
-const date = {
-    fontSize: 12,
-    color: '#7f7f7f',
-    fontFamily: 'Poppins',
-    marginTop: 0,
-    paddingRight: 5
-}
-const username = {
-    fontSize: 14,
-    color: '#7f7f7f',
-    fontFamily: 'Poppins',
-    textAlign: 'left'
-}
-const avatar = {
-    height: 35,
-    width: 35,
-    borderRadius: 40,
-    border: '30px solid',
-    borderColor: green,
-    borderWidth: 6,
-    resizeMode: "cover",
-    backgroundColor: green
-}
+const Item = styled.div`
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    max-width: 100%;
+    margin-top: -15px;
+    align-items: center;
+`;
+
+const Like = styled.img`
+    height: 20px;
+    width: 20px;
+    resize-mode: contain;
+    margin-top: 12px;
+    margin-right: 8px;
+    float: right;
+`;
+
+const Likes = styled.p`
+    font-size: 14px;
+    color: ${purple};
+    font-family: Poppins;
+`;
+
+const Title = styled.p`
+    display: flex;
+    font-size: 20px;
+    color: #7f7f7f;
+    font-family: Poppins;
+    justify-content: flex-start;
+    padding-top: 15px;
+`;
+
+const Date = styled.p`
+    font-size: 12px;
+    color: #7f7f7f;
+    font-family: Poppins;
+    margin-top: 0px;
+    padding-right: 5px;
+`;
+
+const Username = styled.p`
+    font-size: 14px;
+    color: #7f7f7f;
+    font-family: Poppins;
+    text-align: left;
+`;
+
+const Avatar = styled.img`
+    height: 35px;
+    width: 35px;
+    border-radius: 40px;
+    border: 30px solid;
+    border-color: ${green};
+    border-width: 6px;
+    resize-mode: cover;
+    background-color: ${green};
+`;
