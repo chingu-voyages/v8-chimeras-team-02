@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { ListItem, SideList, Header, Footer } from '../components';
 import styled from 'styled-components';
-import { graphql, compose } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { blue, green } from '../resources/colors';
-import { SearchBar, Section, Logo } from '../components';
 
 class Home extends Component {
   renderQuestions() {

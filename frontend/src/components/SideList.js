@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { green, blue } from "../resources/colors";
+import { green } from "../resources/colors";
 import {
   myq,
   unsolved,

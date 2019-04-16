@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { graphql, compose } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { user } from '../resources/images';
-import { blue, green } from '../resources/colors';
+import { green } from '../resources/colors';
 import {
-  SearchBar,
-  Section,
   ListItem,
-  Logo,
   SideList,
   Header,
   Footer,
@@ -137,25 +133,6 @@ export default graphql(GET_QUESTION, {
 
 const container = {
   color: '#7f7f7f',
-};
-
-const header = {
-  display: 'flex',
-  flexDirection: 'row',
-  background: 'linear-gradient(to top, #00AB90 0%, #080A38 15%, #080A38 100%)',
-  height: 85,
-  alignItems: 'center',
-};
-
-const avatar = {
-  height: 35,
-  width: 35,
-  borderRadius: 40,
-  border: '30px solid #2FE090',
-  borderWidth: 2,
-  resizeMode: 'cover',
-  marginRight: 40,
-  marginLeft: 20,
 };
 
 const listview = {
