@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { green } from '../resources/colors';
 import { ListItem, SideList, Header, Footer } from '../components';
@@ -21,16 +21,16 @@ class GiveAnswer extends Component {
     this.setState({ answers: [...this.state.answers, ...answer] });
     e.currentTarget.reset();
 
-    // this.props
-    //   .mutate({
-    //     variables: {
-    //       question_id: answer[0].question_id,
-    //       answer: answer[0].answer,
-    //       user: answer[0].user,
-    //     },
-    //   })
-    //   .then(data => console.log(data))
-    //   .catch(err => console.log(err));
+    this.props
+      .mutate({
+        variables: {
+          question_id: answer[0].question_id,
+          answer: answer[0].answer,
+          user: answer[0].user,
+        },
+      })
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   };
 
   renderQuestion() {
@@ -40,11 +40,27 @@ class GiveAnswer extends Component {
       return (
         <ListItem
           title={this.props.data.question.title}
-          user={'TheAnswerGiver'}
+          user={'TheQuestionAsker'}
           date={'Just now'}
           likes={'0'}
         />
       );
+    }
+  }
+
+  renderAnswers() {
+    if (!this.props.data.loading) {
+      this.props.data.question.answers.map(({ answer, _id }) => {
+        return (
+          <ListItem
+            key={_id}
+            title={answer}
+            user={'TheAnswerGiver'}
+            date={'Yesterday'}
+            likes={'0'}
+          />
+        );
+      });
     }
   }
 
@@ -55,21 +71,21 @@ class GiveAnswer extends Component {
         <div style={gridView}>
           <SideList />
           <div style={listview}>
+            {/* Question */}
             {this.renderQuestion()}
             {console.log(this.props)}
-            {this.state.answers.length === 0 ? (
-              <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
-            ) : (
-              <h1 style={{ color: '#7f7f7f' }}>
-                {this.state.answers.length} Answers
-              </h1>
-            )}
+
+            {/* Submit answer form */}
+            <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
             <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
               <textarea style={textareaStyle} placeholder="Enter answer..." />
               <button style={btn} type="submit">
                 Answer
               </button>
             </form>
+
+            {/* List of answers */}
+            {this.renderAnswers()}
           </div>
         </div>
 
@@ -84,6 +100,10 @@ const GET_QUESTION = gql`
     question(_id: $_id) {
       title
       question
+      answers {
+        _id
+        answer
+      }
     }
   }
 `;
@@ -113,14 +133,13 @@ const CREATE_ANSWER = gql`
 //   }
 // `;
 
-export default graphql(
-  GET_QUESTION,
-  {
+export default compose(
+  graphql(GET_QUESTION, {
     options: props => {
       return { variables: { _id: props.match.params.questionId } };
     },
-  },
-  CREATE_ANSWER
+  }),
+  graphql(CREATE_ANSWER)
 )(GiveAnswer);
 
 const container = {
