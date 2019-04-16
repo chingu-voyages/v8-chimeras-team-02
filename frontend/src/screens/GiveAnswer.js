@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
-import { user } from '../resources/images';
-import { blue, green } from '../resources/colors';
-import {
-  SearchBar,
-  Section,
-  ListItem,
-  Logo,
-  SideList,
-  Header,
-  Footer,
-} from '../components';
+import { green } from '../resources/colors';
+import { ListItem, SideList, Header, Footer } from '../components';
 
 class GiveAnswer extends Component {
   state = {
@@ -20,38 +11,56 @@ class GiveAnswer extends Component {
 
   submitAnswer = e => {
     e.preventDefault();
-    // const answer = [
-    //   {
-    //     question_id: 'id number whatever',
-    //     answer: e.target[0].value,
-    //     user: 'TheUser',
-    //   },
-    // ];
-    // this.setState({ answers: [...this.state.answers, ...answer] });
+    const answer = [
+      {
+        question_id: this.props.match.params.questionId,
+        answer: e.target[0].value,
+        user: 'TheUser',
+      },
+    ];
+    this.setState({ answers: [...this.state.answers, ...answer] });
     e.currentTarget.reset();
 
-    // this.props
-    //   .mutate({
-    //     variables: {
-    //       question_id: answer[0].question_id,
-    //       answer: answer[0].answer,
-    //       user: answer[0].user,
-    //     },
-    //   })
-    //   .then(data => this.props.data.refresh)
-    //   .catch(err => console.log(err));
+    this.props
+      .mutate({
+        variables: {
+          question_id: answer[0].question_id,
+          answer: answer[0].answer,
+          user: answer[0].user,
+        },
+      })
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   };
 
   renderQuestion() {
-    if (!this.props.data.loading) {
+    if (this.props.data.loading) {
+      return <h1>Loading...</h1>;
+    } else {
       return (
         <ListItem
           title={this.props.data.question.title}
-          user={'TheAnswerGiver'}
+          user={'TheQuestionAsker'}
           date={'Just now'}
           likes={'0'}
         />
       );
+    }
+  }
+
+  renderAnswers() {
+    if (!this.props.data.loading) {
+      this.props.data.question.answers.map(({ answer, _id }) => {
+        return (
+          <ListItem
+            key={_id}
+            title={answer}
+            user={'TheAnswerGiver'}
+            date={'Yesterday'}
+            likes={'0'}
+          />
+        );
+      });
     }
   }
 
@@ -62,21 +71,21 @@ class GiveAnswer extends Component {
         <div style={gridView}>
           <SideList />
           <div style={listview}>
+            {/* Question */}
             {this.renderQuestion()}
             {console.log(this.props)}
-            {this.state.answers.length === 0 ? (
-              <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
-            ) : (
-              <h1 style={{ color: '#7f7f7f' }}>
-                {this.state.answers.length} Answers
-              </h1>
-            )}
+
+            {/* Submit answer form */}
+            <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
             <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
               <textarea style={textareaStyle} placeholder="Enter answer..." />
               <button style={btn} type="submit">
                 Answer
               </button>
             </form>
+
+            {/* List of answers */}
+            {this.renderAnswers()}
           </div>
         </div>
 
@@ -91,27 +100,22 @@ const GET_QUESTION = gql`
     question(_id: $_id) {
       title
       question
+      answers {
+        _id
+        answer
+      }
     }
   }
 `;
 
-// const GET_QUESTION = gql`
-//   query getQuestion($_id: ID!) {
-// ​    question(_id: $_id) {
-// ​      title
-// ​    }
-//   }
-// `;
-
-// const CREATE_ANSWER = gql`
-//   mutation CreateAnswer($question_id: ID!, $answer: String!, $user: ID!) {
-//     createAnswer(question_id: $question_id, answer: $answer, user: $user) {
-//       _id
-//       answer
-//       user
-//     }
-//   }
-// `;
+const CREATE_ANSWER = gql`
+  mutation createAnswer($question_id: ID!, $answer: String!) {
+    createAnswer(question_id: $question_id, answer: $answer) {
+      _id
+      answer
+    }
+  }
+`;
 
 // const updateAnswer = gql`
 //   mutation updateAnswer($question_id: ID!, $_id: ID!, $newAnswer: String!) {
@@ -129,33 +133,17 @@ const GET_QUESTION = gql`
 //   }
 // `;
 
-export default graphql(GET_QUESTION, {
-  options: props => {
-    return { variables: { _id: props.match.params.questionId } };
-  },
-})(GiveAnswer);
+export default compose(
+  graphql(GET_QUESTION, {
+    options: props => {
+      return { variables: { _id: props.match.params.questionId } };
+    },
+  }),
+  graphql(CREATE_ANSWER)
+)(GiveAnswer);
 
 const container = {
   color: '#7f7f7f',
-};
-
-const header = {
-  display: 'flex',
-  flexDirection: 'row',
-  background: 'linear-gradient(to top, #00AB90 0%, #080A38 15%, #080A38 100%)',
-  height: 85,
-  alignItems: 'center',
-};
-
-const avatar = {
-  height: 35,
-  width: 35,
-  borderRadius: 40,
-  border: '30px solid #2FE090',
-  borderWidth: 2,
-  resizeMode: 'cover',
-  marginRight: 40,
-  marginLeft: 20,
 };
 
 const listview = {
