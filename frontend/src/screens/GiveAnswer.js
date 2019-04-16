@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
-import { graphql, compose } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { user } from '../resources/images';
-import { blue, green } from '../resources/colors';
-import {
-  SearchBar,
-  Section,
-  ListItem,
-  Logo,
-  SideList,
-  Header,
-  Footer,
-} from '../components';
+import { green } from '../resources/colors';
+import { ListItem, SideList, Header, Footer } from '../components';
 
 class GiveAnswer extends Component {
   state = {
@@ -20,14 +11,14 @@ class GiveAnswer extends Component {
 
   submitAnswer = e => {
     e.preventDefault();
-    // const answer = [
-    //   {
-    //     question_id: 'id number whatever',
-    //     answer: e.target[0].value,
-    //     user: 'TheUser',
-    //   },
-    // ];
-    // this.setState({ answers: [...this.state.answers, ...answer] });
+    const answer = [
+      {
+        question_id: this.props.match.params.questionId,
+        answer: e.target[0].value,
+        user: 'TheUser',
+      },
+    ];
+    this.setState({ answers: [...this.state.answers, ...answer] });
     e.currentTarget.reset();
 
     // this.props
@@ -38,12 +29,14 @@ class GiveAnswer extends Component {
     //       user: answer[0].user,
     //     },
     //   })
-    //   .then(data => this.props.data.refresh)
+    //   .then(data => console.log(data))
     //   .catch(err => console.log(err));
   };
 
   renderQuestion() {
-    if (!this.props.data.loading) {
+    if (this.props.data.loading) {
+      return <h1>Loading...</h1>;
+    } else {
       return (
         <ListItem
           title={this.props.data.question.title}
@@ -95,23 +88,14 @@ const GET_QUESTION = gql`
   }
 `;
 
-// const GET_QUESTION = gql`
-//   query getQuestion($_id: ID!) {
-// ​    question(_id: $_id) {
-// ​      title
-// ​    }
-//   }
-// `;
-
-// const CREATE_ANSWER = gql`
-//   mutation CreateAnswer($question_id: ID!, $answer: String!, $user: ID!) {
-//     createAnswer(question_id: $question_id, answer: $answer, user: $user) {
-//       _id
-//       answer
-//       user
-//     }
-//   }
-// `;
+const CREATE_ANSWER = gql`
+  mutation createAnswer($question_id: ID!, $answer: String!) {
+    createAnswer(question_id: $question_id, answer: $answer) {
+      _id
+      answer
+    }
+  }
+`;
 
 // const updateAnswer = gql`
 //   mutation updateAnswer($question_id: ID!, $_id: ID!, $newAnswer: String!) {
@@ -129,33 +113,18 @@ const GET_QUESTION = gql`
 //   }
 // `;
 
-export default graphql(GET_QUESTION, {
-  options: props => {
-    return { variables: { _id: props.match.params.questionId } };
+export default graphql(
+  GET_QUESTION,
+  {
+    options: props => {
+      return { variables: { _id: props.match.params.questionId } };
+    },
   },
-})(GiveAnswer);
+  CREATE_ANSWER
+)(GiveAnswer);
 
 const container = {
   color: '#7f7f7f',
-};
-
-const header = {
-  display: 'flex',
-  flexDirection: 'row',
-  background: 'linear-gradient(to top, #00AB90 0%, #080A38 15%, #080A38 100%)',
-  height: 85,
-  alignItems: 'center',
-};
-
-const avatar = {
-  height: 35,
-  width: 35,
-  borderRadius: 40,
-  border: '30px solid #2FE090',
-  borderWidth: 2,
-  resizeMode: 'cover',
-  marginRight: 40,
-  marginLeft: 20,
 };
 
 const listview = {
