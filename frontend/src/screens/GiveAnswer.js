@@ -33,6 +33,18 @@ class GiveAnswer extends Component {
       .catch(err => console.log(err));
   };
 
+  onAnswerDelete = id => {
+    this.props
+      .mutate({
+        variables: {
+          question_id: this.props.match.params.questionId,
+          _id: id,
+        },
+      })
+      .then(() => this.props.data.refetch())
+      .catch(err => console.log(err));
+  };
+
   renderQuestion() {
     if (this.props.data.loading) {
       return <h1>Loading...</h1>;
@@ -58,6 +70,7 @@ class GiveAnswer extends Component {
             user={'TheAnswerGiver'}
             date={'10000 B.C.'}
             likes={'0'}
+            onDelete={() => this.onAnswerDelete(_id)}
           />
         );
       });
@@ -116,13 +129,13 @@ const CREATE_ANSWER = gql`
   }
 `;
 
-// const deleteAnswer = gql`
-//   mutation deleteAnswer($question_id: ID!, $_id: ID!) {
-//     deleteAnswer(question_id: $question_id, _id: $_id) {
-//       _id
-//     }
-//   }
-// `;
+const DELETE_ANSWER = gql`
+  mutation deleteAnswer($question_id: ID!, $_id: ID!) {
+    deleteAnswer(question_id: $question_id, _id: $_id) {
+      _id
+    }
+  }
+`;
 
 export default compose(
   graphql(GET_QUESTION, {
@@ -130,7 +143,8 @@ export default compose(
       return { variables: { _id: props.match.params.questionId } };
     },
   }),
-  graphql(CREATE_ANSWER)
+  graphql(CREATE_ANSWER),
+  graphql(DELETE_ANSWER)
 )(GiveAnswer);
 
 const container = {
