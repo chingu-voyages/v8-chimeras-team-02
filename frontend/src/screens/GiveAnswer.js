@@ -49,14 +49,14 @@ class GiveAnswer extends Component {
   }
 
   renderAnswers() {
-    if (!this.props.data.loading) {
-      this.props.data.question.answers.map(({ answer, _id }) => {
+    if (!this.props.data.loading && this.props.data.question.answers) {
+      return this.props.data.question.answers.map(({ answer, _id }) => {
         return (
           <ListItem
             key={_id}
             title={answer}
             user={'TheAnswerGiver'}
-            date={'Yesterday'}
+            date={'10000 B.C.'}
             likes={'0'}
           />
         );
@@ -83,7 +83,6 @@ class GiveAnswer extends Component {
                 Answer
               </button>
             </form>
-
             {/* List of answers */}
             {this.renderAnswers()}
           </div>
