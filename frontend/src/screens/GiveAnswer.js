@@ -29,7 +29,7 @@ class GiveAnswer extends Component {
           user: answer[0].user,
         },
       })
-      .then(data => console.log(data))
+      .then(() => this.props.data.refetch())
       .catch(err => console.log(err));
   };
 
