@@ -52,7 +52,6 @@ export async function LogOut(mongo, user) {
 export async function createQuestion(title, question, user_id, tags, answers, mongo) {
 	const Questions = mongo.collection('Question');
 	const Users = mongo.collection('User');
-	console.log(user_id);
 
 	const user = await Users.findOne({ _id: user_id });
 	if (!user) {
