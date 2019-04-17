@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Link } from 'react-router-dom';
-import { user } from '../resources/images';
-import { blue, green } from '../resources/colors';
-import { Header, ListItem, Footer } from '../components';
+import { green } from '../resources/colors';
+import { Header, Footer } from '../components';
 import styled from 'styled-components';
 
 class NewQuestion extends Component {
