@@ -28,7 +28,7 @@ export default class ListItem extends Component {
             style={{ color: 'red', fontWeight: 'bold', cursor: 'pointer' }}
             onClick={this.props.onDelete}
           >
-            X
+            {this.props.onDelete ? 'X' : null}
           </span>
         </Item>
       </ListContainer>
