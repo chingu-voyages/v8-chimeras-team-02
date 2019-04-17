@@ -116,14 +116,6 @@ const CREATE_ANSWER = gql`
   }
 `;
 
-// const updateAnswer = gql`
-//   mutation updateAnswer($question_id: ID!, $_id: ID!, $newAnswer: String!) {
-//     updateAnswer(question_id: $question_id, _id: $_id, newAnswer: $newAnswer) {
-//       _id
-//     }
-//   }
-// `;
-
 // const deleteAnswer = gql`
 //   mutation deleteAnswer($question_id: ID!, $_id: ID!) {
 //     deleteAnswer(question_id: $question_id, _id: $_id) {
