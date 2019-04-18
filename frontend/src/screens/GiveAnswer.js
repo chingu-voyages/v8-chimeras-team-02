@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { graphql, compose } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { green } from '../resources/colors';
 import { ListItem, SideList, Header, Footer } from '../components';
