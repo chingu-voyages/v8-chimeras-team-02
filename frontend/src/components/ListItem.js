@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { green, blue, purple } from "../resources/colors";
+import { green, purple } from "../resources/colors";
 import { user, heart } from "../resources/images";
 import styled from 'styled-components';
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { green, blue } from '../resources/colors';
+import { blue } from '../resources/colors';
 import styled from 'styled-components';
 
 export default class Section extends Component {
@@ -31,11 +31,12 @@ const Btn = styled.button`
   padding: 15px;
 `;
 
-const BtnHover = styled.button`
+// TODO:
+/*const BtnHover = styled.button`
   font-size: 20px;
   color: ${green};
   background-color: ${blue};
   border: 0px;
   font-family: Poppins;
   padding: 15px;
-`;
+`;*/
