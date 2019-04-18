@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { ListItem, SideList, Header, Footer } from '../components';
 import styled from 'styled-components';
 import { graphql } from 'react-apollo';
@@ -6,16 +7,20 @@ import gql from 'graphql-tag';
 
 class Home extends Component {
   renderQuestions() {
-    if (!this.props.data.loading) {
+    if (this.props.data.loading) {
+      return <h1>Loading...</h1>;
+    } else {
       return this.props.data.questions.map(question => {
         return (
-          <ListItem
-            key={question._id}
-            title={question.title}
-            user={'Hanen Wahabi'}
-            date={question.createAt}
-            likes={'4'}
-          />
+          <StyledLink to={`/giveanswer/${question._id}`}>
+            <ListItem
+              key={question._id}
+              title={question.title}
+              user={'Hanen Wahabi'}
+              date={question.createAt}
+              likes={'4'}
+            />
+          </StyledLink>
         );
       });
     }
@@ -62,6 +67,10 @@ const GridView = styled.div`
   flex: 1;
   flex-direction: row;
   margin-top: 40;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;
 
 /* const form = styled.`
