@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { green, purple } from "../resources/colors";
-import { user, heart } from "../resources/images";
+import { green, purple } from '../resources/colors';
+import { user, heart } from '../resources/images';
 import styled from 'styled-components';
 
 export default class ListItem extends Component {
