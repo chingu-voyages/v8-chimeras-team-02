@@ -1,5 +1,5 @@
 const typeDefs = [
-  `
+	`
 
     scalar Date
 
@@ -55,9 +55,9 @@ const typeDefs = [
       createQuestion( 
         title: String!, 
         question: String!, 
-        user_id: ID, 
-        tags: [String],
-        answers_ids: [ID]): Question
+        user_id: ID!, 
+        tags: [String]!,
+        answers_ids: [ID]!): Question
 
       updateQuestion(
         _id: ID!,
@@ -73,7 +73,7 @@ const typeDefs = [
       createAnswer( 
         question_id: ID!,
         answer: String!, 
-        user_id: ID): Answer
+        user_id: ID!): Answer
 
       updateAnswer(
         question_id: ID!, 
