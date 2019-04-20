@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { SearchBar, Section, Logo } from '../components';
-import { blue } from '../resources/colors';
+import { blue, green } from '../resources/colors';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import Modal from 'react-modal';
@@ -73,12 +73,22 @@ class Header extends Component {
         </StyledLink>
         <Section
           title="LogIn"
-          onClick={() => this.setState({ openLogIn: true })}
+          //onClick={() => this.setState({ openLogIn: true })}
         />
         <Section
           title="Signup"
           onClick={() => this.setState({ openSignup: true })}
         />
+        <Dropdown>
+          <DropdownBtn>
+            Signup
+          </DropdownBtn>
+          <DropdownContent>
+            <DropdownLink href="#">Test</DropdownLink>
+            <DropdownLink href="#">Test</DropdownLink>
+            <DropdownLink href="#">Test</DropdownLink>
+          </DropdownContent>
+        </Dropdown>
         <Avatar />
         {/* For LogIn */}
         <Modal
@@ -182,3 +192,45 @@ const HeaderContainer = styled.div`
 const StyledLink = styled(Link)`
   text-decoration: none;
 `;
+
+/* Dropdown | Hover SignUp */
+const DropdownContent = styled.div`
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+`
+
+const Dropdown = styled.div`
+  position: relative;
+  display: inline-block;
+
+  &:hover ${DropdownContent} {
+    display: block;
+  }
+`
+
+const DropdownBtn = styled.button`
+  background-color: ${green};
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const DropdownLink = styled.a`
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+
+  &:hover {
+    background-color: #fefefe;
+  }
+`
