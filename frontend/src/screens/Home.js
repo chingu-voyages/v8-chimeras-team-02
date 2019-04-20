@@ -12,7 +12,7 @@ class Home extends Component {
     } else {
       return this.props.data.questions.map(question => {
         return (
-          <StyledLink to={`/giveanswer/${question._id}`}>
+          <StyledLink key={question._id} to={`/giveanswer/${question._id}`}>
             <ListItem
               key={question._id}
               title={question.title}
