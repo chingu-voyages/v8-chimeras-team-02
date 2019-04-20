@@ -3,6 +3,11 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { green } from '../resources/colors';
 import { ListItem, Header, Footer } from '../components';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faSpinner)
 
 class GiveAnswer extends Component {
   state = {
@@ -47,7 +52,7 @@ class GiveAnswer extends Component {
 
   renderQuestion() {
     if (this.props.data.loading) {
-      return <h1>Loading...</h1>;
+      return <FontAwesomeIcon icon='spinner' spin style={{fontSize:'50px', alignItems:'center', margin:'0 auto', color:`${green}`}} />;
     } else {
       return (
         <ListItem
