@@ -67,17 +67,17 @@ const ListView = styled.div`
   flex: 3;
   flex-direction: column;
   max-width: 50%;
-`;
+`
 const GridView = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
   margin-top: 40;
-`;
+`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-`;
+`
 
 /* const form = styled.`
 	display: flex;
@@ -88,7 +88,7 @@ const StyledLink = styled(Link)`
 	width: 30%;
 	height: 400;
 	borderRadius: 10;
-`;
+`
 
 const inputs = styled.`
 	border: 1px solid #ccc;
@@ -99,7 +99,7 @@ const inputs = styled.`
 	marginTop: 25;
 	fontSize: 16;
 	outlineColor: green;
-`;
+`
 
 const button = styled.`
 	background: green;
@@ -109,11 +109,11 @@ const button = styled.`
 	alignItems: center;
 	marginTop: 25;
 	fontSize: 20;
-`;
+`
 
 const error = styled.`
 	color: red;
 	fontSize: 14;
 	marginTop: 25;
 	textAlign: center;
-`; */
+` */

@@ -47,7 +47,7 @@ const ListContainer = styled.div`
   box-shadow: 0px 0px 8px 4px gainsboro;
   padding: 0 15px 15px 20px;
   margin-bottom: 20px;
-`;
+`
 
 const Item = styled.div`
   display: flex;
@@ -56,7 +56,7 @@ const Item = styled.div`
   max-width: 100%;
   margin-top: -15px;
   align-items: center;
-`;
+`
 
 /*const Like = styled.img`
   height: 20px;
@@ -70,14 +70,14 @@ const Item = styled.div`
 const Likes = styled.p`
   font-size: 14px;
   color: ${purple};
-`;
+`
 
 const Title = styled.p`
   display: flex;
   font-size: 20px;
   color: #7f7f7f;
   justify-content: flex-start;
-`;
+`
 
 const Date = styled.p`
   font-size: 12px;
@@ -85,13 +85,13 @@ const Date = styled.p`
   margin-top: 0px;
   padding-right: 5px;
   text-align: left;
-`;
+`
 
 const Username = styled.p`
   font-size: 14px;
   color: #7f7f7f;
   text-align: left;
-`;
+`
 
 const Avatar = styled.img`
   height: 35px;
@@ -102,7 +102,7 @@ const Avatar = styled.img`
   border-width: 6px;
   resize-mode: cover;
   background-color: ${green};
-`;
+`
 
 const HeartFill = styled.div`
   color: white;

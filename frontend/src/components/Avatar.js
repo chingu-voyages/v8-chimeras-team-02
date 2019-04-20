@@ -20,7 +20,7 @@ export default class Avatar extends Component {
 const AvatarContainer = styled.div`
 position: relative;
 display: inline-block;
-`;
+`
 
 const AvatarImg = styled.img`
     height: auto;
@@ -33,7 +33,7 @@ const AvatarImg = styled.img`
     margin-left: 1.4vw;
     background-color: ${green};
     margin-top: 5px;
-`;
+`
 
 const DropdownContent = styled.div`
     display: none;
@@ -44,13 +44,13 @@ const DropdownContent = styled.div`
     align-items: right;
     justify-content: right;
     z-index: 1;
-`;
+`
 
 const Text = styled.h3`
     color: black;
     padding: 12px 16px;
     display: block;
-`;
+`
 
 const Button = styled.input`
     background-color: #2FE090;
@@ -61,7 +61,7 @@ const Button = styled.input`
     color: white;
     font-family: Poppins;
     border: 0px;
-`;
+`
 
 // MISSING:
 // .dropdown:hover .dropdownContent {display: block;}
