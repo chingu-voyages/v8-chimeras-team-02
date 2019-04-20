@@ -71,12 +71,12 @@ class Header extends Component {
           <Section title="Ask" />
         </StyledLink>
         <Section
-          title="LogIn"
+          title="Log in"
           //onClick={() => this.setState({ openLogIn: true })}
         />
         <Dropdown>
           <DropdownBtn>
-            Signup
+            Sign up
           </DropdownBtn>
           <DropdownContent>
             <SignUp
@@ -193,6 +193,7 @@ const DropdownBtn = styled.button`
   padding: 10px 15px;
   font-size: 16px;
   border-radius: 5px;
+  min-width: 90px;
 
   &:hover {
     cursor: pointer;
