@@ -156,9 +156,11 @@ export default compose(
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
-  background: ${blue};
+  /*background: ${blue};*/
   height: 85px;
   align-items: center;
+  border-bottom: 1px solid #efebeb;
+  margin-bottom: 20px;
 `;
 
 const StyledLink = styled(Link)`
@@ -169,8 +171,9 @@ const StyledLink = styled(Link)`
 const DropdownContent = styled.div`
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
+  right: 0;
+  background-color: #fff;
+  min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 `
@@ -185,18 +188,18 @@ const Dropdown = styled.div`
 `
 
 const DropdownBtn = styled.button`
-  background-color: ${green};
-  color: white;
-  padding: 16px;
+  border: 1px solid ${green};
+  color: ${green};
+  padding: 10px 15px;
   font-size: 16px;
-  border: none;
+  border-radius: 5px;
 
   &:hover {
     cursor: pointer;
   }
 `
 
-const DropdownLink = styled.a`
+/*const DropdownLink = styled.a`
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -205,4 +208,4 @@ const DropdownLink = styled.a`
   &:hover {
     background-color: #fefefe;
   }
-`
+`*/

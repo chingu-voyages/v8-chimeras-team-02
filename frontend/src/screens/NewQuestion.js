@@ -114,6 +114,5 @@ const AskBtn = styled.button`
   align-items: center;
   font-size: 14px;
   color: white;
-  font-family: Poppins;
   border: 0px;
 `;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { user } from '../resources/images';
+import { green } from '../resources/colors';
 import styled from 'styled-components';
 
 export default class Avatar extends Component {
@@ -30,6 +31,7 @@ const AvatarImg = styled.img`
     resize-mode: cover;
     margin-right: 40px;
     margin-left: 20px;
+    background-color: ${green};
 `;
 
 const DropdownContent = styled.div`

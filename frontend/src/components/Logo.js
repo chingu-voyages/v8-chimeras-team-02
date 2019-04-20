@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { green } from '../resources/colors';
 export default class Logo extends Component {
     render() {
         return (
@@ -9,8 +10,7 @@ export default class Logo extends Component {
 }
 
 const LogoStyled = styled.h1`
-	color: #fff;
+	color: ${green};
 	padding: 15px;
-	font-size: 4vw;
+	font-size: 3vw;
 `;
-
