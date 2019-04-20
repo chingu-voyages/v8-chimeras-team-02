@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { ListItem, SideList, Header, Footer } from '../components';
 import styled from 'styled-components';
+import { green } from "../resources/colors";
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faSpinner)
 
 class Home extends Component {
   renderQuestions() {
     if (this.props.data.loading) {
-      return <h1>Loading...</h1>;
+      return <FontAwesomeIcon icon='spinner' spin style={{fontSize:'50px', alignItems:'center', margin:'0 auto', color:`${green}`}} />;
     } else {
       return this.props.data.questions.map(question => {
         return (
