@@ -63,7 +63,7 @@ class Header extends Component {
   render() {
     return (
       <HeaderContainer>
-        <StyledLink exact to={'/'}>
+        <StyledLink exact='true' to={'/'}>
           <Logo />
         </StyledLink>
         <SearchBar />
