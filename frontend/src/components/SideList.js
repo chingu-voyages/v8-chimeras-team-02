@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { green } from "../resources/colors";
+import { green, grey } from "../resources/colors";
 import {
   myq,
   unsolved,
@@ -32,7 +32,7 @@ export default class SideList extends Component {
                   width: '80%',
                   border: '1px solid transparent',
                   borderRadius: '15px',
-                  padding: '5px 10px',
+                  padding: '0 10px',
                   alignItems: 'center'
             }}
         >
@@ -40,14 +40,14 @@ export default class SideList extends Component {
             src={selected === "Unsolved" ? unsolved2 : unsolved}
             alt={unsolved}
           />*/}
-          <FontAwesomeIcon icon='times-circle' style={{fontSize:'25px'}} />
+          <FontAwesomeIcon icon='times-circle' style={{fontSize:'25px', color: selected === "Unsolved" ? green : 'black'}} />
           <p
             style={{
               fontSize: 14,
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
-              color: selected === "Unsolved" ? green : "black",
+              color: selected === "Unsolved" ? green : grey,
             }}
           >
             {"Unsolved"}
@@ -62,7 +62,7 @@ export default class SideList extends Component {
                   width: '80%',
                   border: '1px solid transparent',
                   borderRadius: '15px',
-                  padding: '5px 10px',
+                  padding: '0 10px',
                   alignItems: 'center'
             }}
         >
@@ -70,14 +70,14 @@ export default class SideList extends Component {
             src={selected === "Solved" ? solved2 : solved}
             alt={solved}
           />*/}
-          <FontAwesomeIcon icon='check-circle' style={{fontSize:'25px'}} />
+          <FontAwesomeIcon icon='check-circle' style={{fontSize:'25px', color: selected === "Solved" ? green : 'black'}} />
           <p
             style={{
               fontSize: 14,
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
-              color: selected === "Solved" ? green : "black",
+              color: selected === "Solved" ? green : grey,
             }}
           >
             {"Solved"}
@@ -92,7 +92,7 @@ export default class SideList extends Component {
                   width: '80%',
                   border: '1px solid transparent',
                   borderRadius: '15px',
-                  padding: '5px 10px',
+                  padding: '0 10px',
                   alignItems: 'center'
             }}
         >
@@ -100,14 +100,14 @@ export default class SideList extends Component {
             src={selected === "My Questions" ? myq2 : myq}
             alt={myq}
           />*/}
-          <FontAwesomeIcon icon='question-circle' style={{fontSize:'25px'}} />
+          <FontAwesomeIcon icon='question-circle' style={{fontSize:'25px', color: selected === "My Questions" ? green : 'black'}} />
           <p
             style={{
               fontSize: 14,
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
-              color: selected === "My Questions" ? green : "black",
+              color: selected === "My Questions" ? green : grey,
             }}
           >
             {"My Questions"}
@@ -133,10 +133,10 @@ const SideItem = styled.button`
   flex: 1;
   flex-direction: row;
   margin-left: 30px;
-  padding-bottom: 20px;
   background-color: transparent;
   border: 0px;
   outline: 0px;
+  margin-bottom: 15px;
 `;
 
 const Icon = styled.img`
