@@ -16,8 +16,7 @@ class Header extends Component {
     email: '',
     password: '',
     error: '',
-    openLogIn: false,
-    openSignup: false,
+    openLogIn: false
   };
 
   onSignup() {
@@ -75,18 +74,23 @@ class Header extends Component {
           title="LogIn"
           //onClick={() => this.setState({ openLogIn: true })}
         />
-        <Section
-          title="Signup"
-          onClick={() => this.setState({ openSignup: true })}
-        />
         <Dropdown>
           <DropdownBtn>
             Signup
           </DropdownBtn>
           <DropdownContent>
-            <DropdownLink href="#">Test</DropdownLink>
-            <DropdownLink href="#">Test</DropdownLink>
-            <DropdownLink href="#">Test</DropdownLink>
+            <SignUp
+              handleName={event => this.setState({ name: event.target.value })}
+              handleEmail={event => this.setState({ email: event.target.value })}
+              handlePassword={event =>
+                this.setState({ password: event.target.value })
+              }
+              onClick={() => {
+                this.onSignup();
+              }}
+              error={this.state.error}
+              onColse={() => this.setState({ openSignup: false })}
+            />
           </DropdownContent>
         </Dropdown>
         <Avatar />
@@ -116,38 +120,6 @@ class Header extends Component {
             onClick={() => this.onLogIn()}
             error={this.state.error}
             onColse={() => this.setState({ openLogIn: false })}
-          />
-        </Modal>
-
-        {/* For Signup */}
-        <Modal
-          style={{
-            overlay: {
-              backgroundColor: 'rgba(255,255,255,.2)',
-              alignItems: 'center',
-              justifyContent: 'center',
-            },
-            content: {
-              backgroundColor: 'transparent',
-              borderWidth: 0,
-              padding: 50,
-            },
-          }}
-          isOpen={this.state.openSignup}
-          onRequestClose={() => this.setState({ openSignup: false })}
-          contentLabel="Modal with image"
-        >
-          <SignUp
-            handleName={event => this.setState({ name: event.target.value })}
-            handleEmail={event => this.setState({ email: event.target.value })}
-            handlePassword={event =>
-              this.setState({ password: event.target.value })
-            }
-            onClick={() => {
-              this.onSignup();
-            }}
-            error={this.state.error}
-            onColse={() => this.setState({ openSignup: false })}
           />
         </Modal>
       </HeaderContainer>
