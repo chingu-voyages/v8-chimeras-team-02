@@ -9,6 +9,13 @@ import {
   myq2,
 } from "../resources/images";
 import styled from 'styled-components';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faCheckCircle, faTimesCircle, faQuestionCircle)
+
+
 export default class SideList extends Component {
   state = {
     selected: "",
@@ -19,24 +26,28 @@ export default class SideList extends Component {
       <SideListDiv>
         <SideItem
           onClick={() => this.setState({ selected: "Unsolved" })}
+          style={{backgroundColor: selected === "Unsolved"
+                  ? "rgba(47, 224, 144, .2)"
+                  : "transparent",
+                  width: '80%',
+                  border: '1px solid transparent',
+                  borderRadius: '15px',
+                  padding: '5px 10px',
+                  alignItems: 'center'
+            }}
         >
-          <Icon
+          {/*<Icon
             src={selected === "Unsolved" ? unsolved2 : unsolved}
             alt={unsolved}
-          />
+          />*/}
+          <FontAwesomeIcon icon='times-circle' style={{fontSize:'25px'}} />
           <p
             style={{
               fontSize: 14,
-              fontFamily: "Poppins",
-              marginTop: 0,
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
               color: selected === "Unsolved" ? green : "black",
-              backgroundColor:
-                selected === "Unsolved"
-                  ? "rgba(47, 224, 144, .2)"
-                  : "transparent",
             }}
           >
             {"Unsolved"}
@@ -45,24 +56,28 @@ export default class SideList extends Component {
 
         <SideItem
           onClick={() => this.setState({ selected: "Solved" })}
+          style={{backgroundColor: selected === "Solved"
+                  ? "rgba(47, 224, 144, .2)"
+                  : "transparent",
+                  width: '80%',
+                  border: '1px solid transparent',
+                  borderRadius: '15px',
+                  padding: '5px 10px',
+                  alignItems: 'center'
+            }}
         >
-          <Icon
+          {/*<Icon
             src={selected === "Solved" ? solved2 : solved}
             alt={solved}
-          />
+          />*/}
+          <FontAwesomeIcon icon='check-circle' style={{fontSize:'25px'}} />
           <p
             style={{
               fontSize: 14,
-              fontFamily: "Poppins",
-              marginTop: 0,
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
               color: selected === "Solved" ? green : "black",
-              backgroundColor:
-                selected === "Solved"
-                  ? "rgba(47, 224, 144, .2)"
-                  : "transparent",
             }}
           >
             {"Solved"}
@@ -71,24 +86,28 @@ export default class SideList extends Component {
 
         <SideItem
           onClick={() => this.setState({ selected: "My Questions" })}
+          style={{backgroundColor: selected === "My Questions"
+                  ? "rgba(47, 224, 144, .2)"
+                  : "transparent",
+                  width: '80%',
+                  border: '1px solid transparent',
+                  borderRadius: '15px',
+                  padding: '5px 10px',
+                  alignItems: 'center'
+            }}
         >
-          <Icon
+          {/*<Icon
             src={selected === "My Questions" ? myq2 : myq}
             alt={myq}
-          />
+          />*/}
+          <FontAwesomeIcon icon='question-circle' style={{fontSize:'25px'}} />
           <p
             style={{
               fontSize: 14,
-              fontFamily: "Poppins",
-              marginTop: 0,
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
               color: selected === "My Questions" ? green : "black",
-              backgroundColor:
-                selected === "My Questions"
-                  ? "rgba(47, 224, 144, .2)"
-                  : "transparent",
             }}
           >
             {"My Questions"}
