@@ -23,15 +23,16 @@ display: inline-block;
 `;
 
 const AvatarImg = styled.img`
-    height: 25%;
-    width: 25%;
+    height: auto;
+    width: 40px;
     border-radius: 40px;
     border: 30px solid #2FE090;
     border-width: 2px;
     resize-mode: cover;
-    margin-right: 40px;
-    margin-left: 20px;
+    margin-right: 15px;
+    margin-left: 1.4vw;
     background-color: ${green};
+    margin-top: 5px;
 `;
 
 const DropdownContent = styled.div`
