@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export default class Footer extends Component {
   render() {
-    return <FooterDiv>Made with <span style={{color:'red'}}>♥</span></FooterDiv>;
+    return <FooterDiv>Made with <span style={{color:'red'}}>♥</span> by v8-chimeras-team-02</FooterDiv>;
   }
 }
 
