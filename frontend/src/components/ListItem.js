@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { green, purple } from '../resources/colors';
+import { green, purple, grey } from '../resources/colors';
 import { user } from '../resources/images';
 import styled from 'styled-components';
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -75,13 +75,14 @@ const Likes = styled.p`
 const Title = styled.p`
   display: flex;
   font-size: 20px;
-  color: #7f7f7f;
+  /*color: #7f7f7f;*/
+  color: black;
   justify-content: flex-start;
 `
 
 const Date = styled.p`
   font-size: 12px;
-  color: #7f7f7f;
+  color: ${grey};
   margin-top: 0px;
   padding-right: 5px;
   text-align: left;
@@ -89,7 +90,7 @@ const Date = styled.p`
 
 const Username = styled.p`
   font-size: 14px;
-  color: #7f7f7f;
+  color: black;
   text-align: left;
 `
 
