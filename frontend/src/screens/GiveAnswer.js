@@ -91,8 +91,9 @@ class GiveAnswer extends Component {
 
             {/* Submit answer form */}
             <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
-            <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
+            <form onSubmit={this.submitAnswer}>
               <textarea style={textareaStyle} placeholder="Enter answer..." />
+              <br />
               <button style={btn} type="submit">
                 Answer
               </button>
@@ -166,11 +167,14 @@ const gridView = {
 };
 
 const textareaStyle = {
-  width: '80%',
-  height: 100,
-  fontSize: 18,
-  color: 'black',
-  fontFamily: 'Poppins',
+  width: '104%',
+  height: '100px',
+  margin: '0 auto',
+  boxShadow: '0px 0px 8px 4px gainsboro',
+  border: '2px solid gainsboro',
+  borderRadius: '4px',
+  resize: 'none',
+  padding: '5px',
 };
 
 const btn = {
@@ -180,6 +184,5 @@ const btn = {
   alignItems: 'center',
   fontSize: 17,
   color: 'white',
-  fontFamily: 'Poppins',
   border: '0px',
 };
