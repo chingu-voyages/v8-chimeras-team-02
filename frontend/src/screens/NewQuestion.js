@@ -41,7 +41,13 @@ class NewQuestion extends Component {
           <FormView>
             <form onSubmit={this.createQuestion}>
               <NewQuestionForm
-                placeholder="Add new question"
+                placeholder="Add a question title"
+                value={this.state.title}
+                onChange={this.handleChange}
+              />
+              <br />
+              <NewQuestionFormDescription
+                placeholder="Add new question description"
                 value={this.state.title}
                 onChange={this.handleChange}
               />
@@ -97,8 +103,8 @@ const GridView = styled.div`
 `;
 
 const NewQuestionForm = styled.textarea`
-  width: 80vw;
-  height: 100px;
+  width: 50vw;
+  height: auto;
   margin: 0 auto;
   box-shadow: 0px 0px 8px 4px gainsboro;
   border: 2px solid gainsboro;
@@ -106,6 +112,17 @@ const NewQuestionForm = styled.textarea`
   resize: none;
   padding: 5px;
 `;
+
+const NewQuestionFormDescription = styled.textarea`
+  width: 50vw;
+  height: 100px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 8px 4px gainsboro;
+  border: 2px solid gainsboro;
+  border-radius: 4px;
+  resize: none;
+  padding: 5px;
+`
 
 const AskBtn = styled.button`
   background-color: ${green};
@@ -115,4 +132,5 @@ const AskBtn = styled.button`
   font-size: 14px;
   color: white;
   border: 0px;
+  float: right;
 `;
