@@ -10,7 +10,7 @@ import styled from 'styled-components';
 class NewQuestion extends Component {
   state = {
     title: '',
-    question: 'question from state',
+    question: '',
   };
 
   createQuestion = e => {
@@ -40,9 +40,14 @@ class NewQuestion extends Component {
         <GridView>
           <FormView>
             <form onSubmit={this.createQuestion}>
-              <NewQuestionForm
-                placeholder="Add new question"
+              <NewQuestionTitle
+                placeholder="Add new question title here..."
                 value={this.state.title}
+                onChange={this.handleChange}
+              />
+              <NewQuestionForm
+                placeholder="Add new question description here..."
+                value={this.state.question}
                 onChange={this.handleChange}
               />
               <br />
@@ -50,7 +55,6 @@ class NewQuestion extends Component {
             </form>
           </FormView>
         </GridView>
-
         <Footer />
       </div>
     );
@@ -85,6 +89,7 @@ const FormView = styled.div`
   display: flex;
   flex: 3;
   justify-content: center;
+  margin: auto 0;
 `;
 
 const GridView = styled.div`
@@ -96,10 +101,21 @@ const GridView = styled.div`
   justify-content: center;
 `;
 
+const NewQuestionTitle = styled.textarea`
+  width: 80vw;
+  height: 18px;
+  margin: 5px 0 0 5px;
+  box-shadow: 0px 0px 8px 4px gainsboro;
+  border: 2px solid gainsboro;
+  border-radius: 4px;
+  resize: none;
+  padding: 5px;
+`;
+
 const NewQuestionForm = styled.textarea`
   width: 80vw;
   height: 100px;
-  margin: 0 auto;
+  margin: 5px 0 0 5px;
   box-shadow: 0px 0px 8px 4px gainsboro;
   border: 2px solid gainsboro;
   border-radius: 4px;
@@ -111,6 +127,7 @@ const AskBtn = styled.button`
   background-color: ${green};
   width: 100px;
   height: 36px;
+  margin: 5px 0 0 5px;
   align-items: center;
   font-size: 14px;
   color: white;

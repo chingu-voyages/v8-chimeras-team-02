@@ -9,6 +9,7 @@ import {
   myq2,
 } from "../resources/images";
 import styled from 'styled-components';
+
 export default class SideList extends Component {
   state = {
     selected: "",

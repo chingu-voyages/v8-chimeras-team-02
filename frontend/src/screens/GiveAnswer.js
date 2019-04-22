@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { green } from '../resources/colors';
-import { ListItem, SideList, Header, Footer } from '../components';
+import { CompleteItem, SideList, Header, Footer } from '../components';
 
 class GiveAnswer extends Component {
   state = {
@@ -50,8 +50,9 @@ class GiveAnswer extends Component {
       return <h1>Loading...</h1>;
     } else {
       return (
-        <ListItem
+        <CompleteItem
           title={this.props.data.question.title}
+          question={'wait for it'}
           user={'TheQuestionAsker'}
           date={'Just now'}
           likes={'0'}
@@ -64,7 +65,7 @@ class GiveAnswer extends Component {
     if (!this.props.data.loading && this.props.data.question.answers) {
       return this.props.data.question.answers.map(({ answer, _id }) => {
         return (
-          <ListItem
+          <CompleteItem
             key={_id}
             title={answer}
             user={'TheAnswerGiver'}
