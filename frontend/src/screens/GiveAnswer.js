@@ -22,14 +22,26 @@ class GiveAnswer extends Component {
     e.currentTarget.reset();
 
     this.props
-      .mutate({
+      .create_answer({
         variables: {
           question_id: answer[0].question_id,
           answer: answer[0].answer,
-          user: answer[0].user,
+          user_id: answer[0].user,
         },
       })
-      .then(data => console.log(data))
+      .then(() => this.props.data.refetch())
+      .catch(err => console.log(err));
+  };
+
+  onAnswerDelete = id => {
+    this.props
+      .delete_answer({
+        variables: {
+          question_id: this.props.match.params.questionId,
+          _id: id,
+        },
+      })
+      .then(() => this.props.data.refetch())
       .catch(err => console.log(err));
   };
 
@@ -49,15 +61,16 @@ class GiveAnswer extends Component {
   }
 
   renderAnswers() {
-    if (!this.props.data.loading) {
-      this.props.data.question.answers.map(({ answer, _id }) => {
+    if (!this.props.data.loading && this.props.data.question.answers) {
+      return this.props.data.question.answers.map(({ answer, _id }) => {
         return (
           <ListItem
             key={_id}
             title={answer}
             user={'TheAnswerGiver'}
-            date={'Yesterday'}
+            date={'10000 B.C.'}
             likes={'0'}
+            onDelete={() => this.onAnswerDelete(_id)}
           />
         );
       });
@@ -69,11 +82,12 @@ class GiveAnswer extends Component {
       <div style={container}>
         <Header />
         <div style={gridView}>
-          <SideList />
           <div style={listview}>
             {/* Question */}
             {this.renderQuestion()}
-            {console.log(this.props)}
+
+            {/* List of answers */}
+            {this.renderAnswers()}
 
             {/* Submit answer form */}
             <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
@@ -83,9 +97,6 @@ class GiveAnswer extends Component {
                 Answer
               </button>
             </form>
-
-            {/* List of answers */}
-            {this.renderAnswers()}
           </div>
         </div>
 
@@ -109,29 +120,21 @@ const GET_QUESTION = gql`
 `;
 
 const CREATE_ANSWER = gql`
-  mutation createAnswer($question_id: ID!, $answer: String!) {
-    createAnswer(question_id: $question_id, answer: $answer) {
+  mutation createAnswer($question_id: ID!, $answer: String!, $user_id: ID!) {
+    createAnswer(question_id: $question_id, answer: $answer, user_id: $user_id) {
       _id
       answer
     }
   }
 `;
 
-// const updateAnswer = gql`
-//   mutation updateAnswer($question_id: ID!, $_id: ID!, $newAnswer: String!) {
-//     updateAnswer(question_id: $question_id, _id: $_id, newAnswer: $newAnswer) {
-//       _id
-//     }
-//   }
-// `;
-
-// const deleteAnswer = gql`
-//   mutation deleteAnswer($question_id: ID!, $_id: ID!) {
-//     deleteAnswer(question_id: $question_id, _id: $_id) {
-//       _id
-//     }
-//   }
-// `;
+const DELETE_ANSWER = gql`
+  mutation deleteAnswer($question_id: ID!, $_id: ID!) {
+    deleteAnswer(question_id: $question_id, _id: $_id) {
+      _id
+    }
+  }
+`;
 
 export default compose(
   graphql(GET_QUESTION, {
@@ -139,7 +142,8 @@ export default compose(
       return { variables: { _id: props.match.params.questionId } };
     },
   }),
-  graphql(CREATE_ANSWER)
+  graphql(CREATE_ANSWER, { name: 'create_answer' }),
+  graphql(DELETE_ANSWER, { name: 'delete_answer' })
 )(GiveAnswer);
 
 const container = {
@@ -157,18 +161,24 @@ const gridView = {
   flex: 1,
   flexDirection: 'row',
   marginTop: 40,
+  alignItems: 'center',
+  justifyContent: 'center',
 };
 
 const textareaStyle = {
-  width: '412px',
+  width: '80%',
+  height: 100,
+  fontSize: 18,
+  color: 'black',
+  fontFamily: 'Poppins',
 };
 
 const btn = {
   backgroundColor: green,
   width: 100,
-  height: 36,
+  height: 50,
   alignItems: 'center',
-  fontSize: 14,
+  fontSize: 17,
   color: 'white',
   fontFamily: 'Poppins',
   border: '0px',

@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { blue } from "../resources/colors";
+import { blue } from '../resources/colors';
 import styled from 'styled-components';
 
 export default class Footer extends Component {
   render() {
-    return (
-      <FooterDiv>
-        Made with ♥
-      </FooterDiv>
-    )
+    return <FooterDiv>Made with ♥</FooterDiv>;
   }
 }
 

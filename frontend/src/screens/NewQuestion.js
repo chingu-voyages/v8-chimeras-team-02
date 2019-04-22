@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+//import { Link } from 'react-router-dom';
+//import { user } from '../resources/images';
 import { green } from '../resources/colors';
 import { Header, Footer } from '../components';
 import styled from 'styled-components';
@@ -18,11 +20,12 @@ class NewQuestion extends Component {
         variables: {
           title: this.state.title,
           question: this.state.question,
+          user_id: '48fb152f-f5a7-45bb-88bd-2ee0e9ead1ab',
+          tags: [],
+          answers_ids: [],
         },
       })
-      .then(data =>
-        this.props.history.push(`/giveanswer/${data.data.createQuestion._id}`)
-      )
+      .then(data => this.props.history.push(`/giveanswer/${data.data.createQuestion._id}`))
       .catch(err => console.log(err));
   };
 
@@ -55,8 +58,20 @@ class NewQuestion extends Component {
 }
 
 const CREATE_QUESTION = gql`
-  mutation createQuestion($title: String!, $question: String!) {
-    createQuestion(title: $title, question: $question) {
+  mutation createQuestion(
+    $title: String!
+    $question: String!
+    $user_id: ID!
+    $tags: [String]!
+    $answers_ids: [ID]!
+  ) {
+    createQuestion(
+      title: $title
+      question: $question
+      user_id: $user_id
+      tags: $tags
+      answers_ids: $answers_ids
+    ) {
       _id
       title
       question
