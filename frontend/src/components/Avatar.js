@@ -17,8 +17,8 @@ export default class Avatar extends Component {
 }
 
 const AvatarContainer = styled.div`
-position: relative;
-display: inline-block;
+    position: relative;
+    display: inline-block;
 `;
 
 const AvatarImg = styled.img`
