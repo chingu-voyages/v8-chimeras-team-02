@@ -27,7 +27,6 @@ const Btn = styled.button`
   color: white;
   background-color: ${blue};
   border: 0px;
-  font-family: Poppins;
   padding: 15px;
 `;
 

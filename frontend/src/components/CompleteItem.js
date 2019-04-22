@@ -63,14 +63,12 @@ const Like = styled.img`
 const Likes = styled.p`
     font-size: 14px;
     color: ${purple};
-    font-family: Poppins;
 `;
 
 const Title = styled.p`
     display: flex;
     font-size: 20px;
     color: #7f7f7f;
-    font-family: Poppins;
     justify-content: flex-start;
     padding-top: 15px;
 `;
@@ -79,7 +77,6 @@ const Body = styled.p`
     display: flex;
     font-size: 10px;
     color: #7f7f7f;
-    font-family: Poppins;
     justify-content: flex-start;
     padding-top: 15px;
 `;
@@ -87,7 +84,6 @@ const Body = styled.p`
 const Date = styled.p`
     font-size: 12px;
     color: #7f7f7f;
-    font-family: Poppins;
     margin-top: 0px;
     padding-right: 5px;
 `;
@@ -95,7 +91,6 @@ const Date = styled.p`
 const Username = styled.p`
     font-size: 14px;
     color: #7f7f7f;
-    font-family: Poppins;
     text-align: left;
 `;
 

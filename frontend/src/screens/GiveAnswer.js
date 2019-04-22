@@ -3,6 +3,7 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { green } from '../resources/colors';
 import { CompleteItem, SideList, Header, Footer } from '../components';
+import styled from 'styled-components';
 
 class GiveAnswer extends Component {
   state = {
@@ -80,10 +81,10 @@ class GiveAnswer extends Component {
 
   render() {
     return (
-      <div style={container}>
+      <Container>
         <Header />
-        <div style={gridView}>
-          <div style={listview}>
+        <GridView>
+          <Listview>
             {/* Question */}
             {this.renderQuestion()}
 
@@ -93,16 +94,16 @@ class GiveAnswer extends Component {
             {/* Submit answer form */}
             <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
             <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
-              <textarea style={textareaStyle} placeholder="Enter answer..." />
-              <button style={btn} type="submit">
+              <TextareaStyle placeholder="Enter answer..." />
+              <Btn type="submit">
                 Answer
-              </button>
+              </Btn>
             </form>
-          </div>
-        </div>
+          </Listview>
+        </GridView>
 
         <Footer />
-      </div>
+      </Container>
     );
   }
 }
@@ -147,40 +148,38 @@ export default compose(
   graphql(DELETE_ANSWER, { name: 'delete_answer' })
 )(GiveAnswer);
 
-const container = {
-  color: '#7f7f7f',
-};
+const Container = styled.div`
+  color: #7f7f7f;
+`;
 
-const listview = {
-  display: 'flex',
-  flex: 3,
-  flexDirection: 'column',
-  maxWidth: '50%',
-};
-const gridView = {
-  display: 'flex',
-  flex: 1,
-  flexDirection: 'row',
-  marginTop: 40,
-  alignItems: 'center',
-  justifyContent: 'center',
-};
+const Listview = styled.div`
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  max-width: 50%;
+`;
+const GridView = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+`;
 
-const textareaStyle = {
-  width: '80%',
-  height: 100,
-  fontSize: 18,
-  color: 'black',
-  fontFamily: 'Poppins',
-};
+const TextareaStyle = styled.textarea`
+  width: 80%;
+  height: 100px;
+  font-size: 18em;
+  color: black;
+`;
 
-const btn = {
-  backgroundColor: green,
-  width: 100,
-  height: 50,
-  alignItems: 'center',
-  fontSize: 17,
-  color: 'white',
-  fontFamily: 'Poppins',
-  border: '0px',
-};
+const Btn = styled.button`
+  background-color: green;
+  width: 100;
+  height: 50;
+  align-items: center;
+  font-size: 17;
+  color: white;
+  border: 0px;
+`;

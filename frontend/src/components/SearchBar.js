@@ -20,7 +20,6 @@ const SearchBtn = styled.button`
     align-items: center;
     font-size: 14px;
     color: white;
-    font-family: Poppins;
     border: 0px;
 `;
 
@@ -30,7 +29,6 @@ const Input = styled.input`
     height: 30px;
     align-items: center;
     font-size: 13px;
-    font-family: Poppins;
     color: #ccc;
 `;
 
