@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { green } from '../resources/colors';
-import { ListItem, SideList, Header, Footer } from '../components';
+import { ListItem, Header, Footer } from '../components';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faSpinner)
 
 class GiveAnswer extends Component {
   state = {
@@ -47,7 +52,7 @@ class GiveAnswer extends Component {
 
   renderQuestion() {
     if (this.props.data.loading) {
-      return <h1>Loading...</h1>;
+      return <FontAwesomeIcon icon='spinner' spin style={{fontSize:'50px', alignItems:'center', margin:'0 auto', color:`${green}`}} />;
     } else {
       return (
         <ListItem
@@ -91,8 +96,9 @@ class GiveAnswer extends Component {
 
             {/* Submit answer form */}
             <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
-            <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
+            <form onSubmit={this.submitAnswer}>
               <textarea style={textareaStyle} placeholder="Enter answer..." />
+              <br />
               <button style={btn} type="submit">
                 Answer
               </button>
@@ -166,11 +172,14 @@ const gridView = {
 };
 
 const textareaStyle = {
-  width: '80%',
-  height: 100,
-  fontSize: 18,
-  color: 'black',
-  fontFamily: 'Poppins',
+  width: '104%',
+  height: '100px',
+  margin: '0 auto',
+  boxShadow: '0px 0px 8px 4px gainsboro',
+  border: '2px solid gainsboro',
+  borderRadius: '4px',
+  resize: 'none',
+  padding: '5px',
 };
 
 const btn = {
@@ -180,6 +189,5 @@ const btn = {
   alignItems: 'center',
   fontSize: 17,
   color: 'white',
-  fontFamily: 'Poppins',
   border: '0px',
 };

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { user } from '../resources/images';
+import { green } from '../resources/colors';
 import styled from 'styled-components';
 
 export default class Avatar extends Component {
@@ -19,18 +20,20 @@ export default class Avatar extends Component {
 const AvatarContainer = styled.div`
 position: relative;
 display: inline-block;
-`;
+`
 
 const AvatarImg = styled.img`
-    height: 25%;
-    width: 25%;
+    height: auto;
+    width: 40px;
     border-radius: 40px;
     border: 30px solid #2FE090;
     border-width: 2px;
     resize-mode: cover;
-    margin-right: 40px;
-    margin-left: 20px;
-`;
+    margin-right: 15px;
+    margin-left: 1.4vw;
+    background-color: ${green};
+    margin-top: 5px;
+`
 
 const DropdownContent = styled.div`
     display: none;
@@ -41,13 +44,13 @@ const DropdownContent = styled.div`
     align-items: right;
     justify-content: right;
     z-index: 1;
-`;
+`
 
 const Text = styled.h3`
     color: black;
     padding: 12px 16px;
     display: block;
-`;
+`
 
 const Button = styled.input`
     background-color: #2FE090;
@@ -58,7 +61,7 @@ const Button = styled.input`
     color: white;
     font-family: Poppins;
     border: 0px;
-`;
+`
 
 // MISSING:
 // .dropdown:hover .dropdownContent {display: block;}
