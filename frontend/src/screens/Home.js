@@ -6,6 +6,9 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 class Home extends Component {
+  state = {
+    searchText: '',
+  };
   renderQuestions() {
     if (this.props.data.loading) {
       return <h1>Loading...</h1>;
@@ -16,7 +19,7 @@ class Home extends Component {
             <ListItem
               key={question._id}
               title={question.title}
-              user={'Hanen Wahabi'}
+              user={question.user.name}
               date={question.createAt}
               likes={'4'}
             />
@@ -25,10 +28,17 @@ class Home extends Component {
       });
     }
   }
+  handleSearch() {}
   render() {
     return (
       <div>
-        <Header />
+        <Header
+          onSearch={() => this.handleSearch()}
+          onChangeText={event => {
+            this.setState({ searchText: event.target.value });
+          }}
+          searchText={this.state.searchText}
+        />
         <GridView>
           <SideList />
           <ListView>
@@ -50,6 +60,9 @@ const GET_QUESTION = gql`
       _id
       title
       createAt
+      user {
+        name
+      }
     }
   }
 `;

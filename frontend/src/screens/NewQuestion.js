@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 //import { Link } from 'react-router-dom';
 //import { user } from '../resources/images';
@@ -16,11 +16,11 @@ class NewQuestion extends Component {
   createQuestion = e => {
     e.preventDefault();
     this.props
-      .mutate({
+      .createQuestion({
         variables: {
           title: this.state.title,
           question: this.state.question,
-          user_id: '48fb152f-f5a7-45bb-88bd-2ee0e9ead1ab',
+          user_id: this.props.data.currentUser._id,
           tags: [],
           answers_ids: [],
         },
@@ -79,7 +79,18 @@ const CREATE_QUESTION = gql`
   }
 `;
 
-export default graphql(CREATE_QUESTION)(NewQuestion);
+const CURRENT_USER = gql`
+  {
+    currentUser {
+      _id
+    }
+  }
+`;
+
+export default compose(
+  graphql(CREATE_QUESTION, { name: 'createQuestion' }),
+  graphql(CURRENT_USER)
+)(NewQuestion);
 
 const FormView = styled.div`
   display: flex;

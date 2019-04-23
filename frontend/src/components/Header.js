@@ -9,9 +9,12 @@ import Modal from 'react-modal';
 import Avatar from './Avatar';
 import LogIn from '../screens/LogIn';
 import SignUp from '../screens/SignUp';
+import { getToken, setToken, resetToken } from '../utils';
+import { ApolloConsumer } from 'react-apollo';
 
 class Header extends Component {
   state = {
+    rememToken: null,
     name: '',
     email: '',
     password: '',
@@ -20,14 +23,21 @@ class Header extends Component {
     openSignup: false,
   };
 
+  componentWillMount() {
+    getToken().then(val => {
+      this.setState({ rememToken: val });
+    });
+  }
+
   onSignup() {
     const { name, email, password } = this.state;
     this.props
       .signup({
         variables: { name, email, password },
       })
-      .then(data => {
-        console.log(JSON.stringify(data));
+      .then(({ data }) => {
+        setToken(data.signup.rememberToken);
+        this.setState({ rememToken: data.signup.rememberToken });
         this.setState({ openSignup: false });
       })
       .catch(err => {
@@ -43,43 +53,61 @@ class Header extends Component {
     } else {
       this.setState({ error: '' });
       this.props
-        .signup({
+        .login({
           variables: { email, password },
         })
-        .then(data => {
-          console.log(JSON.stringify(data));
+        .then(({ data }) => {
+          setToken(data.login.rememberToken);
+          this.setState({ rememToken: data.login.rememberToken });
           this.setState({ openLogIn: false });
         })
         .catch(error => {
-          console.log(error);
           this.setState({ error: 'Wrong email/password ' });
         });
     }
   }
 
-  onLogout() {
-    //Hannen code here
+  onLogout(client) {
+    client
+      .query({
+        query: LOGOUT,
+        variables: {},
+      })
+      .then(data => {
+        this.setState({ rememToken: null });
+        resetToken();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
+    const { rememToken } = this.state;
     return (
       <HeaderContainer>
         <StyledLink exact to={'/'}>
           <Logo />
         </StyledLink>
-        <SearchBar />
-        <StyledLink to={'/newquestion'}>
-          <Section title="Ask" />
-        </StyledLink>
-        <Section
-          title="LogIn"
-          onClick={() => this.setState({ openLogIn: true })}
-        />
-        <Section
-          title="Signup"
-          onClick={() => this.setState({ openSignup: true })}
-        />
-        <Avatar />
+        <SearchBar onChangeText={this.props.onChangeText} onSearch={this.props.onSearch} />
+        {rememToken ? (
+          <StyledLink to={'/newquestion'}>
+            <Section title="Ask" />
+          </StyledLink>
+        ) : null}
+        {!rememToken ? (
+          <div style={Holder}>
+            <Section title="LogIn" onClick={() => this.setState({ openLogIn: true })} />
+            <Section title="Signup" onClick={() => this.setState({ openSignup: true })} />
+          </div>
+        ) : (
+          <Avatar />
+        )}
+        {rememToken ? (
+          <ApolloConsumer>
+            {client => <Section title="Logout" onClick={() => this.onLogout(client)} />}
+          </ApolloConsumer>
+        ) : null}
         {/* For LogIn */}
         <Modal
           style={{
@@ -100,9 +128,7 @@ class Header extends Component {
         >
           <LogIn
             handleEmail={event => this.setState({ email: event.target.value })}
-            handlePassword={event =>
-              this.setState({ password: event.target.value })
-            }
+            handlePassword={event => this.setState({ password: event.target.value })}
             onClick={() => this.onLogIn()}
             error={this.state.error}
             onColse={() => this.setState({ openLogIn: false })}
@@ -130,9 +156,7 @@ class Header extends Component {
           <SignUp
             handleName={event => this.setState({ name: event.target.value })}
             handleEmail={event => this.setState({ email: event.target.value })}
-            handlePassword={event =>
-              this.setState({ password: event.target.value })
-            }
+            handlePassword={event => this.setState({ password: event.target.value })}
             onClick={() => {
               this.onSignup();
             }}
@@ -166,6 +190,14 @@ const LOGIN = gql`
   }
 `;
 
+const LOGOUT = gql`
+  {
+    logOut {
+      _id
+    }
+  }
+`;
+
 export default compose(
   graphql(SIGNUP, { name: 'signup' }),
   graphql(LOGIN, { name: 'login' })
@@ -182,3 +214,7 @@ const HeaderContainer = styled.div`
 const StyledLink = styled(Link)`
   text-decoration: none;
 `;
+const Holder = {
+  display: 'flex',
+  flexDirection: 'row',
+};
