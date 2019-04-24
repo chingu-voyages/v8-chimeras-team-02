@@ -96,7 +96,7 @@ class Header extends Component {
         ) : null}
         {!rememToken ? (
           <div style={Holder}>
-            <Section title="LogIn" onClick={() => this.setState({ openLogIn: true })} />
+            <Section title="Log in" onClick={() => this.setState({ openLogIn: true })} />
             <Dropdown>
               <DropdownBtn>Sign up</DropdownBtn>
               <DropdownContent>
@@ -112,7 +112,6 @@ class Header extends Component {
                 />
               </DropdownContent>
             </Dropdown>
-            <Avatar />
           </div>
         ) : (
           <Avatar />
@@ -150,7 +149,7 @@ class Header extends Component {
         </Modal>
 
         {/* For Signup */}
-        <Modal
+        {/* <Modal
           style={{
             overlay: {
               backgroundColor: 'rgba(255,255,255,.2)',
@@ -177,7 +176,7 @@ class Header extends Component {
             error={this.state.error}
             onClose={() => this.setState({ openSignup: false })}
           />
-        </Modal>
+        </Modal> */}
       </HeaderContainer>
     );
   }
