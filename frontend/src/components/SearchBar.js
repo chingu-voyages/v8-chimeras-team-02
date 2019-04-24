@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
-import { green } from "../resources/colors";
+import { green, grey } from "../resources/colors";
 import styled from 'styled-components';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faSearch)
 
 export default class SearchBar extends Component {
     render() {
         return (
             <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center' }}>
-                <Input type='text' placeholder='Search anything...' />
-                <SearchBtn>Search</SearchBtn>
+                <FontAwesomeIcon icon="search" color={grey} style={{padding: '8px 5px 5px 5px', marginRight: '5px'}} />
+                <Input type='text' placeholder='Type to search' />
+                {/*<SearchBtn>Search</SearchBtn>*/}
             </div>
         )
     }
 }
 
-const SearchBtn = styled.button`
+/*const SearchBtn = styled.button`
     background-color: ${green};
     width: 100px;
     height: 36px;
@@ -21,7 +27,7 @@ const SearchBtn = styled.button`
     font-size: 14px;
     color: white;
     border: 0px;
-`;
+`*/
 
 const Input = styled.input`
     background-color: white;
@@ -29,6 +35,11 @@ const Input = styled.input`
     height: 30px;
     align-items: center;
     font-size: 13px;
-    color: #ccc;
-`;
+    color: ${grey};
+    border: none;
 
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid ${green};
+    }
+`;
