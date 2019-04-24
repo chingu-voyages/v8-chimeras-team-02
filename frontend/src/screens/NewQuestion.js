@@ -37,6 +37,10 @@ class NewQuestion extends Component {
 		this.setState({ question: e.target.value });
 	}
 
+  handleChangeDescription = e => {
+    this.setState({ title: e.target.question });
+  };
+
   render() {
     return (
       <div>
@@ -44,21 +48,16 @@ class NewQuestion extends Component {
         <GridView>
           <FormView>
             <form onSubmit={this.createQuestion}>
-              <NewQuestionForm
-                placeholder="Add a question title"
+              <NewQuestionFormTitle
+                placeholder="Add new question title here..."
                 value={this.state.title}
                 onChange={this.titleChange}
               />
               <br />
               <NewQuestionFormDescription
-                placeholder="Add new question description"
-                value={this.state.question}
-                onChange={this.questionChange}
-              />
-              <NewQuestionForm
                 placeholder="Add new question description here..."
                 value={this.state.question}
-                onChange={this.handleChange}
+                onChange={this.questionChange}
               />
               <br />
               <AskBtn type="submit">Ask</AskBtn>
@@ -110,7 +109,7 @@ const GridView = styled.div`
   justify-content: center;
 `;
 
-const NewQuestionForm = styled.textarea`
+const NewQuestionFormTitle = styled.textarea`
   width: 50vw;
   height: auto;
   margin: 0 auto;

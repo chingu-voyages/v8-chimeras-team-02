@@ -9,15 +9,12 @@ import {
   myq2,
 } from "../resources/images";
 import styled from 'styled-components';
-<<<<<<< HEAD
-=======
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faCheckCircle, faTimesCircle, faQuestionCircle)
 
->>>>>>> upstream/development
 
 export default class SideList extends Component {
   state = {
@@ -47,10 +44,7 @@ export default class SideList extends Component {
           <p
             style={{
               fontSize: 14,
-<<<<<<< HEAD
               marginTop: 0,
-=======
->>>>>>> upstream/development
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
@@ -81,10 +75,7 @@ export default class SideList extends Component {
           <p
             style={{
               fontSize: 14,
-<<<<<<< HEAD
               marginTop: 0,
-=======
->>>>>>> upstream/development
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
@@ -115,10 +106,7 @@ export default class SideList extends Component {
           <p
             style={{
               fontSize: 14,
-<<<<<<< HEAD
               marginTop: 0,
-=======
->>>>>>> upstream/development
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,

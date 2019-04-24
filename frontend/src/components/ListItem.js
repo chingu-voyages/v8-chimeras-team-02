@@ -101,6 +101,17 @@ const Username = styled.p`
   background-color: ${green};
 `
 
+const Avatar = styled.img`
+    height: 35px;
+    width: 35px;
+    border-radius: 40px;
+    border: 30px solid;
+    border-color: ${green};
+    border-width: 6px;
+    resize-mode: cover;
+    background-color: ${green};
+`;
+
 const HeartFill = styled.div`
   color: white;
 
