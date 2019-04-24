@@ -114,13 +114,11 @@ class Header extends Component {
             </Dropdown>
           </div>
         ) : (
-          <Avatar />
-        )}
-        {rememToken ? (
           <ApolloConsumer>
-            {client => <Section title="Logout" onClick={() => this.onLogout(client)} />}
+            {client => <Avatar onClick={() => this.onLogout(client)} />}
           </ApolloConsumer>
-        ) : null}
+        )}
+
         {/* For LogIn */}
         <Modal
           style={{
