@@ -44,7 +44,7 @@ class NewQuestion extends Component {
         <GridView>
           <FormView>
             <form onSubmit={this.createQuestion}>
-              <NewQuestionForm
+              <NewQuestionFormTitle
                 placeholder="Add new question title here..."
                 value={this.state.title}
                 onChange={this.handleChangeTitle}
@@ -105,7 +105,7 @@ const GridView = styled.div`
   justify-content: center;
 `;
 
-const NewQuestionForm = styled.textarea`
+const NewQuestionFormTitle = styled.textarea`
   width: 50vw;
   height: auto;
   margin: 0 auto;
