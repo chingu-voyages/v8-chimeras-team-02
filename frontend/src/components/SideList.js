@@ -44,6 +44,7 @@ export default class SideList extends Component {
           <p
             style={{
               fontSize: 14,
+              marginTop: 0,
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
@@ -74,6 +75,7 @@ export default class SideList extends Component {
           <p
             style={{
               fontSize: 14,
+              marginTop: 0,
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
@@ -104,6 +106,7 @@ export default class SideList extends Component {
           <p
             style={{
               fontSize: 14,
+              marginTop: 0,
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,

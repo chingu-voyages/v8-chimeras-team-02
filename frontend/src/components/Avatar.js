@@ -18,9 +18,9 @@ export default class Avatar extends Component {
 }
 
 const AvatarContainer = styled.div`
-position: relative;
-display: inline-block;
-`
+    position: relative;
+    display: inline-block;
+`;
 
 const AvatarImg = styled.img`
     height: auto;
@@ -59,7 +59,6 @@ const Button = styled.input`
     align-items: center;
     font-size: 14;
     color: white;
-    font-family: Poppins;
     border: 0px;
 `
 
