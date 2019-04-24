@@ -1,5 +1,5 @@
 const typeDefs = [
-	`
+  `
 
     scalar Date
 
@@ -39,6 +39,7 @@ const typeDefs = [
       createAt: Date!
       updatedAt: Date!
       user: User!
+      iscorrect: Boolean!
     }
     
     type Query {
@@ -83,6 +84,12 @@ const typeDefs = [
       deleteAnswer( 
         question_id: ID!,
          _id: ID!): Answer
+
+      searchQuestion(
+          keywords: String!,
+          solved:Boolean,
+          unsolved:Boolean,
+          userId: ID): [Question]
     }
 
     schema {

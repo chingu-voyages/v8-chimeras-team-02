@@ -9,23 +9,28 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { getToken } from './utils';
 
 const cache = new InMemoryCache({
-	dataIdFromObject: o => o.id,
+  dataIdFromObject: o => o.id,
 });
 
 const client = new ApolloClient({
-    uri: 'http://localhost:3003/graphql',
-    headers: {
-        authorization: getToken() ? `Bearer ${getToken()}` : '',
-    },
-    cache
+  uri: 'http://localhost:3003/graphql',
+  request: async operation => {
+    const token = await getToken();
+    operation.setContext({
+      headers: {
+        authorization: token ? token : '',
+      },
+    });
+  },
+  cache,
 });
 
 const Root = () => {
-	return (
-		<ApolloProvider client={client}>
-			<Router />
-		</ApolloProvider>
-	);
+  return (
+    <ApolloProvider client={client}>
+      <Router />
+    </ApolloProvider>
+  );
 };
 
 ReactDOM.render(<Root />, document.getElementById('root'));
