@@ -255,45 +255,29 @@ export async function deleteAnswer(question_id, _id, mongo) {
 
 export async function searchQuestion(keywords, solved, unsolved, userId, mongo) {
   const Questions = mongo.collection('Question');
+  Questions.createIndex({ title: 1, question: 2 });
   var questions = null;
 
   if (solved) {
     questions = await Questions.find({
-      $or: [
-        { title: { $regex: keywords != '' ? '.*' + keywords + '.*' : '' } },
-        { question: { $regex: keywords != '' ? '.*' + keywords + '.*' : '' } },
-      ],
+      $or: [{ $text: { $search: keywords } }, { title: { $regex: '.*' + keywords + '.*' } }], //keywords or empty string
       answers: { $elemMatch: { iscorrect: true } },
     }).toArray();
   } else if (unsolved) {
     questions = await Questions.find({
-      $or: [
-        { title: { $regex: '.*' + keywords + '.*' } },
-        { question: { $regex: '.*' + keywords + '.*' } },
-      ],
+      $or: [{ $text: { $search: keywords } }, { title: { $regex: '.*' + keywords + '.*' } }],
       answers: { $elemMatch: { iscorrect: { $in: [false] } } }, // prob ==> getting false & true together
     }).toArray();
   } else if (userId) {
     questions = await Questions.find({
-      $or: [
-        { title: { $regex: '.*' + keywords + '.*' } },
-        { question: { $regex: '.*' + keywords + '.*' } },
-      ],
+      $or: [{ $text: { $search: keywords } }, { title: { $regex: '.*' + keywords + '.*' } }],
       'user._id': userId,
     }).toArray();
   } else {
     questions = await Questions.find({
-      $or: [
-        { title: { $regex: '.*' + keywords + '.*' } },
-        { question: { $regex: '.*' + keywords + '.*' } },
-      ],
+      $or: [{ $text: { $search: keywords } }, { title: { $regex: '.*' + keywords + '.*' } }],
     }).toArray();
   }
-  //   Questions.createIndex({ title: 7 }, { collation: { locale: 'en' } });
-  //   questions = await Questions.findOne({ title: 'question' });
-  //   questions.toArray(function(err, docs) {
-  //     console.log(docs);
-  //   });
-  //   console.log(questions);
+
   return questions;
 }
