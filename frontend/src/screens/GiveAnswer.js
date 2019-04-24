@@ -59,7 +59,7 @@ class GiveAnswer extends Component {
       return (
         <CompleteItem
           title={this.props.data.question.title}
-          question={'wait for it'}
+          question={this.props.data.question.question}
           user={'TheQuestionAsker'}
           date={'Just now'}
           likes={'0'}
