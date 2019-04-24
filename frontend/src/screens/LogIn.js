@@ -35,8 +35,8 @@ export default class LogIn extends Component {
 const Container = styled.div`
 	display: flex;
 	flex: 1;
-	backgroundColor: transparent;
-	justifyContent: center;
+	background-color: transparent;
+	justify-content: center;
 `;
 
 const Form = styled.div`
@@ -66,19 +66,19 @@ const Button = styled.input`
 	color: white;
 	height: 60px;
 	width: 40%;
-	alignItems: center;
-	marginTop: 25px;
-	fontSize: 20px;
+	align-items: center;
+	margin-top: 25px;
+	font-size: 20px;
 `;
 
 const Error = styled.h3`
 	color: red;
-	fontSize: 14px;
-	marginTop: 25px;
-	textAlign: center;
+	font-size: 14px;
+	margin-top: 25px;
+	text-align: center;
 `;
 const Close = styled.img`
 	width: 25px;
 	height: 25px;
-	resizeMode: contain;
+	/* resize-mode: contain; */
 `;

@@ -10,7 +10,7 @@ import styled from 'styled-components';
 class NewQuestion extends Component {
   state = {
     title: '',
-    question: 'question from state',
+    question: '',
   };
 
   createQuestion = e => {
@@ -29,9 +29,13 @@ class NewQuestion extends Component {
       .catch(err => console.log(err));
   };
 
-  handleChange = e => {
+  titleChange = e => {
     this.setState({ title: e.target.value });
-  };
+	};
+	
+	questionChange = e => {
+		this.setState({ question: e.target.value });
+	}
 
   render() {
     return (
@@ -43,13 +47,13 @@ class NewQuestion extends Component {
               <NewQuestionForm
                 placeholder="Add a question title"
                 value={this.state.title}
-                onChange={this.handleChange}
+                onChange={this.titleChange}
               />
               <br />
               <NewQuestionFormDescription
                 placeholder="Add new question description"
-                value={this.state.title}
-                onChange={this.handleChange}
+                value={this.state.question}
+                onChange={this.questionChange}
               />
               <NewQuestionForm
                 placeholder="Add new question description here..."
