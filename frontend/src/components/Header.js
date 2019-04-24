@@ -89,7 +89,7 @@ class Header extends Component {
                 this.onSignup();
               }}
               error={this.state.error}
-              onColse={() => this.setState({ openSignup: false })}
+              onClose={() => this.setState({ openSignup: false })}
             />
           </DropdownContent>
         </Dropdown>
@@ -119,7 +119,7 @@ class Header extends Component {
             }
             onClick={() => this.onLogIn()}
             error={this.state.error}
-            onColse={() => this.setState({ openLogIn: false })}
+            onClose={() => this.setState({ openLogIn: false })}
           />
         </Modal>
       </HeaderContainer>
