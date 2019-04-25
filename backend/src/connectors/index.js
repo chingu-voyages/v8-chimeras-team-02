@@ -257,7 +257,7 @@ export async function searchQuestion(keywords, solved, unsolved, userId, mongo) 
   const Questions = mongo.collection('Question');
   Questions.createIndex({ title: 1, question: 2 });
   var questions = null;
-
+  if (!questions) console.log('null');
   if (solved) {
     questions = await Questions.find({
       $or: [{ $text: { $search: keywords } }, { title: { $regex: '.*' + keywords + '.*' } }], //keywords or empty string
@@ -266,7 +266,7 @@ export async function searchQuestion(keywords, solved, unsolved, userId, mongo) 
   } else if (unsolved) {
     questions = await Questions.find({
       $or: [{ $text: { $search: keywords } }, { title: { $regex: '.*' + keywords + '.*' } }],
-      answers: { $elemMatch: { iscorrect: { $in: [false] } } }, // prob ==> getting false & true together
+      answers: { $not: { $elemMatch: { iscorrect: true } } }, // prob ==> getting false & true together
     }).toArray();
   } else if (userId) {
     questions = await Questions.find({
