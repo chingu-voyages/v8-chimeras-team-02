@@ -2,31 +2,37 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { ListItem, SideList, Header, Footer } from '../components';
 import styled from 'styled-components';
-import { green } from "../resources/colors";
+import { green } from '../resources/colors';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faSpinner)
+library.add(faSpinner);
 
 class Home extends Component {
   renderQuestions() {
     if (this.props.data.loading) {
-      return <FontAwesomeIcon icon='spinner' spin style={{fontSize:'50px', alignItems:'center', margin:'0 auto', color:`${green}`}} />;
+      return (
+        <FontAwesomeIcon
+          icon="spinner"
+          spin
+          style={{ fontSize: '50px', alignItems: 'center', margin: '0 auto', color: `${green}` }}
+        />
+      );
     } else {
       return this.props.data.questions.map(question => {
+        const questionId = question._id;
         return (
-          <StyledLink key={question._id} to={`/giveanswer/${question._id}`}>
-            <ListItem
-              key={question._id}
-              title={question.title}
-              user={'Hanen Wahabi'}
-              date={question.createAt}
-              likes={'4'}
-            />
-          </StyledLink>
+          <ListItem
+            key={questionId}
+            questionId={questionId}
+            title={question.title}
+            user={'Hanen Wahabi'}
+            date={question.createAt}
+            likes={'4'}
+          />
         );
       });
     }
@@ -67,17 +73,17 @@ const ListView = styled.div`
   flex: 3;
   flex-direction: column;
   max-width: 50%;
-`
+`;
 const GridView = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
   margin-top: 40;
-`
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-`
+`;
 
 /* const form = styled.`
 	display: flex;
