@@ -17,16 +17,16 @@ class Home extends Component {
       return <FontAwesomeIcon icon='spinner' spin style={{fontSize:'50px', alignItems:'center', margin:'0 auto', color:`${green}`}} />;
     } else {
       return this.props.data.questions.map(question => {
+				const questionId = question._id;
         return (
-          <StyledLink key={question._id} to={`/giveanswer/${question._id}`}>
-            <ListItem
-              key={question._id}
-              title={question.title}
-              user={'Hanen Wahabi'}
-              date={question.createAt}
-              likes={'4'}
-            />
-          </StyledLink>
+					<ListItem
+						key={questionId}
+						questionId={questionId}
+						title={question.title}
+						user={'Hanen Wahabi'}
+						date={question.createAt}
+						likes={'4'}
+					/>
         );
       });
     }
