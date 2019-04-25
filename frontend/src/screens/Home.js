@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { ListItem, SideList, Header, Footer } from '../components';
 import styled from 'styled-components';
 import { green } from '../resources/colors';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faSpinner);
 
 class Home extends Component {
   state = {
@@ -70,16 +73,16 @@ class Home extends Component {
       var all_questions = this.state.data ? this.state.data : this.props.data.questions;
       return all_questions.length > 0 ? (
         all_questions.map(question => {
+					const questionId = question._id;
           return (
-            <StyledLink key={question._id} to={`/giveanswer/${question._id}`}>
               <ListItem
-                key={question._id}
+								key={questionId}
+								questionId={questionId}
                 title={question.title}
                 user={question.user.name}
                 date={question.createAt}
                 likes={'4'}
               />
-            </StyledLink>
           );
         })
       ) : (
@@ -189,10 +192,6 @@ const GridView = styled.div`
   flex: 1;
   flex-direction: row;
   margin-top: 40;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
 `;
 
 /* const form = styled.`

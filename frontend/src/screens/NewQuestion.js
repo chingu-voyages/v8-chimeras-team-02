@@ -37,6 +37,10 @@ class NewQuestion extends Component {
 		this.setState({ question: e.target.value });
 	}
 
+  handleChangeDescription = e => {
+    this.setState({ title: e.target.question });
+  };
+
   render() {
     return (
       <div>
@@ -44,14 +48,14 @@ class NewQuestion extends Component {
         <GridView>
           <FormView>
             <form onSubmit={this.createQuestion}>
-              <NewQuestionForm
-                placeholder="Add a question title"
+              <NewQuestionFormTitle
+                placeholder="Add new question title here..."
                 value={this.state.title}
                 onChange={this.titleChange}
               />
               <br />
               <NewQuestionFormDescription
-                placeholder="Add new question description"
+                placeholder="Add new question description here..."
                 value={this.state.question}
                 onChange={this.questionChange}
               />
@@ -60,7 +64,6 @@ class NewQuestion extends Component {
             </form>
           </FormView>
         </GridView>
-
         <Footer />
       </div>
     );
@@ -117,7 +120,7 @@ const GridView = styled.div`
   justify-content: center;
 `;
 
-const NewQuestionForm = styled.textarea`
+const NewQuestionFormTitle = styled.textarea`
   width: 50vw;
   height: auto;
   margin: 0 auto;
@@ -130,19 +133,20 @@ const NewQuestionForm = styled.textarea`
 
 const NewQuestionFormDescription = styled.textarea`
   width: 50vw;
-  height: 100px;
+  height: auto;
   margin: 0 auto;
   box-shadow: 0px 0px 8px 4px gainsboro;
   border: 2px solid gainsboro;
   border-radius: 4px;
   resize: none;
   padding: 5px;
-`
+`;
 
 const AskBtn = styled.button`
   background-color: ${green};
   width: 100px;
   height: 36px;
+  margin: 5px 0 0 5px;
   align-items: center;
   font-size: 14px;
   color: white;

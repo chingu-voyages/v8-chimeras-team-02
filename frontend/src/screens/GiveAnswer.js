@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { green } from '../resources/colors';
-import { ListItem, Header, Footer } from '../components';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { CompleteItem, Answer, Header, Footer } from '../components';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
+
 
 library.add(faSpinner)
 
@@ -52,11 +54,12 @@ class GiveAnswer extends Component {
 
   renderQuestion() {
     if (this.props.data.loading) {
-      return <FontAwesomeIcon icon='spinner' spin style={{fontSize:'50px', alignItems:'center', margin:'0 auto', color:`${green}`}} />;
+      return <FontAwesomeIcon icon='spinner' spin style={{ fontSize: '50px', alignItems: 'center', margin: '0 auto', color: `${green}` }} />;
     } else {
       return (
-        <ListItem
+        <CompleteItem
           title={this.props.data.question.title}
+          question={this.props.data.question.question}
           user={'TheQuestionAsker'}
           date={'Just now'}
           likes={'0'}
@@ -69,9 +72,9 @@ class GiveAnswer extends Component {
     if (!this.props.data.loading && this.props.data.question.answers) {
       return this.props.data.question.answers.map(({ answer, _id }) => {
         return (
-          <ListItem
+          <Answer
             key={_id}
-            title={answer}
+            answer={answer}
             user={'TheAnswerGiver'}
             date={'10000 B.C.'}
             likes={'0'}
@@ -84,10 +87,10 @@ class GiveAnswer extends Component {
 
   render() {
     return (
-      <div style={container}>
+      <Container>
         <Header />
-        <div style={gridView}>
-          <div style={listview}>
+        <GridView>
+          <Listview>
             {/* Question */}
             {this.renderQuestion()}
 
@@ -96,18 +99,17 @@ class GiveAnswer extends Component {
 
             {/* Submit answer form */}
             <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
-            <form onSubmit={this.submitAnswer}>
-              <textarea style={textareaStyle} placeholder="Enter answer..." />
-              <br />
-              <button style={btn} type="submit">
+            <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
+              <TextareaStyle placeholder="Enter answer..." />
+              <Btn type="submit">
                 Answer
-              </button>
+              </Btn>
             </form>
-          </div>
-        </div>
+          </Listview>
+        </GridView>
 
         <Footer />
-      </div>
+      </Container>
     );
   }
 }
@@ -152,42 +154,42 @@ export default compose(
   graphql(DELETE_ANSWER, { name: 'delete_answer' })
 )(GiveAnswer);
 
-const container = {
-  color: '#7f7f7f',
-};
+const Container = styled.div`
+  color: #7f7f7f;
+`;
 
-const listview = {
-  display: 'flex',
-  flex: 3,
-  flexDirection: 'column',
-  maxWidth: '50%',
-};
-const gridView = {
-  display: 'flex',
-  flex: 1,
-  flexDirection: 'row',
-  marginTop: 40,
-  alignItems: 'center',
-  justifyContent: 'center',
-};
+const Listview = styled.div`
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  max-width: 50%;
+`;
+const GridView = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+`;
 
-const textareaStyle = {
-  width: '104%',
-  height: '100px',
-  margin: '0 auto',
-  boxShadow: '0px 0px 8px 4px gainsboro',
-  border: '2px solid gainsboro',
-  borderRadius: '4px',
-  resize: 'none',
-  padding: '5px',
-};
+const TextareaStyle = styled.textarea`
+  width: 140%;
+  height: 100px;
+  margin: 0 auto;
+  boxShadow: 0px 0px 8px 4px gainsboro;
+  border: 2px solid gainsboro;
+  borderRadius: 4px;
+  resize: none;
+  padding: 5px;
+`;
 
-const btn = {
-  backgroundColor: green,
-  width: 100,
-  height: 50,
-  alignItems: 'center',
-  fontSize: 17,
-  color: 'white',
-  border: '0px',
-};
+const Btn = styled.button`
+  background-color: green;
+  width: 100px;
+  height: 50px;
+  align-items: center;
+  font-size: 17;
+  color: white;
+  border: 0px;
+`;
