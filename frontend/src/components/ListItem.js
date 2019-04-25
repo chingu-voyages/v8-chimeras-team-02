@@ -22,7 +22,6 @@ export default class ListItem extends Component {
           <div style={{ marginLeft: 15, float: 'left', width:'85%' }}>
             <Username>{this.props.user}</Username>
             <Date>{'published on ' + this.props.date.split('').slice(0, 10).join('')}</Date>
-						{console.log(this.props.date.split('').slice(0, 10).join(''))}
           </div>
 
           <div style={{ marginLeft: '15px', float: 'right', width:'15%' }}>
