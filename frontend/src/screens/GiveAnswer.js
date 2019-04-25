@@ -74,7 +74,7 @@ class GiveAnswer extends Component {
         return (
           <Answer
             key={_id}
-            title={answer}
+            answer={answer}
             user={'TheAnswerGiver'}
             date={'10000 B.C.'}
             likes={'0'}
