@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { green } from '../resources/colors';
-import { CompleteItem, Answer, SideList, Header, Footer } from '../components';
+import { CompleteItem, Answer, Header, Footer } from '../components';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
