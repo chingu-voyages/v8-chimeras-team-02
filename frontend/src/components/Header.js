@@ -9,15 +9,24 @@ import Modal from 'react-modal';
 import Avatar from './Avatar';
 import LogIn from '../screens/LogIn';
 import SignUp from '../screens/SignUp';
+import { getToken, setToken, resetToken } from '../utils';
+import { ApolloConsumer } from 'react-apollo';
 
 class Header extends Component {
   state = {
+    rememToken: null,
     name: '',
     email: '',
     password: '',
     error: '',
-    openLogIn: false
+    openLogIn: false,
   };
+
+  componentWillMount() {
+    getToken().then(val => {
+      this.setState({ rememToken: val });
+    });
+  }
 
   onSignup() {
     const { name, email, password } = this.state;
@@ -25,8 +34,9 @@ class Header extends Component {
       .signup({
         variables: { name, email, password },
       })
-      .then(data => {
-        console.log(JSON.stringify(data));
+      .then(({ data }) => {
+        setToken(data.signup.rememberToken);
+        this.setState({ rememToken: data.signup.rememberToken });
         this.setState({ openSignup: false });
       })
       .catch(err => {
@@ -42,58 +52,73 @@ class Header extends Component {
     } else {
       this.setState({ error: '' });
       this.props
-        .signup({
+        .login({
           variables: { email, password },
         })
-        .then(data => {
-          console.log(JSON.stringify(data));
+        .then(({ data }) => {
+          setToken(data.login.rememberToken);
+          this.setState({ rememToken: data.login.rememberToken });
           this.setState({ openLogIn: false });
         })
         .catch(error => {
-          console.log(error);
           this.setState({ error: 'Wrong email/password ' });
         });
     }
   }
 
-  onLogout() {
-    //Hannen code here
+  onLogout(client) {
+    client
+      .query({
+        query: LOGOUT,
+        variables: {},
+      })
+      .then(data => {
+        this.setState({ rememToken: null });
+        resetToken();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
+    const { rememToken } = this.state;
     return (
       <HeaderContainer>
-        <StyledLink exact='true' to={'/'}>
+        <StyledLink exact="true" to={'/'}>
           <Logo />
         </StyledLink>
-        <SearchBar />
-        <StyledLink to={'/newquestion'}>
-          <Section title="Ask" />
-        </StyledLink>
-        <Section
-          title="Log in"
-          //onClick={() => this.setState({ openLogIn: true })}
-        />
-        <Dropdown>
-          <DropdownBtn>
-            Sign up
-          </DropdownBtn>
-          <DropdownContent>
-            <SignUp
-              handleName={event => this.setState({ name: event.target.value })}
-              handleEmail={event => this.setState({ email: event.target.value })}
-              handlePassword={event =>
-                this.setState({ password: event.target.value })
-              }
-              onClick={() => {
-                this.onSignup();
-              }}
-              error={this.state.error}
-              onClose={() => this.setState({ openSignup: false })}
-            />
-          </DropdownContent>
-        </Dropdown>
-        <Avatar />
+        <SearchBar onChangeText={this.props.onChangeText} onSearch={this.props.onSearch} />
+        {rememToken ? (
+          <StyledLink to={'/newquestion'}>
+            <Section title="Ask" />
+          </StyledLink>
+        ) : null}
+        {!rememToken ? (
+          <div style={Holder}>
+            <Section title="Log in" onClick={() => this.setState({ openLogIn: true })} />
+            <Dropdown>
+              <DropdownBtn>Sign up</DropdownBtn>
+              <DropdownContent>
+                <SignUp
+                  handleName={event => this.setState({ name: event.target.value })}
+                  handleEmail={event => this.setState({ email: event.target.value })}
+                  handlePassword={event => this.setState({ password: event.target.value })}
+                  onClick={() => {
+                    this.onSignup();
+                  }}
+                  error={this.state.error}
+                  onClose={() => this.setState({ openSignup: false })}
+                />
+              </DropdownContent>
+            </Dropdown>
+          </div>
+        ) : (
+          <ApolloConsumer>
+            {client => <Avatar onClick={() => this.onLogout(client)} />}
+          </ApolloConsumer>
+        )}
+
         {/* For LogIn */}
         <Modal
           style={{
@@ -114,14 +139,42 @@ class Header extends Component {
         >
           <LogIn
             handleEmail={event => this.setState({ email: event.target.value })}
-            handlePassword={event =>
-              this.setState({ password: event.target.value })
-            }
+            handlePassword={event => this.setState({ password: event.target.value })}
             onClick={() => this.onLogIn()}
             error={this.state.error}
             onClose={() => this.setState({ openLogIn: false })}
           />
         </Modal>
+
+        {/* For Signup */}
+        {/* <Modal
+          style={{
+            overlay: {
+              backgroundColor: 'rgba(255,255,255,.2)',
+              alignItems: 'center',
+              justifyContent: 'center',
+            },
+            content: {
+              backgroundColor: 'transparent',
+              borderWidth: 0,
+              padding: 50,
+            },
+          }}
+          isOpen={this.state.openSignup}
+          onRequestClose={() => this.setState({ openSignup: false })}
+          contentLabel="Modal with image"
+        >
+          <SignUp
+            handleName={event => this.setState({ name: event.target.value })}
+            handleEmail={event => this.setState({ email: event.target.value })}
+            handlePassword={event => this.setState({ password: event.target.value })}
+            onClick={() => {
+              this.onSignup();
+            }}
+            error={this.state.error}
+            onClose={() => this.setState({ openSignup: false })}
+          />
+        </Modal> */}
       </HeaderContainer>
     );
   }
@@ -144,6 +197,14 @@ const LOGIN = gql`
       name
       email
       rememberToken
+    }
+  }
+`;
+
+const LOGOUT = gql`
+  {
+    logOut {
+      _id
     }
   }
 `;
@@ -174,9 +235,9 @@ const DropdownContent = styled.div`
   right: 0;
   background-color: #fff;
   min-width: 200px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-`
+`;
 
 const Dropdown = styled.div`
   position: relative;
@@ -185,7 +246,7 @@ const Dropdown = styled.div`
   &:hover ${DropdownContent} {
     display: block;
   }
-`
+`;
 
 const DropdownBtn = styled.button`
   border: 1px solid ${green};
@@ -198,7 +259,7 @@ const DropdownBtn = styled.button`
   &:hover {
     cursor: pointer;
   }
-`
+`;
 
 /*const DropdownLink = styled.a`
   color: black;
@@ -210,3 +271,8 @@ const DropdownBtn = styled.button`
     background-color: #fefefe;
   }
 `*/
+
+const Holder = {
+  display: 'flex',
+  flexDirection: 'row',
+};
