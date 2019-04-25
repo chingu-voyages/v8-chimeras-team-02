@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { green, purple, grey } from '../resources/colors';
 import { user } from '../resources/images';
 import styled from 'styled-components';
@@ -12,14 +13,16 @@ export default class ListItem extends Component {
   render() {
     return (
       <ListContainer>
-        <Title>{this.props.title}</Title>
-
+				<StyledLink key={this.props.questionId} to={`/giveanswer/${this.props.questionId}`}>
+        	<Title>{this.props.title}</Title>
+				</StyledLink>
         <Item>
           <Avatar src={user} alt={user} />
 
           <div style={{ marginLeft: 15, float: 'left', width:'85%' }}>
             <Username>{this.props.user}</Username>
-            <Date>{'published on ' + this.props.date}</Date>
+            <Date>{'published on ' + this.props.date.split('').slice(0, 10).join('')}</Date>
+						{console.log(this.props.date.split('').slice(0, 10).join(''))}
           </div>
 
           <div style={{ marginLeft: '15px', float: 'right', width:'15%' }}>
@@ -118,4 +121,8 @@ const HeartFill = styled.div`
   &:hover {
     color: ${purple}
   }
+`
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `
