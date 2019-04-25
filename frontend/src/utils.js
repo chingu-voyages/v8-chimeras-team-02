@@ -6,12 +6,11 @@ export const getToken = async () => {
   if (token) {
     return Promise.resolve(token);
   }
-
   token = await localStorage.getItem(AUTH_TOKEN);
   return token;
 };
 
-export const setToken = (newToken) => {
+export const setToken = newToken => {
   token = newToken;
   return localStorage.setItem(AUTH_TOKEN, newToken);
 };

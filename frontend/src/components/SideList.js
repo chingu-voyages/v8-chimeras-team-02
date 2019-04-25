@@ -1,46 +1,44 @@
-import React, { Component } from "react";
-import { green, grey } from "../resources/colors";
-import {
-  myq,
-  unsolved,
-  unsolved2,
-  solved2,
-  solved,
-  myq2,
-} from "../resources/images";
+import React, { Component } from 'react';
+import { green, grey } from '../resources/colors';
+import { myq, unsolved, unsolved2, solved2, solved, myq2 } from '../resources/images';
 import styled from 'styled-components';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faCheckCircle, faTimesCircle, faQuestionCircle)
-
+library.add(faCheckCircle, faTimesCircle, faQuestionCircle);
 
 export default class SideList extends Component {
   state = {
-    selected: "",
+    selected: '',
   };
   render() {
     const { selected } = this.state;
+    const { selectMyQ, selectSolved, selectUnsolved } = this.props;
     return (
       <SideListDiv>
         <SideItem
-          onClick={() => this.setState({ selected: "Unsolved" })}
-          style={{backgroundColor: selected === "Unsolved"
-                  ? "rgba(47, 224, 144, .2)"
-                  : "transparent",
-                  width: '80%',
-                  border: '1px solid transparent',
-                  borderRadius: '15px',
-                  padding: '0 10px',
-                  alignItems: 'center'
-            }}
+          onClick={() => {
+            selectUnsolved();
+            this.setState({ selected: 'Unsolved' });
+          }}
+          style={{
+            backgroundColor: selected === 'Unsolved' ? 'rgba(47, 224, 144, .2)' : 'transparent',
+            width: '80%',
+            border: '1px solid transparent',
+            borderRadius: '15px',
+            padding: '0 10px',
+            alignItems: 'center',
+          }}
         >
           {/*<Icon
             src={selected === "Unsolved" ? unsolved2 : unsolved}
             alt={unsolved}
           />*/}
-          <FontAwesomeIcon icon='times-circle' style={{fontSize:'25px', color: selected === "Unsolved" ? green : 'black'}} />
+          <FontAwesomeIcon
+            icon="times-circle"
+            style={{ fontSize: '25px', color: selected === 'Unsolved' ? green : 'black' }}
+          />
           <p
             style={{
               fontSize: 14,
@@ -48,30 +46,35 @@ export default class SideList extends Component {
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
-              color: selected === "Unsolved" ? green : grey,
+              color: selected === 'Unsolved' ? green : grey,
             }}
           >
-            {"Unsolved"}
+            {'Unsolved'}
           </p>
         </SideItem>
 
         <SideItem
-          onClick={() => this.setState({ selected: "Solved" })}
-          style={{backgroundColor: selected === "Solved"
-                  ? "rgba(47, 224, 144, .2)"
-                  : "transparent",
-                  width: '80%',
-                  border: '1px solid transparent',
-                  borderRadius: '15px',
-                  padding: '0 10px',
-                  alignItems: 'center'
-            }}
+          onClick={() => {
+            selectSolved();
+            this.setState({ selected: 'Solved' });
+          }}
+          style={{
+            backgroundColor: selected === 'Solved' ? 'rgba(47, 224, 144, .2)' : 'transparent',
+            width: '80%',
+            border: '1px solid transparent',
+            borderRadius: '15px',
+            padding: '0 10px',
+            alignItems: 'center',
+          }}
         >
           {/*<Icon
             src={selected === "Solved" ? solved2 : solved}
             alt={solved}
           />*/}
-          <FontAwesomeIcon icon='check-circle' style={{fontSize:'25px', color: selected === "Solved" ? green : 'black'}} />
+          <FontAwesomeIcon
+            icon="check-circle"
+            style={{ fontSize: '25px', color: selected === 'Solved' ? green : 'black' }}
+          />
           <p
             style={{
               fontSize: 14,
@@ -79,30 +82,35 @@ export default class SideList extends Component {
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
-              color: selected === "Solved" ? green : grey,
+              color: selected === 'Solved' ? green : grey,
             }}
           >
-            {"Solved"}
+            {'Solved'}
           </p>
         </SideItem>
 
         <SideItem
-          onClick={() => this.setState({ selected: "My Questions" })}
-          style={{backgroundColor: selected === "My Questions"
-                  ? "rgba(47, 224, 144, .2)"
-                  : "transparent",
-                  width: '80%',
-                  border: '1px solid transparent',
-                  borderRadius: '15px',
-                  padding: '0 10px',
-                  alignItems: 'center'
-            }}
+          onClick={() => {
+            selectMyQ();
+            this.setState({ selected: 'My Questions' });
+          }}
+          style={{
+            backgroundColor: selected === 'My Questions' ? 'rgba(47, 224, 144, .2)' : 'transparent',
+            width: '80%',
+            border: '1px solid transparent',
+            borderRadius: '15px',
+            padding: '0 10px',
+            alignItems: 'center',
+          }}
         >
           {/*<Icon
             src={selected === "My Questions" ? myq2 : myq}
             alt={myq}
           />*/}
-          <FontAwesomeIcon icon='question-circle' style={{fontSize:'25px', color: selected === "My Questions" ? green : 'black'}} />
+          <FontAwesomeIcon
+            icon="question-circle"
+            style={{ fontSize: '25px', color: selected === 'My Questions' ? green : 'black' }}
+          />
           <p
             style={{
               fontSize: 14,
@@ -110,10 +118,10 @@ export default class SideList extends Component {
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
-              color: selected === "My Questions" ? green : grey,
+              color: selected === 'My Questions' ? green : grey,
             }}
           >
-            {"My Questions"}
+            {'My Questions'}
           </p>
         </SideItem>
       </SideListDiv>
