@@ -13,7 +13,7 @@ const cache = new InMemoryCache({
 });
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3003/graphql',
+  uri: 'https://chinguflow.herokuapp.com/graphql',
   request: async operation => {
     const token = await getToken();
     operation.setContext({
