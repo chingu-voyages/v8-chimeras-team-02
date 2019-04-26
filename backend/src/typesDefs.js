@@ -39,7 +39,7 @@ const typeDefs = [
       createAt: Date!
       updatedAt: Date!
       user: User!
-      iscorrect: Boolean!
+      iscorrect: Boolean
     }
     
     type Query {
