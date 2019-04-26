@@ -1,77 +1,164 @@
 import React, { Component } from 'react';
-import { green, blue } from "../resources/colors";
+import { green, grey } from '../resources/colors';
 import { myq, unsolved, unsolved2, solved2, solved, myq2 } from '../resources/images';
+import styled from 'styled-components';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faCheckCircle, faTimesCircle, faQuestionCircle);
 
 export default class SideList extends Component {
-    state = {
-        selected: ""
-    }
-    render() {
-        const { selected } = this.state;
-        return (
-            <div style={sideList}>
-                <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-                <button style={sideItem} onClick={() => this.setState({ selected: "Unsolved" })}>
-                    <img src={selected === "Unsolved" ? unsolved2 : unsolved} style={icon} alt={unsolved} />
-                    <p style={{
-                        fontSize: 14, fontFamily: 'Poppins', marginTop: 0,
-                        borderRadius: 8, paddingLeft: 5, paddingRight: 5,
-                        color: selected === "Unsolved" ? green : 'white',
-                        backgroundColor: selected === "Unsolved" ? 'rgba(47, 224, 144, .2)' : 'transparent',
-                    }}>{"Unsolved"}</p>
-                </button>
+  state = {
+    selected: '',
+  };
+  render() {
+    const { selected } = this.state;
+    const { selectMyQ, selectSolved, selectUnsolved } = this.props;
+    return (
+      <SideListDiv>
+        <SideItem
+          onClick={() => {
+            selectUnsolved();
+            this.setState({ selected: 'Unsolved' });
+          }}
+          style={{
+            backgroundColor: selected === 'Unsolved' ? 'rgba(47, 224, 144, .2)' : 'transparent',
+            width: '80%',
+            border: '1px solid transparent',
+            borderRadius: '15px',
+            padding: '0 10px',
+            alignItems: 'center',
+          }}
+        >
+          {/*<Icon
+            src={selected === "Unsolved" ? unsolved2 : unsolved}
+            alt={unsolved}
+          />*/}
+          <FontAwesomeIcon
+            icon="times-circle"
+            style={{ fontSize: '25px', color: selected === 'Unsolved' ? green : 'black' }}
+          />
+          <p
+            style={{
+              fontSize: 14,
+              marginTop: 0,
+              borderRadius: 8,
+              paddingLeft: 5,
+              paddingRight: 5,
+              color: selected === 'Unsolved' ? green : grey,
+            }}
+          >
+            {'Unsolved'}
+          </p>
+        </SideItem>
 
-                <button style={sideItem} onClick={() => this.setState({ selected: "Solved" })}>
-                    <img src={selected === "Solved" ? solved2 : solved} style={icon} alt={solved} />
-                    <p style={{
-                        fontSize: 14, fontFamily: 'Poppins', marginTop: 0,
-                        borderRadius: 8, paddingLeft: 5, paddingRight: 5,
-                        color: selected === "Solved" ? green : 'white',
-                        backgroundColor: selected === "Solved" ? 'rgba(47, 224, 144, .2)' : 'transparent',
+        <SideItem
+          onClick={() => {
+            selectSolved();
+            this.setState({ selected: 'Solved' });
+          }}
+          style={{
+            backgroundColor: selected === 'Solved' ? 'rgba(47, 224, 144, .2)' : 'transparent',
+            width: '80%',
+            border: '1px solid transparent',
+            borderRadius: '15px',
+            padding: '0 10px',
+            alignItems: 'center',
+          }}
+        >
+          {/*<Icon
+            src={selected === "Solved" ? solved2 : solved}
+            alt={solved}
+          />*/}
+          <FontAwesomeIcon
+            icon="check-circle"
+            style={{ fontSize: '25px', color: selected === 'Solved' ? green : 'black' }}
+          />
+          <p
+            style={{
+              fontSize: 14,
+              marginTop: 0,
+              borderRadius: 8,
+              paddingLeft: 5,
+              paddingRight: 5,
+              color: selected === 'Solved' ? green : grey,
+            }}
+          >
+            {'Solved'}
+          </p>
+        </SideItem>
 
-                    }}>{"Solved"}</p>
-                </button>
-
-                <button style={sideItem} onClick={() => this.setState({ selected: "My Questions" })} >
-                    <img src={selected === "My Questions" ? myq2 : myq} style={icon} alt={myq} />
-                    <p style={{
-                        fontSize: 14, fontFamily: 'Poppins', marginTop: 0,
-                        borderRadius: 8, paddingLeft: 5, paddingRight: 5,
-                        color: selected === "My Questions" ? green : 'white',
-                        backgroundColor: selected === "My Questions" ? 'rgba(47, 224, 144, .2)' : 'transparent',
-
-                    }}>{"My Questions"}</p>
-                </button>
-
-            </div>
-
-        )
-    }
+        <SideItem
+          onClick={() => {
+            selectMyQ();
+            this.setState({ selected: 'My Questions' });
+          }}
+          style={{
+            backgroundColor: selected === 'My Questions' ? 'rgba(47, 224, 144, .2)' : 'transparent',
+            width: '80%',
+            border: '1px solid transparent',
+            borderRadius: '15px',
+            padding: '0 10px',
+            alignItems: 'center',
+          }}
+        >
+          {/*<Icon
+            src={selected === "My Questions" ? myq2 : myq}
+            alt={myq}
+          />*/}
+          <FontAwesomeIcon
+            icon="question-circle"
+            style={{ fontSize: '25px', color: selected === 'My Questions' ? green : 'black' }}
+          />
+          <p
+            style={{
+              fontSize: 14,
+              marginTop: 0,
+              borderRadius: 8,
+              paddingLeft: 5,
+              paddingRight: 5,
+              color: selected === 'My Questions' ? green : grey,
+            }}
+          >
+            {'My Questions'}
+          </p>
+        </SideItem>
+      </SideListDiv>
+    );
+  }
 }
-const sideList = {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    marginTop: 40,
-    marginLeft: 25,
 
-}
-const sideItem = {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'row',
-    marginLeft: 30,
-    paddingBottom: 20,
-    backgroundColor: 'transparent',
-    border: '0px',
-    outline: 0
-}
+const SideListDiv = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-top: 40px;
+  margin-left: 25px;
+  align-self: flex-start;
+  max-width: 30%;
+`;
 
-const icon = {
-    width: 20,
-    height: 20,
-    resizeMode: 'contain',
-    marginRight: 10,
-    backgroundColor: blue
-}
+const SideItem = styled.button`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  margin-left: 30px;
+  background-color: transparent;
+  border: 0px;
+  outline: 0px;
+  margin-bottom: 15px;
 
+  transition: all .2s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
+const Icon = styled.img`
+  width: 20px;
+  height: 20px;
+  resize-mode: contain;
+  margin-right: 10px;
+  background-color: black;
+`;

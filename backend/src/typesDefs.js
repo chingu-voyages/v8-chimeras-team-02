@@ -1,5 +1,5 @@
-
-const typeDefs = [`
+const typeDefs = [
+  `
 
     scalar Date
 
@@ -39,10 +39,13 @@ const typeDefs = [`
       createAt: Date!
       updatedAt: Date!
       user: User!
+      iscorrect: Boolean
     }
     
     type Query {
-      Question(_id: ID): Question
+      question(_id: ID!): Question
+      questions(number: String): [Question]
+      answer(question_id: ID!, _id: ID!): Answer
       logOut:User
       currentUser:User
     }
@@ -54,8 +57,8 @@ const typeDefs = [`
         title: String!, 
         question: String!, 
         user_id: ID!, 
-        tags: [String],
-        answers_ids: [ID]): Question
+        tags: [String]!,
+        answers_ids: [ID]!): Question
 
       updateQuestion(
         _id: ID!,
@@ -67,11 +70,32 @@ const typeDefs = [`
         answers_ids: [ID]!): Question
 
       deleteQuestion(_id: ID!): Question
+
+      createAnswer( 
+        question_id: ID!,
+        answer: String!, 
+        user_id: ID!): Answer
+
+      updateAnswer(
+        question_id: ID!, 
+        _id: ID!, 
+        newAnswer: String!): Answer
+
+      deleteAnswer( 
+        question_id: ID!,
+         _id: ID!): Answer
+
+      searchQuestion(
+          keywords: String!,
+          solved:Boolean,
+          unsolved:Boolean,
+          userId: ID): [Question]
     }
 
     schema {
       query: Query
       mutation: Mutation
     }
-  `];
+  `,
+];
 export default typeDefs;
