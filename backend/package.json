@@ -27,7 +27,9 @@
     "http": "0.0.0",
     "jsonwebtoken": "^8.5.0",
     "mongodb": "^3.1.13",
-    "nodemailer": "^5.1.1"
+    "nodemailer": "^5.1.1",
+    "babel-cli": "^6.26.0",
+    "nodemon": "^1.18.7"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
