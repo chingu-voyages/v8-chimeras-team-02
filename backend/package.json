@@ -4,7 +4,7 @@
   "description": "The backend of Chinguflow",
   "main": "index.js.js",
   "engines": {
-    "node": "10.3.0"
+    "node": "11.3.0"
   },
   "scripts": {
     "start": "nodemon --exec babel-node index.js",
