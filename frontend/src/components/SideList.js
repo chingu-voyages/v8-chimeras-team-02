@@ -148,6 +148,11 @@ const SideItem = styled.button`
   border: 0px;
   outline: 0px;
   margin-bottom: 15px;
+
+  transition: all .2s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const Icon = styled.img`
