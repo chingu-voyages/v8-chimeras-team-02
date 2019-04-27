@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { green, purple, grey } from '../resources/colors';
+import { green, purple } from '../resources/colors';
 import { user } from '../resources/images';
 import styled from 'styled-components';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -58,7 +58,7 @@ const ListContainer = styled.div`
   box-shadow: 0px 0px 8px 4px gainsboro;
   padding: 0 15px 15px 20px;
   margin-bottom: 20px;
-`;
+`
 
 const Item = styled.div`
   display: flex;
@@ -67,31 +67,21 @@ const Item = styled.div`
   max-width: 100%;
   margin-top: -15px;
   align-items: center;
-`;
-
-/*const Like = styled.img`
-  height: 20px;
-  width: 20px;
-  resize-mode: contain;
-  margin-top: 12px;
-  margin-right: 8px;
-  float: right;
-`*/
+`
 
 const Likes = styled.p`
     font-size: 12px;
     color: ${purple};
     margin-top: 0;
     margin-bottom: 0;
-`;
+`
 
 const Title = styled.p`
   display: flex;
   font-size: 20px;
-  /*color: #7f7f7f;*/
   color: black;
   justify-content: flex-start;
-`;
+`
 
 const Date = styled.p`
     font-size: 12px;
@@ -100,14 +90,14 @@ const Date = styled.p`
     margin-bottom: 0;
     padding-right: 5px;
     text-align: left;
-`;
+`
 
 const Username = styled.p`
     font-size: 12px;
     color: #000;
     text-align: left;
     margin: 5px 0;
-`;
+`
 
 const Avatar = styled.img`
   height: 35px;
@@ -116,9 +106,8 @@ const Avatar = styled.img`
   border: 30px solid;
   border-color: ${green};
   border-width: 6px;
-  resize-mode: cover;
   background-color: ${green};
-`;
+`
 
 const HeartFill = styled.div`
   color: white;
@@ -126,8 +115,8 @@ const HeartFill = styled.div`
   &:hover {
     color: ${purple};
   }
-`;
+`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-`;
+`

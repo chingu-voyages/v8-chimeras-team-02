@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { green, blue } from '../resources/colors';
-import { unsolved2 } from '../resources/images';
+import { green } from '../resources/colors';
 import styled from 'styled-components';
 
 export default class LogIn extends Component {
@@ -35,8 +34,8 @@ export default class LogIn extends Component {
 const Container = styled.div`
 	display: flex;
 	flex: 1;
-	backgroundColor: transparent;
-	justifyContent: center;
+	background-color: transparent;
+	justify-content: center;
 `
 
 const Form = styled.div`
@@ -76,13 +75,7 @@ const Button = styled.input`
 
 const Error = styled.h3`
 	color: red;
-	fontSize: 14px;
-	marginTop: 25px;
-	textAlign: center;
+	font-size: 14px;
+	margin-top: 25px;
+	text-align: center;
 `
-/*
-const Close = styled.img`
-  width: 25px;
-  height: 25px;
-  resize-mode: contain;
-`;*/

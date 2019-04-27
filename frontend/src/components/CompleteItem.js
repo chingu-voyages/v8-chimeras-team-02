@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { green, purple } from "../resources/colors";
-import { user, heart } from "../resources/images";
+import { user } from "../resources/images";
 import styled from 'styled-components';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -50,7 +50,7 @@ const CompleteItemContainer = styled.div`
    box-shadow: 0px 0px 8px 4px gainsboro;
    padding: 0 20px 10px 20px;
    margin-bottom: 20px;
-`;
+`
 
 const Item = styled.div`
     display: flex;
@@ -59,23 +59,14 @@ const Item = styled.div`
     width: 100%;
     margin-top: -15px;
     align-items: center;
-`;
-
-const Like = styled.img`
-    height: 20px;
-    width: 20px;
-    resize-mode: contain;
-    margin-top: 5px;
-    margin-right: 8px;
-    float: right;
-`;
+`
 
 const Likes = styled.p`
     font-size: 12px;
     color: ${purple};
     margin-top: 0;
     margin-bottom: 15px;
-`;
+`
 
 const Title = styled.p`
     display: flex;
@@ -83,7 +74,7 @@ const Title = styled.p`
     color: #000;
     justify-content: flex-start;
     margin-bottom: 0;
-`;
+`
 
 const Body = styled.p`
     display: flex;
@@ -92,7 +83,7 @@ const Body = styled.p`
     justify-content: flex-start;
     padding-top: 15px;
     margin-bottom: 20px;
-`;
+`
 
 const Date = styled.p`
     font-size: 12px;
@@ -100,14 +91,14 @@ const Date = styled.p`
     margin-top: 0;
     margin-bottom: 0;
     padding-right: 5px;
-`;
+`
 
 const Username = styled.p`
     font-size: 12px;
     color: #000;
     text-align: left;
     margin: 5px 0;
-`;
+`
 
 const Avatar = styled.img`
     height: 30px;
@@ -116,9 +107,8 @@ const Avatar = styled.img`
     border: 30px solid;
     border-color: ${green};
     border-width: 6px;
-    resize-mode: cover;
     background-color: ${green};
-`;
+`
 
 const HeartFill = styled.div`
   color: white;
@@ -127,4 +117,4 @@ const HeartFill = styled.div`
   &:hover {
     color: ${purple};
   }
-`;
+`

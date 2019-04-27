@@ -109,7 +109,7 @@ const FormView = styled.div`
   display: flex;
   flex: 3;
   justify-content: center;
-`;
+`
 
 const GridView = styled.div`
   display: flex;
@@ -118,7 +118,7 @@ const GridView = styled.div`
   margin-top: 40;
   color: white;
   justify-content: center;
-`;
+`
 
 const NewQuestionFormTitle = styled.textarea`
   width: 50vw;
@@ -129,7 +129,7 @@ const NewQuestionFormTitle = styled.textarea`
   border-radius: 4px;
   resize: none;
   padding: 5px;
-`;
+`
 
 const NewQuestionFormDescription = styled.textarea`
   width: 50vw;
@@ -141,7 +141,7 @@ const NewQuestionFormDescription = styled.textarea`
   border-radius: 4px;
   resize: none;
   padding: 5px;
-`;
+`
 
 const AskBtn = styled.button`
   background-color: ${green};
@@ -153,4 +153,4 @@ const AskBtn = styled.button`
   color: white;
   border: 0px;
   float: right;
-`;
+`

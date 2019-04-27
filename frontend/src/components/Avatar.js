@@ -27,14 +27,16 @@ const DropdownContent = styled.div`
   align-items: right;
   justify-content: right;
   z-index: 1;
-`;
+`
+
 const AvatarContainer = styled.div`
   position: relative;
   display: inline-block;
+
   &:hover ${DropdownContent} {
     display: block;
   }
-`;
+`
 
 const AvatarImg = styled.img`
   height: auto;
@@ -42,22 +44,22 @@ const AvatarImg = styled.img`
   border-radius: 40px;
   border: 30px solid #2fe090;
   border-width: 2px;
-  resize-mode: cover;
   margin-right: 15px;
   margin-left: 1.4vw;
   background-color: ${green};
   margin-top: 5px;
+
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 const Text = styled.h3`
   color: black;
   padding: 12px 16px;
   display: block;
   font-size: 18;
-`;
+`
 
 const Button = styled.input`
   background-color: #2fe090;
@@ -69,7 +71,7 @@ const Button = styled.input`
   font-family: Poppins;
   border: 0px;
   margin-bottom: 15px;
-`;
+`
 
 // MISSING:
 // .dropdown:hover .dropdownContent {display: block;}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { SearchBar, Section, Logo } from '../components';
-import { blue, green } from '../resources/colors';
+import { green } from '../resources/colors';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import Avatar from './Avatar';
@@ -169,17 +169,16 @@ export default compose(
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
-  /*background: ${blue};*/
   height: 85px;
   align-items: center;
   border-bottom: 1px solid #efebeb;
   margin-bottom: 20px;
   padding-right: 20px;
-`;
+`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-`;
+`
 
 /* Dropdown | Hover SignUp */
 const DropdownContent = styled.div`
@@ -190,7 +189,7 @@ const DropdownContent = styled.div`
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-`;
+`
 
 const Dropdown = styled.div`
   position: relative;
@@ -199,7 +198,7 @@ const Dropdown = styled.div`
   &:hover ${DropdownContent} {
     display: block;
   }
-`;
+`
 
 const DropdownBtn = styled.button`
   border: 1px solid ${green};
@@ -212,7 +211,7 @@ const DropdownBtn = styled.button`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 const DropdownBtnTwo = styled.button`
   border: none;
@@ -224,20 +223,9 @@ const DropdownBtnTwo = styled.button`
   &:hover {
     cursor: pointer;
   }
-`;
-
-/*const DropdownLink = styled.a`
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-
-  &:hover {
-    background-color: #fefefe;
-  }
-`*/
+`
 
 const Holder = {
   display: 'flex',
   flexDirection: 'row',
-};
+}
