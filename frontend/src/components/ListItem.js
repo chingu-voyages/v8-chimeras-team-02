@@ -19,7 +19,7 @@ export default class ListItem extends Component {
         <Item>
           <Avatar src={user} alt={user} />
 
-          <div style={{ marginLeft: 15, float: 'left', width: '85%' }}>
+          <div style={{ marginLeft: 15, width:'70%' }}>
             <Username>{this.props.user}</Username>
             <Date>
               {'published on ' +
@@ -30,7 +30,7 @@ export default class ListItem extends Component {
             </Date>
           </div>
 
-          <div style={{ marginLeft: '15px', float: 'right', width: '15%' }}>
+          <div style={{ right: 0, width: '30%', textAlign:'right' }}>
             <HeartFill>
               <FontAwesomeIcon
                 icon="heart"
@@ -79,8 +79,10 @@ const Item = styled.div`
 `*/
 
 const Likes = styled.p`
-  font-size: 14px;
-  color: ${purple};
+    font-size: 12px;
+    color: ${purple};
+    margin-top: 0;
+    margin-bottom: 0;
 `;
 
 const Title = styled.p`
@@ -92,18 +94,20 @@ const Title = styled.p`
 `;
 
 const Date = styled.p`
-  font-size: 12px;
-  color: ${grey};
-  margin-top: 0px;
-  padding-right: 5px;
-  text-align: left;
+    font-size: 12px;
+    color: #7f7f7f;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-right: 5px;
+    text-align: left;
 `;
 
 const Username = styled.p`
-  font-size: 14px;
-  color: black;
-  text-align: left;
-`
+    font-size: 12px;
+    color: #000;
+    text-align: left;
+    margin: 5px 0;
+`;
 
 const Avatar = styled.img`
   height: 35px;
