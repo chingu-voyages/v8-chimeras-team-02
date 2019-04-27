@@ -12,18 +12,20 @@ export default class CompleteItem extends Component {
 
                 <Body>{this.props.question}</Body>
 
+                <hr style={{width:'100%', marginRight: '40px', color: '#7f7f7f'}} />
+
                 <Item>
                     <Avatar src={user} alt={user} />
 
-                    <div style={{ marginLeft: 15 }}>
+                    <div style={{ marginLeft: 15, width:'70%' }}>
                         <Username>{this.props.user}</Username>
                         <Date>{"published on " + this.props.date}</Date>
                     </div>
 
-                    <div style={{ marginLeft: '15%' }}>
+                    <div style={{ right: 0, width: '30%', textAlign:'right' }}>
                         <div>
                             <Like src={heart} alt={heart} />
-                            <p style={{ width: '100%', height: '20px' }}></p>
+                            <p style={{ height: '15px' }}></p>
                         </div>
                         <Likes>{this.props.likes + ' likes '}</Likes>
                     </div>
@@ -38,7 +40,7 @@ const CompleteItemContainer = styled.div`
    flex-direction: column;
    width: 100%;
    box-shadow: 0px 0px 8px 4px gainsboro;
-   padding: 0 15px 15px 15%;
+   padding: 0 20px 10px 20px;
    margin-bottom: 20px;
 `;
 
@@ -46,7 +48,7 @@ const Item = styled.div`
     display: flex;
     flex-direction: row;
     height: 80px;
-    max-width: 100%;
+    width: 100%;
     margin-top: -15px;
     align-items: center;
 `;
@@ -55,48 +57,53 @@ const Like = styled.img`
     height: 20px;
     width: 20px;
     resize-mode: contain;
-    margin-top: 12px;
+    margin-top: 5px;
     margin-right: 8px;
     float: right;
 `;
 
 const Likes = styled.p`
-    font-size: 14px;
+    font-size: 12px;
     color: ${purple};
+    margin-top: 0;
+    margin-bottom: 15px;
 `;
 
 const Title = styled.p`
     display: flex;
     font-size: 20px;
-    color: #7f7f7f;
+    color: #000;
     justify-content: flex-start;
-    padding-top: 15px;
+    margin-bottom: 0;
 `;
 
 const Body = styled.p`
     display: flex;
-    font-size: 10px;
+    font-size: 14px;
     color: #7f7f7f;
     justify-content: flex-start;
     padding-top: 15px;
+    margin-bottom: 20px;
 `;
 
 const Date = styled.p`
     font-size: 12px;
     color: #7f7f7f;
-    margin-top: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
     padding-right: 5px;
 `;
 
 const Username = styled.p`
-    font-size: 14px;
-    color: #7f7f7f;
+    font-size: 12px;
+    color: #000;
     text-align: left;
+    margin: 5px 0;
 `;
 
 const Avatar = styled.img`
-    height: 35px;
-    width: 35px;
+    height: 30px;
+    width: 30px;
     border-radius: 40px;
     border: 30px solid;
     border-color: ${green};
