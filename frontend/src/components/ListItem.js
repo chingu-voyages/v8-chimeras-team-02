@@ -102,15 +102,8 @@ const Date = styled.p`
 const Username = styled.p`
   font-size: 14px;
   color: black;
-  height: 35px;
-  width: 35px;
-  border-radius: 40px;
-  border: 30px solid;
-  border-color: ${green};
-  border-width: 6px;
-  resize-mode: cover;
-  background-color: ${green};
-`;
+  text-align: left;
+`
 
 const Avatar = styled.img`
   height: 35px;
