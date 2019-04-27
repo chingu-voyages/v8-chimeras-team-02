@@ -60,8 +60,8 @@ const resolvers = {
     deleteAnswer: async (root, { question_id, _id }, { mongo }, info) => {
       return deleteAnswer(question_id, _id, mongo);
     },
-    updateAnswer: async (root, { question_id, _id, newAnswer }, { mongo }, info) => {
-      return updateAnswer(question_id, _id, newAnswer, mongo);
+    updateAnswer: async (root, { question_id, _id, newAnswer, iscorrect }, { mongo }, info) => {
+      return updateAnswer(question_id, _id, newAnswer, iscorrect, mongo);
     },
     searchQuestion: async (root, { keywords, solved, unsolved, userId }, { mongo }, info) => {
       return searchQuestion(keywords, solved, unsolved, userId, mongo);

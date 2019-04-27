@@ -8,8 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
-
-library.add(faSpinner)
+library.add(faSpinner);
 
 class GiveAnswer extends Component {
   state = {
@@ -36,7 +35,9 @@ class GiveAnswer extends Component {
           user_id: answer[0].user,
         },
       })
-      .then(() => this.props.data.refetch())
+      .then(() => {
+        this.props.data.refetch();
+      })
       .catch(err => console.log(err));
   };
 
@@ -54,31 +55,57 @@ class GiveAnswer extends Component {
 
   renderQuestion() {
     if (this.props.data.loading) {
-      return <FontAwesomeIcon icon='spinner' spin style={{ fontSize: '50px', alignItems: 'center', margin: '0 auto', color: `${green}` }} />;
+      return (
+        <FontAwesomeIcon
+          icon="spinner"
+          spin
+          style={{ fontSize: '50px', alignItems: 'center', margin: '0 auto', color: `${green}` }}
+        />
+      );
     } else {
       return (
         <CompleteItem
           title={this.props.data.question.title}
           question={this.props.data.question.question}
-          user={'TheQuestionAsker'}
-          date={'Just now'}
+          user={this.props.data.question.user.name}
+          date={this.props.data.question.createAt}
           likes={'0'}
         />
       );
     }
   }
 
+  updateAnswer(_id) {
+    if (this.props.user) {
+      if (this.props.user.currentUser._id === this.props.data.question.user._id) {
+        this.props
+          .update_answer({
+            variables: {
+              question_id: this.props.match.params.questionId,
+              _id,
+              iscorrect: true,
+            },
+          })
+          .then(() => {
+            this.props.data.refetch();
+          })
+          .catch(err => console.log(err));
+      } else console.log("You're not the owner of this question");
+    }
+  }
+
   renderAnswers() {
     if (!this.props.data.loading && this.props.data.question.answers) {
-      return this.props.data.question.answers.map(({ answer, _id }) => {
+      return this.props.data.question.answers.map(({ _id, createDate, answer, iscorrect }) => {
         return (
           <Answer
             key={_id}
             answer={answer}
-            user={'TheAnswerGiver'}
-            date={'10000 B.C.'}
-            likes={'0'}
+            user={'user.name'}
+            date={createDate}
+            iscorrect={iscorrect}
             onDelete={() => this.onAnswerDelete(_id)}
+            updateAnswer={() => this.updateAnswer(_id, answer)}
           />
         );
       });
@@ -101,9 +128,7 @@ class GiveAnswer extends Component {
             <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
             <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
               <TextareaStyle placeholder="Enter answer..." />
-              <Btn type="submit">
-                Answer
-              </Btn>
+              <Btn type="submit">Answer</Btn>
             </form>
           </Listview>
         </GridView>
@@ -119,9 +144,16 @@ const GET_QUESTION = gql`
     question(_id: $_id) {
       title
       question
+      user {
+        _id
+        name
+      }
+      createAt
       answers {
         _id
+        createDate
         answer
+        iscorrect
       }
     }
   }
@@ -132,6 +164,8 @@ const CREATE_ANSWER = gql`
     createAnswer(question_id: $question_id, answer: $answer, user_id: $user_id) {
       _id
       answer
+      iscorrect
+      createDate
     }
   }
 `;
@@ -143,7 +177,29 @@ const DELETE_ANSWER = gql`
     }
   }
 `;
+const UPDATE_ANSWER = gql`
+  mutation updateAnswer($question_id: ID!, $_id: ID!, $newAnswer: String, $iscorrect: Boolean!) {
+    updateAnswer(
+      question_id: $question_id
+      _id: $_id
+      newAnswer: $newAnswer
+      iscorrect: $iscorrect
+    ) {
+      _id
+      answer
+      iscorrect
+      createDate
+    }
+  }
+`;
 
+const CURRENT_USER = gql`
+  {
+    currentUser {
+      _id
+    }
+  }
+`;
 export default compose(
   graphql(GET_QUESTION, {
     options: props => {
@@ -151,7 +207,9 @@ export default compose(
     },
   }),
   graphql(CREATE_ANSWER, { name: 'create_answer' }),
-  graphql(DELETE_ANSWER, { name: 'delete_answer' })
+  graphql(DELETE_ANSWER, { name: 'delete_answer' }),
+  graphql(UPDATE_ANSWER, { name: 'update_answer' }),
+  graphql(CURRENT_USER, { name: 'user' })
 )(GiveAnswer);
 
 const Container = styled.div`
@@ -177,9 +235,9 @@ const TextareaStyle = styled.textarea`
   width: 140%;
   height: 100px;
   margin: 0 auto;
-  boxShadow: 0px 0px 8px 4px gainsboro;
+  boxshadow: 0px 0px 8px 4px gainsboro;
   border: 2px solid gainsboro;
-  borderRadius: 4px;
+  borderradius: 4px;
   resize: none;
   padding: 5px;
 `;
