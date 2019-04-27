@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { green, purple } from "../resources/colors";
 import { user, heart } from "../resources/images";
 import styled from 'styled-components';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faHeart);
+
 
 export default class CompleteItem extends Component {
 
@@ -23,10 +29,12 @@ export default class CompleteItem extends Component {
                     </div>
 
                     <div style={{ right: 0, width: '30%', textAlign:'right' }}>
-                        <div>
-                            <Like src={heart} alt={heart} />
-                            <p style={{ height: '15px' }}></p>
-                        </div>
+                      <HeartFill>
+                        <FontAwesomeIcon
+                          icon="heart"
+                          style={{ fontSize: '25px', stroke: `${purple}`, strokeWidth: 10 }}
+                        />
+                      </HeartFill>
                         <Likes>{this.props.likes + ' likes '}</Likes>
                     </div>
                 </Item>
@@ -110,4 +118,13 @@ const Avatar = styled.img`
     border-width: 6px;
     resize-mode: cover;
     background-color: ${green};
+`;
+
+const HeartFill = styled.div`
+  color: white;
+  padding-top: 20px;
+
+  &:hover {
+    color: ${purple};
+  }
 `;
