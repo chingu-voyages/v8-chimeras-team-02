@@ -7,7 +7,7 @@ export default class LogIn extends Component {
   render() {
     return (
       <Container>
-        <Close onClick={this.props.onClose} src={unsolved2} />
+        {/*<Close onClick={this.props.onClose} src={unsolved2} />*/}
         <Form>
           <Inputs
             type="email"
@@ -33,52 +33,56 @@ export default class LogIn extends Component {
   }
 }
 const Container = styled.div`
-  display: flex;
-  flex: 1;
-  background-color: transparent;
-  justify-content: center;
-`;
+	display: flex;
+	flex: 1;
+	backgroundColor: transparent;
+	justifyContent: center;
+`
 
 const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: ${blue};
-  align-items: center;
-  justify-content: center;
-  width: 30%;
-  height: 400px;
-  border-radius: 10px;
-`;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: auto;
+	border-radius: 5px;
+	padding-bottom: 10px;
+	border: 1px solid #f1f1f1;
+`
 
 const Inputs = styled.input`
-  border: 1px solid #ccc;
-  background: white;
-  height: 45px;
-  width: 40%;
-  align-items: left;
-  margin-top: 25px;
-  font-size: 16px;
-  outline-color: ${green};
-`;
+	border: 1px solid #ccc;
+	background: white;
+	height: 35px;
+	width: 80%;
+	align-items: left;
+	margin-top: 10px;
+	font-size: 16px;
+	outline-color: ${green};
+	padding: 5px 10px;
+	border-radius: 5px;
+`
 
 const Button = styled.input`
-  background: ${green};
-  color: white;
-  height: 60px;
-  width: 40%;
-  align-items: center;
-  margin-top: 25px;
-  font-size: 20px;
-`;
+	background: ${green};
+	color: white;
+	height: auto;
+	width: 90%;
+	padding: 10px 15px;
+	align-items: center;
+	font-size: 14px;
+`
 
 const Error = styled.h3`
-  color: red;
-  font-size: 14px;
-  margin-top: 25px;
-  text-align: center;
-`;
+	color: red;
+	fontSize: 14px;
+	marginTop: 25px;
+	textAlign: center;
+`
+/*
 const Close = styled.img`
   width: 25px;
   height: 25px;
-  /* resize-mode: contain; */
-`;
+  resize-mode: contain;
+`;*/

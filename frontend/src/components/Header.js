@@ -96,7 +96,22 @@ class Header extends Component {
         ) : null}
         {!rememToken ? (
           <div style={Holder}>
-            <Section title="Log in" onClick={() => this.setState({ openLogIn: true })} />
+            {/* <Section title="Log in" onClick={() => this.setState({ openLogIn: true })} /> */}
+
+            {/* LOGIN */}
+            <Dropdown>
+              <DropdownBtnTwo>Log in</DropdownBtnTwo>
+              <DropdownContent>
+                <LogIn
+                  handleEmail={event => this.setState({ email: event.target.value })}
+                  handlePassword={event => this.setState({ password: event.target.value })}
+                  onClick={() => this.onLogIn()}
+                  error={this.state.error}
+                  onClose={() => this.setState({ openLogIn: false })}
+                />
+              </DropdownContent>
+            </Dropdown>
+            {/* SIGNUP */}
             <Dropdown>
               <DropdownBtn>Sign up</DropdownBtn>
               <DropdownContent>
@@ -120,7 +135,7 @@ class Header extends Component {
         )}
 
         {/* For LogIn */}
-        <Modal
+        {/* <Modal
           style={{
             overlay: {
               backgroundColor: 'rgba(255,255,255,.2)',
@@ -137,14 +152,8 @@ class Header extends Component {
           onRequestClose={() => this.setState({ openLogIn: false })}
           contentLabel="Modal with image"
         >
-          <LogIn
-            handleEmail={event => this.setState({ email: event.target.value })}
-            handlePassword={event => this.setState({ password: event.target.value })}
-            onClick={() => this.onLogIn()}
-            error={this.state.error}
-            onClose={() => this.setState({ openLogIn: false })}
-          />
-        </Modal>
+
+        </Modal>*/}
 
         {/* For Signup */}
         {/* <Modal
@@ -255,6 +264,18 @@ const DropdownBtn = styled.button`
   padding: 10px 15px;
   font-size: 16px;
   border-radius: 5px;
+  min-width: 90px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const DropdownBtnTwo = styled.button`
+  border: none;
+  color: ${green};
+  padding: 10px 15px;
+  font-size: 16px;
   min-width: 90px;
 
   &:hover {
