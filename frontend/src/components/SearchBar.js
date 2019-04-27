@@ -22,7 +22,12 @@ export default class SearchBar extends Component {
           }}
           onClick={this.props.onSearch}
         />
-        <Input type="text" placeholder="Type to search" onChange={this.props.onChangeText} />
+        <label for="site-search" style={{display:'none'}}>Search</label>
+        <Input
+          type="search"
+          placeholder="Type to search"
+          onChange={this.props.onChangeText}
+          aria-label="Search through questions" />
         {/*<SearchBtn>Search</SearchBtn>*/}
       </div>
     );
