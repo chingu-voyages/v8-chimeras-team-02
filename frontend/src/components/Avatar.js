@@ -68,7 +68,6 @@ const Button = styled.input`
   align-items: center;
   font-size: 18;
   color: white;
-  font-family: Poppins;
   border: 0px;
   margin-bottom: 15px;
 `
