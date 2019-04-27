@@ -22,7 +22,16 @@ export default class SearchBar extends Component {
           }}
           onClick={this.props.onSearch}
         />
-        <Input type="text" placeholder="Type to search" onChange={this.props.onChangeText} />
+        <Input
+          type="text"
+          placeholder="Type to search"
+          onChange={this.props.onChangeText}
+          onKeyPress={event => {
+            if (event.key === 'Enter') {
+              this.props.onSearch();
+            }
+          }}
+        />
         {/*<SearchBtn>Search</SearchBtn>*/}
       </div>
     );
