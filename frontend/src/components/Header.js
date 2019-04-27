@@ -29,7 +29,8 @@ class Header extends Component {
   }
 
   onSignup() {
-    const { name, email, password } = this.state;
+    let { name, email, password } = this.state;
+    email = email.toLowerCase();
     if (email.length === 0 || name.length === 0 || password.length === 0) {
       this.setState({ error: 'Empty fields' });
     } else {
@@ -51,8 +52,8 @@ class Header extends Component {
   }
 
   onLogIn() {
-    const { email, password } = this.state;
-
+    let { email, password } = this.state;
+    email = email.toLowerCase();
     if (email.length === 0 || password.length === 0) {
       this.setState({ error: 'Empty fields' });
     } else {
