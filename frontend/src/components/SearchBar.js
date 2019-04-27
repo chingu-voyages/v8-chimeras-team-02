@@ -22,7 +22,7 @@ export default class SearchBar extends Component {
           }}
           onClick={this.props.onSearch}
         />
-        <label for="site-search" style={{display:'none'}}>Search</label>
+        <label htmlFor="site-search" style={{display:'none'}}>Search</label>
         <Input
           type="search"
           placeholder="Type to search"
