@@ -5,7 +5,6 @@ import { SearchBar, Section, Logo } from '../components';
 import { blue, green } from '../resources/colors';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
-import Modal from 'react-modal';
 import Avatar from './Avatar';
 import LogIn from '../screens/LogIn';
 import SignUp from '../screens/SignUp';
@@ -19,7 +18,6 @@ class Header extends Component {
     email: '',
     password: '',
     error: '',
-    openLogIn: false,
   };
 
   componentWillMount() {
@@ -96,8 +94,6 @@ class Header extends Component {
         ) : null}
         {!rememToken ? (
           <div style={Holder}>
-            {/* <Section title="Log in" onClick={() => this.setState({ openLogIn: true })} /> */}
-
             {/* LOGIN */}
             <Dropdown>
               <DropdownBtnTwo>Log in</DropdownBtnTwo>
@@ -107,7 +103,6 @@ class Header extends Component {
                   handlePassword={event => this.setState({ password: event.target.value })}
                   onClick={() => this.onLogIn()}
                   error={this.state.error}
-                  onClose={() => this.setState({ openLogIn: false })}
                 />
               </DropdownContent>
             </Dropdown>
@@ -123,7 +118,6 @@ class Header extends Component {
                     this.onSignup();
                   }}
                   error={this.state.error}
-                  onClose={() => this.setState({ openSignup: false })}
                 />
               </DropdownContent>
             </Dropdown>
@@ -133,57 +127,6 @@ class Header extends Component {
             {client => <Avatar onClick={() => this.onLogout(client)} />}
           </ApolloConsumer>
         )}
-
-        {/* For LogIn */}
-        {/* <Modal
-          style={{
-            overlay: {
-              backgroundColor: 'rgba(255,255,255,.2)',
-              alignItems: 'center',
-              justifyContent: 'center',
-            },
-            content: {
-              backgroundColor: 'transparent',
-              borderWidth: 0,
-              padding: 50,
-            },
-          }}
-          isOpen={this.state.openLogIn}
-          onRequestClose={() => this.setState({ openLogIn: false })}
-          contentLabel="Modal with image"
-        >
-
-        </Modal>*/}
-
-        {/* For Signup */}
-        {/* <Modal
-          style={{
-            overlay: {
-              backgroundColor: 'rgba(255,255,255,.2)',
-              alignItems: 'center',
-              justifyContent: 'center',
-            },
-            content: {
-              backgroundColor: 'transparent',
-              borderWidth: 0,
-              padding: 50,
-            },
-          }}
-          isOpen={this.state.openSignup}
-          onRequestClose={() => this.setState({ openSignup: false })}
-          contentLabel="Modal with image"
-        >
-          <SignUp
-            handleName={event => this.setState({ name: event.target.value })}
-            handleEmail={event => this.setState({ email: event.target.value })}
-            handlePassword={event => this.setState({ password: event.target.value })}
-            onClick={() => {
-              this.onSignup();
-            }}
-            error={this.state.error}
-            onClose={() => this.setState({ openSignup: false })}
-          />
-        </Modal> */}
       </HeaderContainer>
     );
   }
