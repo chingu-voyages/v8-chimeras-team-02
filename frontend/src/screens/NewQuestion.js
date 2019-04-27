@@ -32,7 +32,7 @@ class NewQuestion extends Component {
   titleChange = e => {
     this.setState({ title: e.target.value });
 	};
-	
+
 	questionChange = e => {
 		this.setState({ question: e.target.value });
 	}
@@ -134,6 +134,7 @@ const NewQuestionFormTitle = styled.textarea`
 const NewQuestionFormDescription = styled.textarea`
   width: 50vw;
   height: auto;
+  min-height: 150px;
   margin: 0 auto;
   box-shadow: 0px 0px 8px 4px gainsboro;
   border: 2px solid gainsboro;
