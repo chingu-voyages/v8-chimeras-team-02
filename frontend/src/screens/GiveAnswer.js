@@ -36,8 +36,6 @@ class GiveAnswer extends Component {
         },
       })
       .then(() => {
-        console.log('>>>>>>', this.props.data);
-
         this.props.data.refetch();
       })
       .catch(err => console.log(err));
@@ -65,7 +63,7 @@ class GiveAnswer extends Component {
         />
       );
     } else {
-      console.log(this.props.user.currentUser._id);
+      console.log(this.props.data);
 
       return (
         <CompleteItem
@@ -80,7 +78,7 @@ class GiveAnswer extends Component {
   }
 
   updateAnswer(_id) {
-    if (this.props.user) {
+    if (this.props.user.currentUser) {
       if (this.props.user.currentUser._id === this.props.data.question.user._id) {
         this.props
           .update_answer({
@@ -132,11 +130,15 @@ class GiveAnswer extends Component {
             {this.renderAnswers()}
 
             {/* Submit answer form */}
-            <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
-            <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
-              <TextareaStyle placeholder="Enter answer..." />
-              <Btn type="submit">Answer</Btn>
-            </form>
+            {this.props.user.currentUser ? (
+              <div>
+                <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
+                <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
+                  <TextareaStyle placeholder="Enter answer..." />
+                  <Btn type="submit">Answer</Btn>
+                </form>
+              </div>
+            ) : null}
           </Listview>
         </GridView>
 
@@ -151,11 +153,11 @@ const GET_QUESTION = gql`
     question(_id: $_id) {
       title
       question
+      createAt
       user {
         _id
         name
       }
-      createAt
       answers {
         _id
         createDate

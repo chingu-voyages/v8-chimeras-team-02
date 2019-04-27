@@ -38,6 +38,7 @@ class Header extends Component {
         setToken(data.signup.rememberToken);
         this.setState({ rememToken: data.signup.rememberToken });
         this.setState({ openSignup: false });
+        window.location.reload();
       })
       .catch(err => {
         this.setState({ error: err.message });
@@ -59,6 +60,7 @@ class Header extends Component {
           setToken(data.login.rememberToken);
           this.setState({ rememToken: data.login.rememberToken });
           this.setState({ openLogIn: false });
+          window.location.reload();
         })
         .catch(error => {
           this.setState({ error: 'Wrong email/password ' });
@@ -75,6 +77,7 @@ class Header extends Component {
       .then(data => {
         this.setState({ rememToken: null });
         resetToken();
+        window.location.reload();
       })
       .catch(err => {
         console.log(err);

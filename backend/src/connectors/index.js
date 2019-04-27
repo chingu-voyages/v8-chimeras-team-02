@@ -177,7 +177,6 @@ export async function getAnswer(question_id, _id, mongo) {
       `Something Wrong! Trying to get answer for a question that doesn't exist. Id: ${question_id}`
     );
   }
-  console.log(question.answers);
   // Loop trough array to check for the _id
   for (let i in question.answers) {
     if (question.answers[i]._id === _id) {

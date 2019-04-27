@@ -89,41 +89,44 @@ export default class SideList extends Component {
           </p>
         </SideItem>
 
-        <SideItem
-          onClick={() => {
-            selectMyQ();
-            this.setState({ selected: 'My Questions' });
-          }}
-          style={{
-            backgroundColor: selected === 'My Questions' ? 'rgba(47, 224, 144, .2)' : 'transparent',
-            width: '80%',
-            border: '1px solid transparent',
-            borderRadius: '15px',
-            padding: '0 10px',
-            alignItems: 'center',
-          }}
-        >
-          {/*<Icon
+        {this.props.currentUser ? (
+          <SideItem
+            onClick={() => {
+              selectMyQ();
+              this.setState({ selected: 'My Questions' });
+            }}
+            style={{
+              backgroundColor:
+                selected === 'My Questions' ? 'rgba(47, 224, 144, .2)' : 'transparent',
+              width: '80%',
+              border: '1px solid transparent',
+              borderRadius: '15px',
+              padding: '0 10px',
+              alignItems: 'center',
+            }}
+          >
+            {/*<Icon
             src={selected === "My Questions" ? myq2 : myq}
             alt={myq}
           />*/}
-          <FontAwesomeIcon
-            icon="question-circle"
-            style={{ fontSize: '25px', color: selected === 'My Questions' ? green : 'black' }}
-          />
-          <p
-            style={{
-              fontSize: 14,
-              marginTop: 0,
-              borderRadius: 8,
-              paddingLeft: 5,
-              paddingRight: 5,
-              color: selected === 'My Questions' ? green : grey,
-            }}
-          >
-            {'My Questions'}
-          </p>
-        </SideItem>
+            <FontAwesomeIcon
+              icon="question-circle"
+              style={{ fontSize: '25px', color: selected === 'My Questions' ? green : 'black' }}
+            />
+            <p
+              style={{
+                fontSize: 14,
+                marginTop: 0,
+                borderRadius: 8,
+                paddingLeft: 5,
+                paddingRight: 5,
+                color: selected === 'My Questions' ? green : grey,
+              }}
+            >
+              {'My Questions'}
+            </p>
+          </SideItem>
+        ) : null}
       </SideListDiv>
     );
   }
@@ -149,7 +152,7 @@ const SideItem = styled.button`
   outline: 0px;
   margin-bottom: 15px;
 
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   &:hover {
     transform: scale(1.1);
   }
