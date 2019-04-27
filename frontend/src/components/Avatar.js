@@ -10,7 +10,9 @@ export default class Avatar extends Component {
         <AvatarImg src={user} alt={user} />
         <DropdownContent>
           <Text>See you soon?</Text>
-          <Button type="button" value="Log Out" onClick={this.props.onClick} />
+          <div style={{width: '100%', margin: '0 auto'}}>
+            <Button type="button" onClick={this.props.onClick}>Log Out</Button>
+          </div>
         </DropdownContent>
       </AvatarContainer>
     );
@@ -24,8 +26,6 @@ const DropdownContent = styled.div`
   background-color: #fff;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  align-items: right;
-  justify-content: right;
   z-index: 1;
 `
 
@@ -58,18 +58,21 @@ const Text = styled.h3`
   color: black;
   padding: 12px 16px;
   display: block;
-  font-size: 18;
+  font-size: 18px;
 `
 
-const Button = styled.input`
+const Button = styled.button`
   background-color: #2fe090;
   width: 110px;
   height: 38px;
   align-items: center;
-  font-size: 18;
+  justify-content: center;
+  font-size: 16px;
   color: white;
   border: 0px;
-  margin-bottom: 15px;
+  margin: 15px auto;
+  color: white;
+  display: flex;
 `
 
 // MISSING:
