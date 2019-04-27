@@ -130,7 +130,7 @@ export async function getQuestions(number = '0', mongo) {
   return questions;
 }
 
-export async function createAnswer(question_id, newAnswer, user, mongo) {
+export async function createAnswer(question_id, newAnswer, userId, mongo) {
   // Find the question we're answering
   const Questions = mongo.collection('Question');
   const question = await Questions.findOne({ _id: question_id });
@@ -144,7 +144,8 @@ export async function createAnswer(question_id, newAnswer, user, mongo) {
   // Creatre MetaData
   let _id = uuidv4();
   let date = new Date().toISOString();
-
+  const Users = mongo.collection('User');
+  const user = await Users.findOne({ _id: userId });
   // Create and push Answer
   const answer = {
     _id,

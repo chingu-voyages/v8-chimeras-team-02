@@ -7,7 +7,7 @@ export default class Answer extends Component {
   render() {
     return (
       <AnswerContainer>
-        <Username>{this.props.user}</Username>
+        <Username>{this.props.user.name}</Username>
 
         <Item>
           <Avatar src={user} alt={user} />
@@ -17,7 +17,11 @@ export default class Answer extends Component {
             <Datee>{'published on ' + this.props.date}</Datee>
           </div>
         </Item>
-        <div>
+        <div style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          {this.props.user._id == this.props.currentUser ? (
+            <DeleteA onClick={this.props.onDelete}>{'delete answer'}</DeleteA>
+          ) : null}
+
           {this.props.iscorrect ? (
             <Checked src={checked} alt={checked} onClick={this.props.updateAnswer} />
           ) : (
@@ -72,10 +76,9 @@ const Datee = styled.p`
   margin-top: 0px;
   padding-right: 5px;
 `;
-
 const Username = styled.p`
-  font-size: 14px;
-  color: #7f7f7f;
+  font-size: 15px;
+  color: #4c4b4b;
   text-align: left;
 `;
 
@@ -88,4 +91,13 @@ const Avatar = styled.img`
   border-width: 6px;
   resize-mode: cover;
   background-color: ${green};
+`;
+
+const DeleteA = styled.p`
+  font-size: 12px;
+  color: #7f7f7f;
+  text-align: left;
+  &:hover {
+    cursor: pointer;
+  }
 `;

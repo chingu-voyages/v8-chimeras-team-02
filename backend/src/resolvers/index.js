@@ -54,8 +54,8 @@ const resolvers = {
     ) => {
       return updateQuestion(_id, title, question, createAt, user, tags, answers, mongo);
     },
-    createAnswer: async (root, { question_id, answer, user }, { mongo }, info) => {
-      return createAnswer(question_id, answer, user, mongo);
+    createAnswer: async (root, { question_id, answer, user_id }, { mongo }, info) => {
+      return createAnswer(question_id, answer, user_id, mongo);
     },
     deleteAnswer: async (root, { question_id, _id }, { mongo }, info) => {
       return deleteAnswer(question_id, _id, mongo);

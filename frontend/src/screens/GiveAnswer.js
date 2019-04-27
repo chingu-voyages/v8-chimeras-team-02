@@ -21,7 +21,7 @@ class GiveAnswer extends Component {
       {
         question_id: this.props.match.params.questionId,
         answer: e.target[0].value,
-        user: 'TheUser',
+        user: this.props.user.currentUser._id,
       },
     ];
     this.setState({ answers: [...this.state.answers, ...answer] });
@@ -36,6 +36,8 @@ class GiveAnswer extends Component {
         },
       })
       .then(() => {
+        console.log('>>>>>>', this.props.data);
+
         this.props.data.refetch();
       })
       .catch(err => console.log(err));
@@ -63,6 +65,8 @@ class GiveAnswer extends Component {
         />
       );
     } else {
+      console.log(this.props.user.currentUser._id);
+
       return (
         <CompleteItem
           title={this.props.data.question.title}
@@ -96,19 +100,22 @@ class GiveAnswer extends Component {
 
   renderAnswers() {
     if (!this.props.data.loading && this.props.data.question.answers) {
-      return this.props.data.question.answers.map(({ _id, createDate, answer, iscorrect }) => {
-        return (
-          <Answer
-            key={_id}
-            answer={answer}
-            user={'user.name'}
-            date={createDate}
-            iscorrect={iscorrect}
-            onDelete={() => this.onAnswerDelete(_id)}
-            updateAnswer={() => this.updateAnswer(_id, answer)}
-          />
-        );
-      });
+      return this.props.data.question.answers.map(
+        ({ _id, createDate, answer, iscorrect, user }) => {
+          return (
+            <Answer
+              key={_id}
+              answer={answer}
+              user={user}
+              date={createDate}
+              iscorrect={iscorrect}
+              onDelete={() => this.onAnswerDelete(_id)}
+              updateAnswer={() => this.updateAnswer(_id, answer)}
+              currentUser={this.props.user.currentUser._id}
+            />
+          );
+        }
+      );
     }
   }
 
@@ -154,6 +161,10 @@ const GET_QUESTION = gql`
         createDate
         answer
         iscorrect
+        user {
+          _id
+          name
+        }
       }
     }
   }
@@ -166,6 +177,10 @@ const CREATE_ANSWER = gql`
       answer
       iscorrect
       createDate
+      user {
+        _id
+        name
+      }
     }
   }
 `;
@@ -189,6 +204,10 @@ const UPDATE_ANSWER = gql`
       answer
       iscorrect
       createDate
+      user {
+        _id
+        name
+      }
     }
   }
 `;
