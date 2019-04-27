@@ -222,6 +222,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   border-bottom: 1px solid #efebeb;
   margin-bottom: 20px;
+  padding-right: 20px;
 `;
 
 const StyledLink = styled(Link)`
