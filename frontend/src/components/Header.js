@@ -253,7 +253,7 @@ const DropdownContent = styled.div`
 const Dropdown = styled.div`
   position: relative;
   display: inline-block;
-
+  margin-right: 40px;
   &:hover ${DropdownContent} {
     display: block;
   }
