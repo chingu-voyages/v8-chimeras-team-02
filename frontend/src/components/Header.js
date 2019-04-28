@@ -29,24 +29,31 @@ class Header extends Component {
   }
 
   onSignup() {
-    const { name, email, password } = this.state;
-    this.props
-      .signup({
-        variables: { name, email, password },
-      })
-      .then(({ data }) => {
-        setToken(data.signup.rememberToken);
-        this.setState({ rememToken: data.signup.rememberToken });
-        this.setState({ openSignup: false });
-      })
-      .catch(err => {
-        this.setState({ error: err.message });
-      });
+    let { name, email, password } = this.state;
+    email = email.toLowerCase();
+    if (email.length === 0 || name.length === 0 || password.length === 0) {
+      this.setState({ error: 'Empty fields' });
+    } else {
+      this.setState({ error: '' });
+      this.props
+        .signup({
+          variables: { name, email, password },
+        })
+        .then(({ data }) => {
+          setToken(data.signup.rememberToken);
+          this.setState({ rememToken: data.signup.rememberToken });
+          this.setState({ openSignup: false });
+          window.location.reload();
+        })
+        .catch(err => {
+          this.setState({ error: err.message });
+        });
+    }
   }
 
   onLogIn() {
-    const { email, password } = this.state;
-
+    let { email, password } = this.state;
+    email = email.toLowerCase();
     if (email.length === 0 || password.length === 0) {
       this.setState({ error: 'Empty fields' });
     } else {
@@ -59,6 +66,7 @@ class Header extends Component {
           setToken(data.login.rememberToken);
           this.setState({ rememToken: data.login.rememberToken });
           this.setState({ openLogIn: false });
+          window.location.reload();
         })
         .catch(error => {
           this.setState({ error: 'Wrong email/password ' });
@@ -75,6 +83,7 @@ class Header extends Component {
       .then(data => {
         this.setState({ rememToken: null });
         resetToken();
+        window.location.reload();
       })
       .catch(err => {
         console.log(err);
@@ -101,9 +110,11 @@ class Header extends Component {
               <DropdownBtn>Sign up</DropdownBtn>
               <DropdownContent>
                 <SignUp
-                  handleName={event => this.setState({ name: event.target.value })}
-                  handleEmail={event => this.setState({ email: event.target.value })}
-                  handlePassword={event => this.setState({ password: event.target.value })}
+                  handleName={event => this.setState({ name: event.target.value, error: '' })}
+                  handleEmail={event => this.setState({ email: event.target.value, error: '' })}
+                  handlePassword={event =>
+                    this.setState({ password: event.target.value, error: '' })
+                  }
                   onClick={() => {
                     this.onSignup();
                   }}
@@ -138,8 +149,8 @@ class Header extends Component {
           contentLabel="Modal with image"
         >
           <LogIn
-            handleEmail={event => this.setState({ email: event.target.value })}
-            handlePassword={event => this.setState({ password: event.target.value })}
+            handleEmail={event => this.setState({ email: event.target.value, error: '' })}
+            handlePassword={event => this.setState({ password: event.target.value, error: '' })}
             onClick={() => this.onLogIn()}
             error={this.state.error}
             onClose={() => this.setState({ openLogIn: false })}
@@ -242,7 +253,7 @@ const DropdownContent = styled.div`
 const Dropdown = styled.div`
   position: relative;
   display: inline-block;
-
+  margin-right: 35px;
   &:hover ${DropdownContent} {
     display: block;
   }

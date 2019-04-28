@@ -130,7 +130,7 @@ export async function getQuestions(number = '0', mongo) {
   return questions;
 }
 
-export async function createAnswer(question_id, newAnswer, user, mongo) {
+export async function createAnswer(question_id, newAnswer, userId, mongo) {
   // Find the question we're answering
   const Questions = mongo.collection('Question');
   const question = await Questions.findOne({ _id: question_id });
@@ -144,7 +144,8 @@ export async function createAnswer(question_id, newAnswer, user, mongo) {
   // Creatre MetaData
   let _id = uuidv4();
   let date = new Date().toISOString();
-
+  const Users = mongo.collection('User');
+  const user = await Users.findOne({ _id: userId });
   // Create and push Answer
   const answer = {
     _id,
@@ -176,7 +177,6 @@ export async function getAnswer(question_id, _id, mongo) {
       `Something Wrong! Trying to get answer for a question that doesn't exist. Id: ${question_id}`
     );
   }
-  console.log(question.answers);
   // Loop trough array to check for the _id
   for (let i in question.answers) {
     if (question.answers[i]._id === _id) {
@@ -191,7 +191,7 @@ export async function getAnswer(question_id, _id, mongo) {
   return answer;
 }
 
-export async function updateAnswer(question_id, _id, newAnswer, mongo) {
+export async function updateAnswer(question_id, _id, newAnswer, iscorrect, mongo) {
   // Get Question
   const Questions = mongo.collection('Question');
   const question = await Questions.findOne({ _id: question_id });
@@ -208,8 +208,11 @@ export async function updateAnswer(question_id, _id, newAnswer, mongo) {
   // Loop trough array to check for the _id and update answer
   for (let i in question.answers) {
     if (question.answers[i]._id === _id) {
-      question.answers[i].answer = newAnswer;
+      if (newAnswer) question.answers[i].answer = newAnswer;
+      question.answers[i].iscorrect = iscorrect;
       answer = question.answers[i];
+    } else {
+      question.answers[i].iscorrect = false; // set the rest of answers to false, only one answer is correct
     }
   }
 
@@ -217,7 +220,10 @@ export async function updateAnswer(question_id, _id, newAnswer, mongo) {
     throw new Error(`No Answer found for id: ${_id}`);
   }
 
-  await Questions.updateOne({ _id: question_id }, { $set: { answers: question.answers } });
+  await Questions.updateOne(
+    { _id: question_id },
+    { $set: { answers: question.answers, iscorrect: iscorrect } }
+  );
 
   return answer;
 }
