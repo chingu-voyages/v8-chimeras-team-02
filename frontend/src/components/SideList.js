@@ -78,6 +78,7 @@ export default class SideList extends Component {
           </p>
         </SideItem>
 
+        {this.props.currentUser ? (
         <SideItem
           onClick={() => {
             selectMyQ();
@@ -99,7 +100,6 @@ export default class SideList extends Component {
             <p
               style={{
                 fontSize: 14,
-                marginTop: 0,
                 borderRadius: 8,
                 paddingLeft: 5,
                 paddingRight: 5,
