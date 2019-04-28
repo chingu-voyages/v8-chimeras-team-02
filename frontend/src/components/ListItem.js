@@ -58,6 +58,7 @@ const ListContainer = styled.div`
   box-shadow: 0px 0px 8px 4px gainsboro;
   padding: 0 15px 15px 20px;
   margin-bottom: 20px;
+  box-sizing: border-box;
 `
 
 const Item = styled.div`
