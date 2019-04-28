@@ -13,4 +13,4 @@ const LogoStyled = styled.h1`
 	color: ${green};
 	padding: 15px;
 	font-size: 3vw;
-`;
+`

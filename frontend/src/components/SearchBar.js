@@ -22,31 +22,21 @@ export default class SearchBar extends Component {
           }}
           onClick={this.props.onSearch}
         />
+        <label htmlFor="site-search" style={{display:'none'}}>Search</label>
         <Input
-          type="text"
+          type="search"
           placeholder="Type to search"
           onChange={this.props.onChangeText}
+          aria-label="Search through questions"
           onKeyPress={event => {
             if (event.key === 'Enter') {
               this.props.onSearch();
             }
-          }}
-        />
-        {/*<SearchBtn>Search</SearchBtn>*/}
+          }} />
       </div>
     );
   }
 }
-
-/*const SearchBtn = styled.button`
-    background-color: ${green};
-    width: 100px;
-    height: 36px;
-    align-items: center;
-    font-size: 14px;
-    color: white;
-    border: 0px;
-`*/
 
 const Input = styled.input`
   background-color: white;
@@ -62,4 +52,4 @@ const Input = styled.input`
     outline: none;
     border-bottom: 1px solid ${green};
   }
-`;
+`

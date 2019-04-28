@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { SearchBar, Section, Logo } from '../components';
-import { blue, green } from '../resources/colors';
+import { green } from '../resources/colors';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
-import Modal from 'react-modal';
 import Avatar from './Avatar';
 import LogIn from '../screens/LogIn';
 import SignUp from '../screens/SignUp';
@@ -19,7 +18,6 @@ class Header extends Component {
     email: '',
     password: '',
     error: '',
-    openLogIn: false,
   };
 
   componentWillMount() {
@@ -105,7 +103,19 @@ class Header extends Component {
         ) : null}
         {!rememToken ? (
           <div style={Holder}>
-            <Section title="Log in" onClick={() => this.setState({ openLogIn: true })} />
+            {/* LOGIN */}
+            <Dropdown>
+              <DropdownBtnTwo>Log in</DropdownBtnTwo>
+              <DropdownContent>
+                <LogIn
+                  handleEmail={event => this.setState({ email: event.target.value })}
+                  handlePassword={event => this.setState({ password: event.target.value })}
+                  onClick={() => this.onLogIn()}
+                  error={this.state.error}
+                />
+              </DropdownContent>
+            </Dropdown>
+            {/* SIGNUP */}
             <Dropdown>
               <DropdownBtn>Sign up</DropdownBtn>
               <DropdownContent>
@@ -119,7 +129,6 @@ class Header extends Component {
                     this.onSignup();
                   }}
                   error={this.state.error}
-                  onClose={() => this.setState({ openSignup: false })}
                 />
               </DropdownContent>
             </Dropdown>
@@ -129,63 +138,6 @@ class Header extends Component {
             {client => <Avatar onClick={() => this.onLogout(client)} />}
           </ApolloConsumer>
         )}
-
-        {/* For LogIn */}
-        <Modal
-          style={{
-            overlay: {
-              backgroundColor: 'rgba(255,255,255,.2)',
-              alignItems: 'center',
-              justifyContent: 'center',
-            },
-            content: {
-              backgroundColor: 'transparent',
-              borderWidth: 0,
-              padding: 50,
-            },
-          }}
-          isOpen={this.state.openLogIn}
-          onRequestClose={() => this.setState({ openLogIn: false })}
-          contentLabel="Modal with image"
-        >
-          <LogIn
-            handleEmail={event => this.setState({ email: event.target.value, error: '' })}
-            handlePassword={event => this.setState({ password: event.target.value, error: '' })}
-            onClick={() => this.onLogIn()}
-            error={this.state.error}
-            onClose={() => this.setState({ openLogIn: false })}
-          />
-        </Modal>
-
-        {/* For Signup */}
-        {/* <Modal
-          style={{
-            overlay: {
-              backgroundColor: 'rgba(255,255,255,.2)',
-              alignItems: 'center',
-              justifyContent: 'center',
-            },
-            content: {
-              backgroundColor: 'transparent',
-              borderWidth: 0,
-              padding: 50,
-            },
-          }}
-          isOpen={this.state.openSignup}
-          onRequestClose={() => this.setState({ openSignup: false })}
-          contentLabel="Modal with image"
-        >
-          <SignUp
-            handleName={event => this.setState({ name: event.target.value })}
-            handleEmail={event => this.setState({ email: event.target.value })}
-            handlePassword={event => this.setState({ password: event.target.value })}
-            onClick={() => {
-              this.onSignup();
-            }}
-            error={this.state.error}
-            onClose={() => this.setState({ openSignup: false })}
-          />
-        </Modal> */}
       </HeaderContainer>
     );
   }
@@ -228,16 +180,16 @@ export default compose(
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
-  /*background: ${blue};*/
   height: 85px;
   align-items: center;
   border-bottom: 1px solid #efebeb;
   margin-bottom: 20px;
-`;
+  padding-right: 20px;
+`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-`;
+`
 
 /* Dropdown | Hover SignUp */
 const DropdownContent = styled.div`
@@ -248,7 +200,7 @@ const DropdownContent = styled.div`
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-`;
+`
 
 const Dropdown = styled.div`
   position: relative;
@@ -257,7 +209,7 @@ const Dropdown = styled.div`
   &:hover ${DropdownContent} {
     display: block;
   }
-`;
+`
 
 const DropdownBtn = styled.button`
   border: 1px solid ${green};
@@ -270,20 +222,21 @@ const DropdownBtn = styled.button`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
-/*const DropdownLink = styled.a`
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+const DropdownBtnTwo = styled.button`
+  border: none;
+  color: ${green};
+  padding: 10px 15px;
+  font-size: 16px;
+  min-width: 90px;
 
   &:hover {
-    background-color: #fefefe;
+    cursor: pointer;
   }
-`*/
+`
 
 const Holder = {
   display: 'flex',
   flexDirection: 'row',
-};
+}
