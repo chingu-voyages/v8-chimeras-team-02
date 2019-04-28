@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { green, purple } from '../resources/colors';
+import { green } from '../resources/colors';
 import { user, checked, unchecked } from '../resources/images';
 import styled from 'styled-components';
 
@@ -18,7 +18,7 @@ export default class Answer extends Component {
           </div>
         </Item>
         <div style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          {this.props.user._id == this.props.currentUser ? (
+          {this.props.user._id === this.props.currentUser ? (
             <DeleteA onClick={this.props.onDelete}>{'delete answer'}</DeleteA>
           ) : null}
 
