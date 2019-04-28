@@ -73,16 +73,16 @@ class Home extends Component {
       var all_questions = this.state.data ? this.state.data : this.props.data.questions;
       return all_questions.length > 0 ? (
         all_questions.map(question => {
-					const questionId = question._id;
+          const questionId = question._id;
           return (
-              <ListItem
-								key={questionId}
-								questionId={questionId}
-                title={question.title}
-                user={question.user.name}
-                date={question.createAt}
-                likes={'4'}
-              />
+            <ListItem
+              key={questionId}
+              questionId={questionId}
+              title={question.title}
+              user={question.user.name}
+              date={question.createAt}
+              likes={'4'}
+            />
           );
         })
       ) : (
@@ -92,7 +92,6 @@ class Home extends Component {
   }
   render() {
     const { searchText } = this.state;
-
     return (
       <div>
         <Header
@@ -104,6 +103,7 @@ class Home extends Component {
         />
         <GridView>
           <SideList
+            currentUser={this.props.user.currentUser}
             selectSolved={() =>
               this.setState({ solved: true, unsolved: false, my_questions: false }, () =>
                 this.onSearch()

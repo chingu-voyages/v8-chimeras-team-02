@@ -10,17 +10,18 @@ library.add(faHeart);
 
 
 export default class CompleteItem extends Component {
+  render() {
+    return (
+      <CompleteItemContainer>
+        <Title>{this.props.title}</Title>
 
-    render() {
-        return (
-            <CompleteItemContainer>
-                <Title>{this.props.title}</Title>
+        <Body>{this.props.question}</Body>
 
-                <Body>{this.props.question}</Body>
+        <Item>
+          <Avatar src={user} alt={user} />
 
                 <hr style={{width:'100%', marginRight: '40px', color: '#7f7f7f'}} />
 
-                <Item>
                     <Avatar src={user} alt={user} />
 
                     <div style={{ marginLeft: 15, width:'70%' }}>

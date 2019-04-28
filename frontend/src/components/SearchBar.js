@@ -27,7 +27,12 @@ export default class SearchBar extends Component {
           type="search"
           placeholder="Type to search"
           onChange={this.props.onChangeText}
-          aria-label="Search through questions" />
+          aria-label="Search through questions"
+          onKeyPress={event => {
+            if (event.key === 'Enter') {
+              this.props.onSearch();
+            }
+          }} />
       </div>
     );
   }
