@@ -48,13 +48,14 @@ export default class CompleteItem extends Component {
 }
 
 const CompleteItemContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  box-shadow: 0px 0px 8px 4px gainsboro;
-  padding: 0 20px 10px 20px;
-  margin-bottom: 20px;
-`;
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   box-shadow: 0px 0px 8px 4px gainsboro;
+   padding: 0 20px 10px 20px;
+   margin-bottom: 20px;
+   box-sizing: border-box;
+`
 
 const Item = styled.div`
   display: flex;

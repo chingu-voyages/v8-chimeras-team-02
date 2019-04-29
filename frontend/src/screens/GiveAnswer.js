@@ -131,10 +131,11 @@ class GiveAnswer extends Component {
 
             {/* Submit answer form */}
             {this.props.user.currentUser ? (
-              <div>
+              <div style={{width: '100%'}}>
                 <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
-                <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
+                <form onSubmit={this.submitAnswer}>
                   <TextareaStyle placeholder="Enter answer..." />
+                  <br />
                   <Btn type="submit">Answer</Btn>
                 </form>
               </div>
@@ -253,22 +254,26 @@ const GridView = styled.div`
 `;
 
 const TextareaStyle = styled.textarea`
-  width: 140%;
-  height: 100px;
+  width: 100%;
+  height: auto;
+  min-height: 150px;
   margin: 0 auto;
-  boxshadow: 0px 0px 8px 4px gainsboro;
+  box-shadow: 0px 0px 8px 4px gainsboro;
   border: 2px solid gainsboro;
-  borderradius: 4px;
+  border-radius: 4px;
   resize: none;
   padding: 5px;
+  box-sizing: border-box;
 `;
 
 const Btn = styled.button`
-  background-color: green;
+  background-color: ${green};
   width: 100px;
-  height: 50px;
+  height: 36px;
+  margin: 5px 0 0 5px;
   align-items: center;
-  font-size: 17;
+  font-size: 14px;
   color: white;
   border: 0px;
+  float: right;
 `;
