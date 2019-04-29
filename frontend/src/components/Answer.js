@@ -40,6 +40,7 @@ const AnswerContainer = styled.div`
   box-shadow: 0 4px 2px -2px #dbd9d9;
   padding: 0 15px 15px 15%;
   margin-bottom: 20px;
+  box-sizing: border-box;
 `;
 
 const Item = styled.div`
