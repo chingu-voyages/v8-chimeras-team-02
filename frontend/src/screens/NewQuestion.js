@@ -37,10 +37,6 @@ class NewQuestion extends Component {
 		this.setState({ question: e.target.value });
 	}
 
-  handleChangeDescription = e => {
-    this.setState({ title: e.target.question });
-  };
-
   render() {
     return (
       <div>
