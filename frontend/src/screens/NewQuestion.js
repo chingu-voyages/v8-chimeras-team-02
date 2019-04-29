@@ -23,7 +23,8 @@ class NewQuestion extends Component {
           user_id: this.props.data.currentUser._id,
           tags: [],
           answers_ids: [],
-        },
+				},
+				refetchQueries: [{ query: GET_QUESTION }]
       })
       .then(data => this.props.history.push(`/giveanswer/${data.data.createQuestion._id}`))
       .catch(err => console.log(err));
@@ -66,6 +67,19 @@ class NewQuestion extends Component {
   }
 }
 
+const GET_QUESTION = gql`
+  {
+    questions {
+      _id
+      title
+      createAt
+      user {
+        name
+      }
+    }
+  }
+`;
+
 const CREATE_QUESTION = gql`
   mutation createQuestion(
     $title: String!
@@ -97,6 +111,7 @@ const CURRENT_USER = gql`
 `;
 
 export default compose(
+	graphql(GET_QUESTION),
   graphql(CREATE_QUESTION, { name: 'createQuestion' }),
   graphql(CURRENT_USER)
 )(NewQuestion);
