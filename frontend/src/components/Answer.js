@@ -14,7 +14,13 @@ export default class Answer extends Component {
 
           <div style={{ marginLeft: 15 }}>
             <Body>{this.props.answer}</Body>
-            <Datee>{'published on ' + this.props.date}</Datee>
+            <Date>
+              {'published on ' +
+                this.props.date
+                  .split('')
+                  .slice(0, 10)
+                  .join('')}
+            </Date>
           </div>
         </Item>
         <div style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -71,7 +77,7 @@ const Body = styled.p`
   padding-top: 15px;
 `;
 
-const Datee = styled.p`
+const Date = styled.p`
   font-size: 12px;
   color: #7f7f7f;
   margin-top: 0px;
