@@ -14,7 +14,13 @@ export default class Answer extends Component {
 
           <div style={{ marginLeft: 15 }}>
             <Body>{this.props.answer}</Body>
-            <Date>{'published on ' + this.props.date}</Date>
+            <Date>
+              {'published on ' +
+                this.props.date
+                  .split('')
+                  .slice(0, 10)
+                  .join('')}
+            </Date>
           </div>
         </Item>
         <div style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
