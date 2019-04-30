@@ -146,6 +146,12 @@ export async function createAnswer(question_id, newAnswer, userId, mongo) {
   let date = new Date().toISOString();
   const Users = mongo.collection('User');
   const user = await Users.findOne({ _id: userId });
+
+  if (!user) {
+    throw new Error(
+      `Error! Something went wrong creating your answer. Please log out and log back in.`
+    )
+  }
   // Create and push Answer
   const answer = {
     _id,
