@@ -19,8 +19,16 @@ class Home extends Component {
     data: null,
   };
 
+  async componentWillMount() {
+    const searchText = await localStorage.getItem('SEARCH_TEXT');
+    if (searchText) {
+      this.setState({ searchText }, () => this.onSearch());
+    }
+  }
+
   onSearch() {
     const { searchText, solved, unsolved, my_questions } = this.state;
+    localStorage.setItem('SEARCH_TEXT', null);
 
     if (my_questions)
       this.props
@@ -172,10 +180,7 @@ const SEARCH = gql`
   }
 `;
 
-export default // graphql(SEARCH, { name: 'searchQuestion' }),
-
-// graphql(GET_QUESTION),
-compose(
+export default compose(
   graphql(GET_QUESTION),
   graphql(SEARCH, { name: 'searchQuestion' }),
   graphql(CURRENT_USER, { name: 'user' })
@@ -186,10 +191,10 @@ const ListView = styled.div`
   flex: 3;
   flex-direction: column;
   max-width: 50%;
-`
+`;
 const GridView = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
   margin-top: 40;
-`
+`;

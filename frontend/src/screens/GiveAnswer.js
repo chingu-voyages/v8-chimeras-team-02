@@ -13,6 +13,7 @@ library.add(faSpinner);
 class GiveAnswer extends Component {
   state = {
     answers: [],
+    searchText: '',
   };
 
   submitAnswer = e => {
@@ -63,8 +64,6 @@ class GiveAnswer extends Component {
         />
       );
     } else {
-      console.log(this.props.data);
-
       return (
         <CompleteItem
           title={this.props.data.question.title}
@@ -117,10 +116,23 @@ class GiveAnswer extends Component {
     }
   }
 
+  onSearch() {
+    localStorage.setItem('SEARCH_TEXT', this.state.searchText);
+    window.location = '/';
+  }
+
   render() {
+    const { searchText } = this.state;
+
     return (
       <Container>
-        <Header />
+        <Header
+          onSearch={() => this.onSearch()}
+          onChangeText={event => {
+            this.setState({ searchText: event.target.value });
+          }}
+          searchText={searchText}
+        />
         <GridView>
           <Listview>
             {/* Question */}
@@ -222,6 +234,7 @@ const CURRENT_USER = gql`
     }
   }
 `;
+
 export default compose(
   graphql(GET_QUESTION, {
     options: props => {
