@@ -109,7 +109,7 @@ class GiveAnswer extends Component {
               iscorrect={iscorrect}
               onDelete={() => this.onAnswerDelete(_id)}
               updateAnswer={() => this.updateAnswer(_id, answer)}
-              currentUser={this.props.user.currentUser._id}
+              currentUser={this.props.user.currentUser ? this.props.user.currentUser._id : null}
             />
           );
         }
