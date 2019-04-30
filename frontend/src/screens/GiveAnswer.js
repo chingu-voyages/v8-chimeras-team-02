@@ -92,8 +92,8 @@ class GiveAnswer extends Component {
             this.props.data.refetch();
           })
           .catch(err => console.log(err));
-      } else console.log("You're not the owner of this question");
-    }
+      }
+    } else console.log("You're not the owner of this question");
   }
 
   renderAnswers() {
@@ -108,7 +108,7 @@ class GiveAnswer extends Component {
               date={createDate}
               iscorrect={iscorrect}
               onDelete={() => this.onAnswerDelete(_id)}
-              updateAnswer={() => this.updateAnswer(_id, answer)}
+              updateAnswer={() => this.updateAnswer(_id)}
               currentUser={this.props.user.currentUser ? this.props.user.currentUser._id : null}
             />
           );
@@ -131,7 +131,7 @@ class GiveAnswer extends Component {
 
             {/* Submit answer form */}
             {this.props.user.currentUser ? (
-              <div style={{width: '100%'}}>
+              <div style={{ width: '100%' }}>
                 <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
                 <form onSubmit={this.submitAnswer}>
                   <TextareaStyle placeholder="Enter answer..." />
