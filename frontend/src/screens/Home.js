@@ -28,8 +28,8 @@ class Home extends Component {
 
   onSearch() {
     const { searchText, solved, unsolved, my_questions } = this.state;
-    localStorage.setItem('SEARCH_TEXT', null);
-
+    localStorage.removeItem('SEARCH_TEXT');
+    
     if (my_questions)
       this.props
         .searchQuestion({
