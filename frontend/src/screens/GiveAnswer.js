@@ -22,7 +22,7 @@ class GiveAnswer extends Component {
       {
         question_id: this.props.match.params.questionId,
         answer: e.target[0].value,
-        user: 'TheUser',
+        user: this.props.user.currentUser._id,
       },
     ];
     this.setState({ answers: [...this.state.answers, ...answer] });
@@ -75,9 +75,8 @@ class GiveAnswer extends Component {
           <Answer
             key={_id}
             answer={answer}
-            user={'TheAnswerGiver'}
-            date={'10000 B.C.'}
-            likes={'0'}
+            user={user}
+            date={createDate}
             onDelete={() => this.onAnswerDelete(_id)}
           />
         );
@@ -185,7 +184,7 @@ const TextareaStyle = styled.textarea`
 `;
 
 const Btn = styled.button`
-  background-color: green;
+  background-color: ${green};
   width: 100px;
   height: 50px;
   align-items: center;
