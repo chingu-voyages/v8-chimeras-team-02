@@ -8,8 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
-
-library.add(faSpinner)
+library.add(faSpinner);
 
 class GiveAnswer extends Component {
   state = {
@@ -36,7 +35,9 @@ class GiveAnswer extends Component {
           user_id: answer[0].user,
         },
       })
-      .then(() => this.props.data.refetch())
+      .then(() => {
+        this.props.data.refetch();
+      })
       .catch(err => console.log(err));
   };
 
@@ -54,33 +55,67 @@ class GiveAnswer extends Component {
 
   renderQuestion() {
     if (this.props.data.loading) {
-      return <FontAwesomeIcon icon='spinner' spin style={{ fontSize: '50px', alignItems: 'center', margin: '0 auto', color: `${green}` }} />;
+      return (
+        <FontAwesomeIcon
+          icon="spinner"
+          spin
+          style={{ fontSize: '50px', alignItems: 'center', margin: '0 auto', color: `${green}` }}
+        />
+      );
     } else {
+      console.log(this.props.data);
+
       return (
         <CompleteItem
           title={this.props.data.question.title}
           question={this.props.data.question.question}
-          user={'TheQuestionAsker'}
-          date={'Just now'}
+          user={this.props.data.question.user.name}
+          date={this.props.data.question.createAt}
           likes={'0'}
         />
       );
     }
   }
 
+  updateAnswer(_id) {
+    if (this.props.user.currentUser) {
+      if (this.props.user.currentUser._id === this.props.data.question.user._id) {
+        this.props
+          .update_answer({
+            variables: {
+              question_id: this.props.match.params.questionId,
+              _id,
+              iscorrect: true,
+            },
+          })
+          .then(() => {
+            this.props.data.refetch();
+          })
+          .catch(err => console.log(err));
+      }
+    } else console.log("You're not the owner of this question");
+  }
+
   renderAnswers() {
     if (!this.props.data.loading && this.props.data.question.answers) {
-      return this.props.data.question.answers.map(({ answer, _id }) => {
-        return (
-          <Answer
-            key={_id}
-            answer={answer}
-            user={user}
-            date={createDate}
-            onDelete={() => this.onAnswerDelete(_id)}
-          />
-        );
-      });
+
+      return this.props.data.question.answers.map(
+        ({ _id, createDate, answer, iscorrect, user }) => {
+          return (
+            <Answer
+              key={_id}
+              answer={answer}
+              user={user}
+              date={createDate}
+              iscorrect={iscorrect}
+              onDelete={() => this.onAnswerDelete(_id)}
+              updateAnswer={() => this.updateAnswer(_id)}
+              currentUser={this.props.user.currentUser ? this.props.user.currentUser._id : null}
+            />
+          );
+        }
+      );
+
     }
   }
 
@@ -97,13 +132,16 @@ class GiveAnswer extends Component {
             {this.renderAnswers()}
 
             {/* Submit answer form */}
-            <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
-            <form style={{ display: 'flex' }} onSubmit={this.submitAnswer}>
-              <TextareaStyle placeholder="Enter answer..." />
-              <Btn type="submit">
-                Answer
-              </Btn>
-            </form>
+            {this.props.user.currentUser ? (
+              <div style={{ width: '100%' }}>
+                <h1 style={{ color: '#7f7f7f' }}>Your answer</h1>
+                <form onSubmit={this.submitAnswer}>
+                  <TextareaStyle placeholder="Enter answer..." />
+                  <br />
+                  <Btn type="submit">Answer</Btn>
+                </form>
+              </div>
+            ) : null}
           </Listview>
         </GridView>
 
@@ -118,9 +156,20 @@ const GET_QUESTION = gql`
     question(_id: $_id) {
       title
       question
+      createAt
+      user {
+        _id
+        name
+      }
       answers {
         _id
+        createDate
         answer
+        iscorrect
+        user {
+          _id
+          name
+        }
       }
     }
   }
@@ -131,6 +180,12 @@ const CREATE_ANSWER = gql`
     createAnswer(question_id: $question_id, answer: $answer, user_id: $user_id) {
       _id
       answer
+      iscorrect
+      createDate
+      user {
+        _id
+        name
+      }
     }
   }
 `;
@@ -142,7 +197,33 @@ const DELETE_ANSWER = gql`
     }
   }
 `;
+const UPDATE_ANSWER = gql`
+  mutation updateAnswer($question_id: ID!, $_id: ID!, $newAnswer: String, $iscorrect: Boolean!) {
+    updateAnswer(
+      question_id: $question_id
+      _id: $_id
+      newAnswer: $newAnswer
+      iscorrect: $iscorrect
+    ) {
+      _id
+      answer
+      iscorrect
+      createDate
+      user {
+        _id
+        name
+      }
+    }
+  }
+`;
 
+const CURRENT_USER = gql`
+  {
+    currentUser {
+      _id
+    }
+  }
+`;
 export default compose(
   graphql(GET_QUESTION, {
     options: props => {
@@ -150,7 +231,9 @@ export default compose(
     },
   }),
   graphql(CREATE_ANSWER, { name: 'create_answer' }),
-  graphql(DELETE_ANSWER, { name: 'delete_answer' })
+  graphql(DELETE_ANSWER, { name: 'delete_answer' }),
+  graphql(UPDATE_ANSWER, { name: 'update_answer' }),
+  graphql(CURRENT_USER, { name: 'user' })
 )(GiveAnswer);
 
 const Container = styled.div`
@@ -173,22 +256,26 @@ const GridView = styled.div`
 `;
 
 const TextareaStyle = styled.textarea`
-  width: 140%;
-  height: 100px;
+  width: 100%;
+  height: auto;
+  min-height: 150px;
   margin: 0 auto;
-  boxShadow: 0px 0px 8px 4px gainsboro;
+  box-shadow: 0px 0px 8px 4px gainsboro;
   border: 2px solid gainsboro;
-  borderRadius: 4px;
+  border-radius: 4px;
   resize: none;
   padding: 5px;
+  box-sizing: border-box;
 `;
 
 const Btn = styled.button`
   background-color: ${green};
   width: 100px;
-  height: 50px;
+  height: 36px;
+  margin: 5px 0 0 5px;
   align-items: center;
-  font-size: 17;
+  font-size: 14px;
   color: white;
   border: 0px;
+  float: right;
 `;

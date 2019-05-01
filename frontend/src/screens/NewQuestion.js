@@ -23,7 +23,8 @@ class NewQuestion extends Component {
           user_id: this.props.data.currentUser._id,
           tags: [],
           answers_ids: [],
-        },
+				},
+				refetchQueries: [{ query: GET_QUESTION }]
       })
       .then(data => this.props.history.push(`/giveanswer/${data.data.createQuestion._id}`))
       .catch(err => console.log(err));
@@ -32,14 +33,10 @@ class NewQuestion extends Component {
   titleChange = e => {
     this.setState({ title: e.target.value });
 	};
-	
+
 	questionChange = e => {
 		this.setState({ question: e.target.value });
 	}
-
-  handleChangeDescription = e => {
-    this.setState({ title: e.target.question });
-  };
 
   render() {
     return (
@@ -69,6 +66,19 @@ class NewQuestion extends Component {
     );
   }
 }
+
+const GET_QUESTION = gql`
+  {
+    questions {
+      _id
+      title
+      createAt
+      user {
+        name
+      }
+    }
+  }
+`;
 
 const CREATE_QUESTION = gql`
   mutation createQuestion(
@@ -101,6 +111,7 @@ const CURRENT_USER = gql`
 `;
 
 export default compose(
+	graphql(GET_QUESTION),
   graphql(CREATE_QUESTION, { name: 'createQuestion' }),
   graphql(CURRENT_USER)
 )(NewQuestion);
@@ -109,7 +120,7 @@ const FormView = styled.div`
   display: flex;
   flex: 3;
   justify-content: center;
-`;
+`
 
 const GridView = styled.div`
   display: flex;
@@ -118,7 +129,7 @@ const GridView = styled.div`
   margin-top: 40;
   color: white;
   justify-content: center;
-`;
+`
 
 const NewQuestionFormTitle = styled.textarea`
   width: 50vw;
@@ -129,18 +140,19 @@ const NewQuestionFormTitle = styled.textarea`
   border-radius: 4px;
   resize: none;
   padding: 5px;
-`;
+`
 
 const NewQuestionFormDescription = styled.textarea`
   width: 50vw;
   height: auto;
+  min-height: 150px;
   margin: 0 auto;
   box-shadow: 0px 0px 8px 4px gainsboro;
   border: 2px solid gainsboro;
   border-radius: 4px;
   resize: none;
   padding: 5px;
-`;
+`
 
 const AskBtn = styled.button`
   background-color: ${green};
@@ -152,4 +164,4 @@ const AskBtn = styled.button`
   color: white;
   border: 0px;
   float: right;
-`;
+`

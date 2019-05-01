@@ -36,7 +36,7 @@ const typeDefs = [
     type Answer {
       _id: ID! 
       answer: String!
-      createAt: Date!
+      createDate: Date!
       updatedAt: Date!
       user: User!
       iscorrect: Boolean
@@ -79,7 +79,8 @@ const typeDefs = [
       updateAnswer(
         question_id: ID!, 
         _id: ID!, 
-        newAnswer: String!): Answer
+        newAnswer: String,
+        iscorrect: Boolean!): Answer
 
       deleteAnswer( 
         question_id: ID!,

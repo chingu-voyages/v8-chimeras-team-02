@@ -73,16 +73,16 @@ class Home extends Component {
       var all_questions = this.state.data ? this.state.data : this.props.data.questions;
       return all_questions.length > 0 ? (
         all_questions.map(question => {
-					const questionId = question._id;
+          const questionId = question._id;
           return (
-              <ListItem
-								key={questionId}
-								questionId={questionId}
-                title={question.title}
-                user={question.user.name}
-                date={question.createAt}
-                likes={'4'}
-              />
+            <ListItem
+              key={questionId}
+              questionId={questionId}
+              title={question.title}
+              user={question.user.name}
+              date={question.createAt}
+              likes={'4'}
+            />
           );
         })
       ) : (
@@ -92,7 +92,6 @@ class Home extends Component {
   }
   render() {
     const { searchText } = this.state;
-
     return (
       <div>
         <Header
@@ -104,6 +103,7 @@ class Home extends Component {
         />
         <GridView>
           <SideList
+            currentUser={this.props.user.currentUser}
             selectSolved={() =>
               this.setState({ solved: true, unsolved: false, my_questions: false }, () =>
                 this.onSearch()
@@ -186,49 +186,10 @@ const ListView = styled.div`
   flex: 3;
   flex-direction: column;
   max-width: 50%;
-`;
+`
 const GridView = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
   margin-top: 40;
-`;
-
-/* const form = styled.`
-	display: flex;
-	flexDirection: column;
-	backgroundColor: white;
-	alignItems: center;
-	justifyContent: center;
-	width: 30%;
-	height: 400;
-	borderRadius: 10;
 `
-
-const inputs = styled.`
-	border: 1px solid #ccc;
-	background: white;
-	height: 45;
-	width: 40%;
-	alignItems: left;
-	marginTop: 25;
-	fontSize: 16;
-	outlineColor: green;
-`
-
-const button = styled.`
-	background: green;
-	color: white;
-	height: 60;
-	width: 40%;
-	alignItems: center;
-	marginTop: 25;
-	fontSize: 20;
-`
-
-const error = styled.`
-	color: red;
-	fontSize: 14;
-	marginTop: 25;
-	textAlign: center;
-` */
