@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { green } from '../resources/colors';
 
 export default class Section extends Component {
   render() {
@@ -25,5 +26,7 @@ const Btn = styled.button`
 
   &:hover {
     cursor: pointer;
+    border: 1px solid ${green};
+    color: ${green};
   }
 `;
