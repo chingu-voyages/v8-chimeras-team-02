@@ -127,6 +127,11 @@ class Home extends Component {
                 this.onSearch()
               )
             }
+            selectAll={() =>
+              this.setState({ solved: false, unsolved: false, my_questions: false }, () =>
+                this.onSearch()
+              )
+            }
           />
           <ListView>
             <h2 style={{ textAlign: 'left' }}>Top Questions</h2>
