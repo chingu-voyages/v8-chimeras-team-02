@@ -128,7 +128,7 @@ class Home extends Component {
               )
             }
             selectAll={() =>
-              this.setState({ solved: false, unsolved: false, my_questions: false }, () =>
+              this.setState({ searchText: '', solved: false, unsolved: false, my_questions: false }, () =>
                 this.onSearch()
               )
             }
