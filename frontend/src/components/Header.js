@@ -95,7 +95,7 @@ class Header extends Component {
         <StyledLink exact="true" to={'/'}>
           <Logo />
         </StyledLink>
-        <SearchBar onChangeText={this.props.onChangeText} onSearch={this.props.onSearch} />
+        <SearchBar onChangeText={this.props.onChangeText} onSearch={this.props.onSearch} value={this.props.searchText} />
         {rememToken ? (
           <StyledLink to={'/newquestion'}>
             <Section title="Ask" />
