@@ -13,7 +13,7 @@ export default class SideList extends Component {
   };
   render() {
     const { selected } = this.state;
-    const { selectMyQ, selectSolved, selectUnsolved } = this.props;
+    const { selectMyQ, selectSolved, selectUnsolved, selectAll } = this.props;
     return (
       <SideListDiv>
         <SideItem
@@ -75,6 +75,37 @@ export default class SideList extends Component {
             }}
           >
             {'Solved'}
+          </p>
+        </SideItem>
+        
+				<SideItem
+          onClick={() => {
+            selectAll();
+            this.setState({ selected: '' });
+          }}
+          style={{
+            backgroundColor: selected === '' ? 'rgba(47, 224, 144, .2)' : 'transparent',
+            width: '80%',
+            border: '1px solid transparent',
+            borderRadius: '15px',
+            padding: '0 10px',
+            alignItems: 'center',
+          }}
+        >
+          <FontAwesomeIcon
+            icon="check-circle"
+            style={{ fontSize: '25px', color: selected === '' ? green : 'black' }}
+          />
+          <p
+            style={{
+              fontSize: 14,
+              borderRadius: 8,
+              paddingLeft: 5,
+              paddingRight: 5,
+              color: selected === '' ? green : grey,
+            }}
+          >
+            {'All'}
           </p>
         </SideItem>
 
