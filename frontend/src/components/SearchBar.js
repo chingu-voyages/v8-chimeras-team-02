@@ -22,7 +22,9 @@ export default class SearchBar extends Component {
           }}
           onClick={this.props.onSearch}
         />
-        <label htmlFor="site-search" style={{display:'none'}}>Search</label>
+        <label htmlFor="site-search" style={{ display: 'none' }}>
+          Search
+        </label>
         <Input
           type="search"
           placeholder="Type to search"
@@ -32,7 +34,9 @@ export default class SearchBar extends Component {
             if (event.key === 'Enter') {
               this.props.onSearch();
             }
-          }} />
+          }}
+          value={this.props.value}
+        />
       </div>
     );
   }
@@ -52,4 +56,4 @@ const Input = styled.input`
     outline: none;
     border-bottom: 1px solid ${green};
   }
-`
+`;
