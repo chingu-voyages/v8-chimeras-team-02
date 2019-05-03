@@ -97,6 +97,7 @@ class GiveAnswer extends Component {
 
   renderAnswers() {
     if (!this.props.data.loading && this.props.data.question.answers) {
+
       return this.props.data.question.answers.map(
         ({ _id, createDate, answer, iscorrect, user }) => {
           return (
@@ -113,6 +114,7 @@ class GiveAnswer extends Component {
           );
         }
       );
+
     }
   }
 

@@ -61,7 +61,7 @@ const Item = styled.div`
 const Checked = styled.img`
   height: 40px;
   width: 40px;
-  resize-mode: contain;
+  object-fit: contain;
   margin-right: 8px;
   float: right;
   &:hover {
@@ -96,7 +96,7 @@ const Avatar = styled.img`
   border: 30px solid;
   border-color: ${green};
   border-width: 6px;
-  resize-mode: cover;
+  object-fit: cover;
   background-color: ${green};
 `;
 
