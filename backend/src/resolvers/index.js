@@ -54,14 +54,14 @@ const resolvers = {
     ) => {
       return updateQuestion(_id, title, question, createAt, user, tags, answers, mongo);
     },
-    createAnswer: async (root, { question_id, answer, user }, { mongo }, info) => {
-      return createAnswer(question_id, answer, user, mongo);
+    createAnswer: async (root, { question_id, answer, user_id }, { mongo }, info) => {
+      return createAnswer(question_id, answer, user_id, mongo);
     },
     deleteAnswer: async (root, { question_id, _id }, { mongo }, info) => {
       return deleteAnswer(question_id, _id, mongo);
     },
-    updateAnswer: async (root, { question_id, _id, newAnswer }, { mongo }, info) => {
-      return updateAnswer(question_id, _id, newAnswer, mongo);
+    updateAnswer: async (root, { question_id, _id, newAnswer, iscorrect }, { mongo }, info) => {
+      return updateAnswer(question_id, _id, newAnswer, iscorrect, mongo);
     },
     searchQuestion: async (root, { keywords, solved, unsolved, userId }, { mongo }, info) => {
       return searchQuestion(keywords, solved, unsolved, userId, mongo);

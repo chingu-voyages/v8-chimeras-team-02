@@ -84,12 +84,7 @@ const Button = styled.input`
 
 const Error = styled.h3`
 	color: red;
-	fontSize: 14px;
-	marginTop: 25px;
-	textAlign: center;
+	font-size: 14px;
+	margin-top: 25px;
+	text-align: center;
 `
-/*const Close = styled.img`
-	width: 25px;
-	height: 25px;
-	resizeMode: contain;
-`*/

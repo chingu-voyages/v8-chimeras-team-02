@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { green, grey } from '../resources/colors';
-import { myq, unsolved, unsolved2, solved2, solved, myq2 } from '../resources/images';
 import styled from 'styled-components';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +13,7 @@ export default class SideList extends Component {
   };
   render() {
     const { selected } = this.state;
-    const { selectMyQ, selectSolved, selectUnsolved } = this.props;
+    const { selectMyQ, selectSolved, selectUnsolved, selectAll } = this.props;
     return (
       <SideListDiv>
         <SideItem
@@ -31,10 +30,6 @@ export default class SideList extends Component {
             alignItems: 'center',
           }}
         >
-          {/*<Icon
-            src={selected === "Unsolved" ? unsolved2 : unsolved}
-            alt={unsolved}
-          />*/}
           <FontAwesomeIcon
             icon="times-circle"
             style={{ fontSize: '25px', color: selected === 'Unsolved' ? green : 'black' }}
@@ -42,7 +37,6 @@ export default class SideList extends Component {
           <p
             style={{
               fontSize: 14,
-              marginTop: 0,
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
@@ -67,10 +61,6 @@ export default class SideList extends Component {
             alignItems: 'center',
           }}
         >
-          {/*<Icon
-            src={selected === "Solved" ? solved2 : solved}
-            alt={solved}
-          />*/}
           <FontAwesomeIcon
             icon="check-circle"
             style={{ fontSize: '25px', color: selected === 'Solved' ? green : 'black' }}
@@ -78,7 +68,6 @@ export default class SideList extends Component {
           <p
             style={{
               fontSize: 14,
-              marginTop: 0,
               borderRadius: 8,
               paddingLeft: 5,
               paddingRight: 5,
@@ -88,7 +77,39 @@ export default class SideList extends Component {
             {'Solved'}
           </p>
         </SideItem>
+        
+				<SideItem
+          onClick={() => {
+            selectAll();
+            this.setState({ selected: '' });
+          }}
+          style={{
+            backgroundColor: selected === '' ? 'rgba(47, 224, 144, .2)' : 'transparent',
+            width: '80%',
+            border: '1px solid transparent',
+            borderRadius: '15px',
+            padding: '0 10px',
+            alignItems: 'center',
+          }}
+        >
+          <FontAwesomeIcon
+            icon="check-circle"
+            style={{ fontSize: '25px', color: selected === '' ? green : 'black' }}
+          />
+          <p
+            style={{
+              fontSize: 14,
+              borderRadius: 8,
+              paddingLeft: 5,
+              paddingRight: 5,
+              color: selected === '' ? green : grey,
+            }}
+          >
+            {'All'}
+          </p>
+        </SideItem>
 
+        {this.props.currentUser ? (
         <SideItem
           onClick={() => {
             selectMyQ();
@@ -103,27 +124,23 @@ export default class SideList extends Component {
             alignItems: 'center',
           }}
         >
-          {/*<Icon
-            src={selected === "My Questions" ? myq2 : myq}
-            alt={myq}
-          />*/}
-          <FontAwesomeIcon
-            icon="question-circle"
-            style={{ fontSize: '25px', color: selected === 'My Questions' ? green : 'black' }}
-          />
-          <p
-            style={{
-              fontSize: 14,
-              marginTop: 0,
-              borderRadius: 8,
-              paddingLeft: 5,
-              paddingRight: 5,
-              color: selected === 'My Questions' ? green : grey,
-            }}
-          >
-            {'My Questions'}
-          </p>
-        </SideItem>
+            <FontAwesomeIcon
+              icon="question-circle"
+              style={{ fontSize: '25px', color: selected === 'My Questions' ? green : 'black' }}
+            />
+            <p
+              style={{
+                fontSize: 14,
+                borderRadius: 8,
+                paddingLeft: 5,
+                paddingRight: 5,
+                color: selected === 'My Questions' ? green : grey,
+              }}
+            >
+              {'My Questions'}
+            </p>
+          </SideItem>
+        ) : null}
       </SideListDiv>
     );
   }
@@ -137,7 +154,7 @@ const SideListDiv = styled.div`
   margin-left: 25px;
   align-self: flex-start;
   max-width: 30%;
-`;
+`
 
 const SideItem = styled.button`
   display: flex;
@@ -149,16 +166,8 @@ const SideItem = styled.button`
   outline: 0px;
   margin-bottom: 15px;
 
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   &:hover {
     transform: scale(1.1);
   }
-`;
-
-const Icon = styled.img`
-  width: 20px;
-  height: 20px;
-  resize-mode: contain;
-  margin-right: 10px;
-  background-color: black;
-`;
+`

@@ -17,4 +17,4 @@ const FooterDiv = styled.div`
   border-top: 1px solid #efebeb;
   padding-top: 15px;
   padding-bottom: 15px;
-`;
+`

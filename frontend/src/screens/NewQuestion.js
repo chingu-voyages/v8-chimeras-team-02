@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
-//import { Link } from 'react-router-dom';
-//import { user } from '../resources/images';
 import { green } from '../resources/colors';
 import { Header, Footer } from '../components';
 import styled from 'styled-components';
@@ -11,6 +9,7 @@ class NewQuestion extends Component {
   state = {
     title: '',
     question: '',
+    searchText: '',
   };
 
   createQuestion = e => {
@@ -24,6 +23,7 @@ class NewQuestion extends Component {
           tags: [],
           answers_ids: [],
         },
+        refetchQueries: [{ query: GET_QUESTION }],
       })
       .then(data => this.props.history.push(`/giveanswer/${data.data.createQuestion._id}`))
       .catch(err => console.log(err));
@@ -31,20 +31,29 @@ class NewQuestion extends Component {
 
   titleChange = e => {
     this.setState({ title: e.target.value });
-	};
-	
-	questionChange = e => {
-		this.setState({ question: e.target.value });
-	}
-
-  handleChangeDescription = e => {
-    this.setState({ title: e.target.question });
   };
 
+  questionChange = e => {
+    this.setState({ question: e.target.value });
+  };
+
+  onSearch() {
+    localStorage.setItem('SEARCH_TEXT', this.state.searchText);
+    window.location = '/';
+  }
+
   render() {
+    const { searchText } = this.state;
+
     return (
       <div>
-        <Header />
+        <Header
+          onSearch={() => this.onSearch()}
+          onChangeText={event => {
+            this.setState({ searchText: event.target.value });
+          }}
+          searchText={searchText}
+        />
         <GridView>
           <FormView>
             <form onSubmit={this.createQuestion}>
@@ -69,6 +78,19 @@ class NewQuestion extends Component {
     );
   }
 }
+
+const GET_QUESTION = gql`
+  {
+    questions {
+      _id
+      title
+      createAt
+      user {
+        name
+      }
+    }
+  }
+`;
 
 const CREATE_QUESTION = gql`
   mutation createQuestion(
@@ -101,6 +123,7 @@ const CURRENT_USER = gql`
 `;
 
 export default compose(
+  graphql(GET_QUESTION),
   graphql(CREATE_QUESTION, { name: 'createQuestion' }),
   graphql(CURRENT_USER)
 )(NewQuestion);
@@ -134,6 +157,7 @@ const NewQuestionFormTitle = styled.textarea`
 const NewQuestionFormDescription = styled.textarea`
   width: 50vw;
   height: auto;
+  min-height: 150px;
   margin: 0 auto;
   box-shadow: 0px 0px 8px 4px gainsboro;
   border: 2px solid gainsboro;

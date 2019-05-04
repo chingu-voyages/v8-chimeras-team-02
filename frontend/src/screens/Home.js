@@ -19,8 +19,16 @@ class Home extends Component {
     data: null,
   };
 
+  async componentWillMount() {
+    const searchText = await localStorage.getItem('SEARCH_TEXT');
+    if (searchText) {
+      this.setState({ searchText }, () => this.onSearch());
+    }
+  }
+
   onSearch() {
     const { searchText, solved, unsolved, my_questions } = this.state;
+    localStorage.removeItem('SEARCH_TEXT');
 
     if (my_questions)
       this.props
@@ -73,16 +81,24 @@ class Home extends Component {
       var all_questions = this.state.data ? this.state.data : this.props.data.questions;
       return all_questions.length > 0 ? (
         all_questions.map(question => {
-					const questionId = question._id;
+          const questionId = question._id;
+
+          let resolved = false;
+          for (let i in question.answers) {
+            if (question.answers[i].iscorrect) {
+              resolved = true;
+            }
+          }
           return (
-              <ListItem
-								key={questionId}
-								questionId={questionId}
-                title={question.title}
-                user={question.user.name}
-                date={question.createAt}
-                likes={'4'}
-              />
+            <ListItem
+              key={questionId}
+              questionId={questionId}
+              title={question.title}
+              user={question.user.name}
+              date={question.createAt}
+              likes={'4'}
+              resolved={resolved}
+            />
           );
         })
       ) : (
@@ -92,7 +108,6 @@ class Home extends Component {
   }
   render() {
     const { searchText } = this.state;
-
     return (
       <div>
         <Header
@@ -104,6 +119,7 @@ class Home extends Component {
         />
         <GridView>
           <SideList
+            currentUser={this.props.user.currentUser}
             selectSolved={() =>
               this.setState({ solved: true, unsolved: false, my_questions: false }, () =>
                 this.onSearch()
@@ -117,6 +133,12 @@ class Home extends Component {
             selectMyQ={() =>
               this.setState({ solved: false, unsolved: false, my_questions: true }, () =>
                 this.onSearch()
+              )
+            }
+            selectAll={() =>
+              this.setState(
+                { searchText: '', solved: false, unsolved: false, my_questions: false },
+                () => this.onSearch()
               )
             }
           />
@@ -141,6 +163,10 @@ const GET_QUESTION = gql`
       createAt
       user {
         name
+      }
+      answers {
+        _id
+        iscorrect
       }
     }
   }
@@ -172,10 +198,7 @@ const SEARCH = gql`
   }
 `;
 
-export default // graphql(SEARCH, { name: 'searchQuestion' }),
-
-// graphql(GET_QUESTION),
-compose(
+export default compose(
   graphql(GET_QUESTION),
   graphql(SEARCH, { name: 'searchQuestion' }),
   graphql(CURRENT_USER, { name: 'user' })
@@ -193,42 +216,3 @@ const GridView = styled.div`
   flex-direction: row;
   margin-top: 40;
 `;
-
-/* const form = styled.`
-	display: flex;
-	flexDirection: column;
-	backgroundColor: white;
-	alignItems: center;
-	justifyContent: center;
-	width: 30%;
-	height: 400;
-	borderRadius: 10;
-`
-
-const inputs = styled.`
-	border: 1px solid #ccc;
-	background: white;
-	height: 45;
-	width: 40%;
-	alignItems: left;
-	marginTop: 25;
-	fontSize: 16;
-	outlineColor: green;
-`
-
-const button = styled.`
-	background: green;
-	color: white;
-	height: 60;
-	width: 40%;
-	alignItems: center;
-	marginTop: 25;
-	fontSize: 20;
-`
-
-const error = styled.`
-	color: red;
-	fontSize: 14;
-	marginTop: 25;
-	textAlign: center;
-` */
