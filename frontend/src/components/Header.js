@@ -95,7 +95,11 @@ class Header extends Component {
         <StyledLink exact="true" to={'/'}>
           <Logo />
         </StyledLink>
-        <SearchBar onChangeText={this.props.onChangeText} onSearch={this.props.onSearch} value={this.props.searchText} />
+        <SearchBar
+          onChangeText={this.props.onChangeText}
+          onSearch={this.props.onSearch}
+          value={this.props.searchText}
+        />
         {rememToken ? (
           <StyledLink to={'/newquestion'}>
             <Section title="Ask" />
@@ -185,11 +189,11 @@ const HeaderContainer = styled.div`
   border-bottom: 1px solid #efebeb;
   margin-bottom: 20px;
   padding-right: 20px;
-`
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-`
+`;
 
 /* Dropdown | Hover SignUp */
 const DropdownContent = styled.div`
@@ -200,7 +204,7 @@ const DropdownContent = styled.div`
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-`
+`;
 
 const Dropdown = styled.div`
   position: relative;
@@ -209,7 +213,7 @@ const Dropdown = styled.div`
   &:hover ${DropdownContent} {
     display: block;
   }
-`
+`;
 
 const DropdownBtn = styled.button`
   border: 1px solid ${green};
@@ -222,7 +226,7 @@ const DropdownBtn = styled.button`
   &:hover {
     cursor: pointer;
   }
-`
+`;
 
 const DropdownBtnTwo = styled.button`
   border: none;
@@ -234,9 +238,9 @@ const DropdownBtnTwo = styled.button`
   &:hover {
     cursor: pointer;
   }
-`
+`;
 
 const Holder = {
   display: 'flex',
   flexDirection: 'row',
-}
+};
