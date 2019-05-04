@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { green, purple } from '../resources/colors';
-import { user } from '../resources/images';
+import { user, checked, unchecked } from '../resources/images';
 import styled from 'styled-components';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,13 +33,13 @@ export default class CompleteItem extends Component {
           </div>
 
           <div style={{ right: 0, width: '30%', textAlign: 'right' }}>
-            <HeartFill>
+            {/* <HeartFill>
               <FontAwesomeIcon
                 icon="heart"
                 style={{ fontSize: '25px', stroke: `${purple}`, strokeWidth: 10 }}
               />
             </HeartFill>
-            <Likes>{this.props.likes + ' likes '}</Likes>
+            <Likes>{this.props.likes + ' likes '}</Likes> */}
           </div>
         </Item>
       </CompleteItemContainer>
@@ -48,14 +48,14 @@ export default class CompleteItem extends Component {
 }
 
 const CompleteItemContainer = styled.div`
-   display: flex;
-   flex-direction: column;
-   width: 100%;
-   box-shadow: 0px 0px 8px 4px gainsboro;
-   padding: 0 20px 10px 20px;
-   margin-bottom: 20px;
-   box-sizing: border-box;
-`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: 0px 0px 8px 4px gainsboro;
+  padding: 0 20px 10px 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+`;
 
 const Item = styled.div`
   display: flex;
@@ -110,9 +110,9 @@ const Avatar = styled.img`
   width: 30px;
   border-radius: 40px;
   border: 30px solid;
-  border-color: ${green};
+  border-color: ${purple};
   border-width: 6px;
-  background-color: ${green};
+  background-color: ${purple};
 `;
 
 const HeartFill = styled.div`

@@ -29,7 +29,7 @@ class Home extends Component {
   onSearch() {
     const { searchText, solved, unsolved, my_questions } = this.state;
     localStorage.removeItem('SEARCH_TEXT');
-    
+
     if (my_questions)
       this.props
         .searchQuestion({
@@ -82,6 +82,13 @@ class Home extends Component {
       return all_questions.length > 0 ? (
         all_questions.map(question => {
           const questionId = question._id;
+
+          let resolved = false;
+          for (let i in question.answers) {
+            if (question.answers[i].iscorrect) {
+              resolved = true;
+            }
+          }
           return (
             <ListItem
               key={questionId}
@@ -90,6 +97,7 @@ class Home extends Component {
               user={question.user.name}
               date={question.createAt}
               likes={'4'}
+              resolved={resolved}
             />
           );
         })
@@ -128,8 +136,9 @@ class Home extends Component {
               )
             }
             selectAll={() =>
-              this.setState({ searchText: '', solved: false, unsolved: false, my_questions: false }, () =>
-                this.onSearch()
+              this.setState(
+                { searchText: '', solved: false, unsolved: false, my_questions: false },
+                () => this.onSearch()
               )
             }
           />
@@ -154,6 +163,10 @@ const GET_QUESTION = gql`
       createAt
       user {
         name
+      }
+      answers {
+        _id
+        iscorrect
       }
     }
   }
